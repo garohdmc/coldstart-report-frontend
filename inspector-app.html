@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cold Start Report — Prototype</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --steel:#22262B; --steel-2:#2E333A; --paper:#FAF8F3; --paper-2:#F1EDE3;
+    --ink:#2A2926; --ink-soft:#5B5852; --amber:#C8752B; --amber-deep:#8A4E17;
+    --amber-bg:#FBE9D3; --red:#B23A2E; --red-bg:#F6DEDB; --green:#4C7A52;
+    --green-bg:#E1EBDE; --hairline:#D8D2C4;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:#8A8577;padding:40px 16px;font-family:'Inter',sans-serif;color:var(--ink);}
+  .wrap{max-width:880px;margin:0 auto;}
+
+  /* ===== FORM CARD ===== */
+  .form-card{
+    background:var(--paper);border-radius:6px;padding:30px 36px;margin-bottom:24px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.2);
+  }
+  .form-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--amber-deep);margin:0 0 6px;}
+  .form-title{font-family:'Oswald',sans-serif;font-weight:600;font-size:22px;text-transform:uppercase;margin:0 0 18px;}
+  .field-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  .field{display:flex;flex-direction:column;gap:5px;}
+  .field label{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);}
+  .field select, .field input, .field textarea{
+    font-family:'Inter',sans-serif;font-size:14px;padding:9px 11px;border:1px solid var(--hairline);
+    border-radius:4px;background:#fff;color:var(--ink);
+  }
+  .field textarea{resize:vertical;min-height:70px;font-family:'Inter',sans-serif;}
+  .submit-btn{
+    margin-top:6px;background:var(--steel);color:#fff;border:none;padding:13px 22px;
+    font-family:'Oswald',sans-serif;font-size:14px;letter-spacing:.03em;text-transform:uppercase;
+    border-radius:4px;cursor:pointer;width:100%;transition:background .15s;
+  }
+  .submit-btn:hover{background:var(--amber-deep);}
+  .submit-btn:disabled{background:#B9B6AE;cursor:not-allowed;}
+  .hint{font-size:11.5px;color:var(--ink-soft);margin-top:8px;line-height:1.5;}
+
+  /* ===== LOADING ===== */
+  .loading{display:none;text-align:center;padding:40px;color:#fff;font-family:'IBM Plex Mono',monospace;font-size:13px;}
+  .loading.active{display:block;}
+  .progress-track{
+    max-width:340px;margin:16px auto 8px;height:8px;border-radius:4px;
+    background:rgba(255,255,255,0.15);overflow:hidden;
+  }
+  .progress-fill{
+    height:100%;width:0%;border-radius:4px;
+    background:var(--amber);
+    background-image:linear-gradient(
+      110deg,
+      var(--amber) 0%, var(--amber) 35%,
+      #E8A85C 50%,
+      var(--amber) 65%, var(--amber) 100%
+    );
+    background-size:200% 100%;
+    animation:shimmer 1.3s linear infinite;
+    transition:width .3s ease;
+  }
+  @keyframes shimmer{
+    0%{background-position:200% 0;}
+    100%{background-position:-200% 0;}
+  }
+  .progress-pct{font-size:22px;font-weight:600;color:#fff;margin:4px 0 0;letter-spacing:.02em;}
+
+  /* ===== REPORT (reused design) ===== */
+  .sheet{display:none;max-width:880px;margin:0 auto;background:var(--paper);border-radius:2px;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,0.25);}
+  .sheet.active{display:block;}
+  .header{background:var(--steel);color:#fff;padding:28px 36px 24px;display:flex;justify-content:space-between;align-items:flex-start;gap:20px;}
+  .brand-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);margin:0 0 6px;}
+  .brand-name{font-family:'Oswald',sans-serif;font-weight:600;font-size:26px;letter-spacing:.02em;margin:0;text-transform:uppercase;}
+  .brand-sub{font-size:12.5px;color:#B9B6AE;margin:4px 0 0;}
+  .report-meta{text-align:right;font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:#C9C6BE;line-height:1.7;}
+  .report-meta strong{color:#fff;font-weight:500;}
+  .vehicle-strip{background:var(--steel-2);color:#fff;padding:16px 36px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,0.08);flex-wrap:wrap;gap:10px;}
+  .vehicle-title{font-family:'Oswald',sans-serif;font-size:19px;font-weight:500;letter-spacing:.01em;}
+  .vehicle-title span{color:var(--amber);}
+  .vehicle-facts{display:flex;gap:24px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:#B9B6AE;flex-wrap:wrap;}
+  .vehicle-facts b{color:#fff;font-weight:500;}
+  .body{padding:30px 36px 20px;}
+  .grade-block{display:flex;gap:24px;align-items:stretch;margin-bottom:32px;flex-wrap:wrap;}
+  .hang-tag{flex:0 0 168px;background:var(--steel);color:#fff;border-radius:6px;padding:18px 14px 16px;position:relative;text-align:center;}
+  .hang-tag::before{content:'';position:absolute;top:12px;left:50%;width:12px;height:12px;margin-left:-6px;border-radius:50%;background:var(--paper);box-shadow:inset 0 0 0 2px var(--steel-2);}
+  .hang-tag-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:#9A968C;margin:20px 0 4px;}
+  .hang-tag-grade{font-family:'Oswald',sans-serif;font-size:56px;font-weight:600;line-height:1;color:var(--amber);}
+  .hang-tag-label{font-family:'Oswald',sans-serif;font-size:13px;letter-spacing:.04em;text-transform:uppercase;margin-top:4px;}
+  .hang-tag-note{font-size:10.5px;color:#B9B6AE;margin-top:10px;line-height:1.5;}
+  .grade-summary{flex:1;min-width:260px;}
+  .grade-summary h2{font-family:'Oswald',sans-serif;font-size:15px;font-weight:500;text-transform:uppercase;letter-spacing:.03em;margin:0 0 10px;color:var(--ink);}
+  .grade-summary p{font-size:14.5px;line-height:1.65;color:var(--ink-soft);margin:0 0 14px;}
+  .stat-row{display:flex;gap:12px;flex-wrap:wrap;}
+  .stat{flex:1;min-width:110px;background:var(--paper-2);border:1px solid var(--hairline);border-radius:4px;padding:10px 12px;}
+  .stat-label{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin:0 0 3px;}
+  .stat-value{font-family:'Oswald',sans-serif;font-size:18px;font-weight:500;}
+  .section{margin-bottom:28px;border-top:1px solid var(--hairline);padding-top:20px;}
+  .section-head{display:flex;align-items:baseline;gap:10px;margin-bottom:14px;}
+  .section-num{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--amber-deep);font-weight:600;}
+  .section-title{font-family:'Oswald',sans-serif;font-size:16px;font-weight:500;text-transform:uppercase;letter-spacing:.02em;margin:0;}
+  .finding{display:grid;grid-template-columns:100px 1fr;gap:14px;padding:10px 0;border-bottom:1px solid var(--hairline);font-size:13.5px;line-height:1.55;}
+  .finding:last-child{border-bottom:none;}
+  .flag{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;padding:3px 8px;border-radius:3px;height:fit-content;text-align:center;}
+  .flag.check{background:var(--red-bg);color:var(--red);}
+  .flag.watch{background:var(--amber-bg);color:var(--amber-deep);}
+  .flag.clear{background:var(--green-bg);color:var(--green);}
+  .finding-text b{font-weight:600;}
+  .finding-text .sub{color:var(--ink-soft);display:block;margin-top:2px;font-size:12.5px;}
+  .qlist{margin:0;padding:0;list-style:none;}
+  .qlist li{font-size:13.5px;line-height:1.6;padding:8px 0 8px 24px;position:relative;border-bottom:1px solid var(--hairline);}
+  .qlist li:last-child{border-bottom:none;}
+  .qlist li::before{content:'?';position:absolute;left:0;top:8px;font-family:'IBM Plex Mono',monospace;font-weight:600;color:var(--amber-deep);font-size:12px;}
+  .footer{background:var(--steel);color:#B9B6AE;padding:18px 36px;display:flex;justify-content:space-between;align-items:center;font-size:11px;font-family:'IBM Plex Mono',monospace;flex-wrap:wrap;gap:8px;}
+  .footer strong{color:#fff;}
+  .new-report-btn{
+    display:block;margin:16px auto 0;background:none;border:1px solid #fff;color:#fff;
+    padding:8px 16px;border-radius:4px;font-family:'IBM Plex Mono',monospace;font-size:11px;cursor:pointer;
+  }
+  @media(max-width:640px){
+    body{padding:16px 10px;}
+    .form-card{padding:20px 18px;}
+    .form-title{font-size:19px;}
+    .field-row{grid-template-columns:1fr;gap:12px;}
+    .field select, .field input, .field textarea{
+      font-size:16px; /* prevents iOS Safari auto-zoom on focus */
+      padding:11px 12px;
+    }
+    .submit-btn{padding:15px 20px;font-size:13px;}
+    .header,.vehicle-strip,.footer{flex-direction:column;align-items:flex-start;}
+    .report-meta{text-align:left;margin-top:4px;}
+    .header{padding:22px 20px 18px;}
+    .vehicle-strip{padding:14px 20px;}
+    .body{padding:22px 20px 16px;}
+    .vehicle-facts{gap:14px;font-size:11px;}
+    .hang-tag{flex:1 1 100%;}
+    .grade-block{flex-direction:column;}
+    .stat-row{flex-wrap:wrap;}
+    .stat{min-width:100px;}
+    .finding{grid-template-columns:76px 1fr;gap:10px;}
+    .flag{font-size:9px;padding:3px 6px;}
+    .footer{padding:16px 20px;font-size:10px;gap:6px;}
+    .kp-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="form-card" id="formCard">
+    <p class="form-eyebrow">Pre-purchase inspection assist</p>
+    <h1 class="form-title">Cold Start Report</h1>
+
+    <div class="field-row">
+      <div class="field">
+        <label>Model year</label>
+        <input id="year" type="number" placeholder="e.g. 2013" oninput="populateModelDropdown()">
+      </div>
+      <div class="field">
+        <label>Specific model</label>
+        <select id="modelName">
+          <option value="" disabled selected>Enter a model year first…</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="field-row">
+      <div class="field">
+        <label>Mileage</label>
+        <input id="mileage" type="number" placeholder="e.g. 38412">
+      </div>
+      <div class="field">
+        <label>Asking price (optional)</label>
+        <input id="price" type="number" placeholder="e.g. 11999">
+      </div>
+    </div>
+
+    <div class="field-row">
+      <div class="field">
+        <label>VIN (optional)</label>
+        <input id="vin" type="text" placeholder="e.g. 1HD1...4392">
+      </div>
+      <div class="field"></div>
+    </div>
+
+    <div class="field">
+      <label>Seller's listing text / description (paste it in)</label>
+      <textarea id="listingText" placeholder="Paste the seller's description here — runs great, minor cosmetic wear, etc."></textarea>
+    </div>
+
+    <button class="submit-btn" id="submitBtn" onclick="generateReport()">Generate Inspection Report</button>
+    <p class="hint">This is a prototype. Reports are generated from a hand-built knowledge base of known failure points — not a substitute for an in-person mechanical inspection.</p>
+  </div>
+
+  <div class="loading" id="loading">
+    <p id="loadingText">Checking known failure points…</p>
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    <p class="progress-pct" id="progressPct">0%</p>
+  </div>
+
+  <div class="sheet" id="reportSheet"></div>
+
+</div>
+
+<script>
+// Once your backend is deployed (see deployment steps), replace this with your real
+// backend URL, e.g. "https://coldstart-report-backend.onrender.com"
+const BACKEND_URL = "https://coldstart-report-backend.onrender.com";
+const KB = [
+  {
+    "model_family": "Softail (Twin Cam era)",
+    "models": ["Fat Boy","Heritage Softail Classic","Softail Deluxe","Softail Custom / Custom FXSTC","Night Train","Cross Bones","Blackline","Breakout","Fat Bob (Softail chassis)"],
+    "years": "2000-2017",
+    "failure_points": [
+      {"id":"fp_001","name":"Cam chain tensioner failure","applies_to_years":"2000-2006 (spring-loaded tensioner design)","typical_failure_mileage":"20,000 miles and up","symptom":"Rattling noise on cold start, worsens with mileage; can lead to chain failure and engine damage if ignored","check_method":"Cold start listen test; ask if updated tensioner was ever installed","severity":"dealbreaker if rattle persists after warm idle, or seller has no service history past 20k miles","typical_fix_cost_usd":"400-900"},
+      {"id":"fp_002","name":"Battery life","applies_to_years":"all","typical_lifespan":"~3 years (age-based, not mileage-based)","symptom":"Weak/slow cranking, dim gauges at idle, dead battery after sitting","check_method":"Ask battery age/replacement date; check date code if visible","severity":"watch if battery is 3+ years old regardless of mileage","typical_fix_cost_usd":"150-250"},
+      {"id":"fp_003","name":"Rocker box oil leaks","applies_to_years":"all","typical_failure_mileage":"any mileage — not tied to wear/age","symptom":"Oil seepage/leak at rocker box gasket seams","check_method":"Visual check of rocker box seams and underneath engine for oil residue","severity":"watch — common, usually not a dealbreaker, factor into negotiation","typical_fix_cost_usd":"TBD"},
+      {"id":"fp_006","name":"Springer front end handlebar clamps","applies_to_years":"all (springer-equipped models below)","applies_to_models":"Softail Springer, Heritage Springer, Springer Classic, Bad Boy, Cross Bones, Springer Softail","symptom":"Handlebar clamps on springer front ends don't hold well; handlebars tend to move/shift, especially worse if bars were swapped to ape hangers (added leverage/weight)","check_method":"Check for handlebar movement/play by hand; ask if bars have been changed from stock, especially to ape hangers","severity":"watch — safety-relevant since loose handlebars affect control; more likely on bikes with aftermarket ape hangers installed","typical_fix_cost_usd":"TBD"}
+    ]
+  },
+  {
+    "model_family": "Touring (Twin Cam era)",
+    "models": ["Road King","Road Glide","Road Glide Ultra","Street Glide","Street Glide Special","Electra Glide Standard","Electra Glide Classic (EGC)","Electra Glide Ultra Classic","Electra Glide Ultra Limited","CVO Touring models"],
+    "years": "2000-2016",
+    "failure_points": [
+      {"id":"fp_t001","name":"Y-pipe exhaust cracking","applies_to_years":"1995-2008","applies_to_models":"all Touring models","symptom":"Cracking at the Y-pipe (head pipe junction), often heard as an exhaust leak tick/tap or louder-than-stock exhaust note","check_method":"Visual inspection of Y-pipe junction for cracks/soot staining; listen for exhaust leak tick at idle","severity":"watch — common wear item on this era, not a dealbreaker","typical_fix_cost_usd":"TBD"},
+      {"id":"fp_t002","name":"Charging system / voltage regulator","applies_to_years":"all","applies_to_models":"all Touring models","symptom":"Weak charging, dim gauges/lights at idle, dead battery, intermittent electrical issues","check_method":"Multimeter test across battery terminals with engine running — should read 14.2 volts at 2,500 RPM. Lower reading indicates charging system issue.","severity":"watch if reading below 14.2V at 2,500 RPM","typical_fix_cost_usd":"TBD"},
+      {"id":"fp_t003","name":"Oil pan bolts backing out","applies_to_years":"1999-2016","applies_to_models":"all Touring models","symptom":"Oil leak from oil pan area caused by bolts loosening/backing out over time","check_method":"Visual check underneath oil pan for leak residue","severity":"watch — common wear item, cheap fix if caught early","typical_fix_cost_usd":"TBD"},
+      {"id":"fp_t004","name":"Compensator failure","applies_to_years":"2007-2013","applies_to_models":"all Touring models","symptom":"Clunk noise when the motorcycle is shut off","check_method":"Start the bike, let it idle briefly, then turn it off and listen for a clunk from the primary/drivetrain area","severity":"watch — known weak point on this year range","typical_fix_cost_usd":"TBD"},
+      {"id":"fp_t005","name":"2008 first-year ABS and Throttle-by-Wire issues","applies_to_years":"2008 only","applies_to_models":"all Touring models","symptom":"ABS unit failure: front brake lever feels rock hard and won't pull in. Separate ABS issue: hitting a bump (e.g. speed bump) while applying the front brake can cause the lever to sink to the grip, requiring the rider to release and reapply -- a real safety concern. Throttle-by-Wire failure: bike goes into limp mode.","check_method":"Test front brake lever feel at a stop; if possible, test brake response over an uneven surface/bump at low speed. Ask seller if ABS or throttle-by-wire have ever thrown a code, gone into limp mode, or been serviced.","severity":"SAFETY ISSUE, not just cost -- flag prominently on any 2008 Touring model regardless of mileage, this affects effective front brake stopping power","typical_fix_cost_usd":"TBD"},
+      {"id":"fp_t006","name":"Weak fairing brackets (FLH models)","applies_to_years":"1994-2010","applies_to_models":"FLHT, FLHTC, FLHTCI, FLHTI, FLHTCU, FLHTCUI, FLHX, FLHXI, FLHTCUSE","symptom":"Fairing brackets are weak and tend to break; fairing begins to shake and rattle","check_method":"Hand-test fairing for play/looseness; ask seller if any shake/rattle from the fairing has been noticed, especially at speed","severity":"watch — not a safety/dangerous issue, but affects ride quality and is a real repair cost","typical_fix_cost_usd":"500-600"}
+    ]
+  }
+];
+const EVO_SOFTAIL_KB = {
+  "model_family": "Softail (Evolution era, 1984-1999)",
+  "years": "1984-1999",
+  "failure_points": [
+    {"id":"fp_e001","name":"Timing plate melting","applies_to_years":"1984-1999","applies_to_models":"all Evolution-era Softail models","symptom":"Timing plate (located in the cam cover, behind the timing cover) has a tendency to melt","check_method":"Likely requires cover removal or diagnosis of ignition symptoms tied to timing plate failure","severity":"watch — part is obsolete/discontinued from OEM; if it fails, buyer must upgrade to a different ignition system or go aftermarket, not a simple like-for-like part replacement","typical_fix_cost_usd":"TBD"}
+  ]
+};
+KB.push(EVO_SOFTAIL_KB);
+
+const SOFTAIL_M8_KB = {
+  "model_family": "Softail M8 (2018+)",
+  "years": "2018-present",
+  "failure_points": [
+    {"id":"fp_m8001","name":"Oil pump issue — transmission oil transfer to primary case","applies_to_years":"2018-2019 (early Softail M8)","applies_to_models":"early Softail Milwaukee-Eight models","symptom":"Oil pump pressure issue causes transmission oil to transfer into the primary case, which can lead to transmission failure","check_method":"Check primary case oil level/condition for signs of transmission fluid contamination; ask seller about any transmission service history or known oil pump recalls/updates performed","severity":"watch — can lead to transmission failure if not caught; ask specifically about this on any 2018-2019 model","typical_fix_cost_usd":"TBD"}
+  ]
+};
+KB.push(SOFTAIL_M8_KB);
+
+const TOURING_EVO_KB = {
+  "model_family": "Touring Evo (1985-1998)",
+  "years": "1985-1998",
+  "failure_points": []
+};
+KB.push(TOURING_EVO_KB);
+
+const TOURING_M8_KB = {
+  "model_family": "Touring M8 (2017+)",
+  "years": "2017-present",
+  "failure_points": [
+    {"id":"fp_m8002","name":"Oil pump issue — transmission oil transfer to primary case","applies_to_years":"2017-2019 (early Touring M8)","applies_to_models":"early Touring Milwaukee-Eight models","symptom":"Oil pump pressure issue causes transmission oil to transfer into the primary case, which can lead to transmission failure","check_method":"Check primary case oil level/condition for signs of transmission fluid contamination; ask seller about any transmission service history or known oil pump recalls/updates performed","severity":"watch — can lead to transmission failure if not caught; ask specifically about this on any 2017-2019 model","typical_fix_cost_usd":"TBD"}
+  ]
+};
+KB.push(TOURING_M8_KB);
+
+const FXR_DYNA_EVO_KB = {
+  "model_family": "FXR / Dyna Evo (1985-1998)",
+  "years": "1985-1998",
+  "failure_points": []
+};
+KB.push(FXR_DYNA_EVO_KB);
+
+const DYNA_TWINCAM_KB = {
+  "model_family": "Dyna Twin Cam (1999-2016)",
+  "years": "1999-2016",
+  "failure_points": []
+};
+KB.push(DYNA_TWINCAM_KB);
+
+const GENERAL_KB = {
+  "model_family": "General (applies across model families)",
+  "failure_points": [
+    {"id":"fp_gen001","name":"Fuel tank rust from moisture","applies_to":"older, very low-mileage bikes especially — moisture buildup from long periods of sitting","symptom":"Rust forming inside the fuel tank, can lead to costly fuel system damage (clogged injectors/carb, fuel pump wear)","check_method":"Inspect inside fuel tank with a flashlight through the filler neck","severity":"watch — can become very costly if present; low mileage does NOT mean low risk, can be the opposite","typical_fix_cost_usd":"TBD"},
+    {"id":"fp_gen002","name":"CVO 110ci engine premature lifter failure","applies_to":"CVO models equipped with the 110ci engine (any model family — Touring CVO, Softail CVO, etc.)","symptom":"Clacking sound from the engine, accompanied by loss of power","check_method":"Listen for a clack/clacking noise from the top end at idle and under load; ask seller if they've noticed any power loss or unusual engine noise","severity":"watch — known weak point on CVO 110ci engines specifically, not the standard 103/96/88 engines","typical_fix_cost_usd":"TBD"}
+  ]
+};
+
+// Each entry: code/name, the KB section it maps to (for pulling the right failure points),
+// and the approximate year range it was in production. Year boundaries are best-effort from
+// research, not verified against Garo's direct knowledge -- worth spot-checking edge years.
+const MODEL_DATA = [
+  {name:"FXR Super Glide", kb:"FXR / Dyna Evo (1985-1998)", start:1985, end:1994},
+  {name:"FXRS Low Rider", kb:"FXR / Dyna Evo (1985-1998)", start:1985, end:1994},
+  {name:"FXRS-Conv Low Rider Convertible", kb:"FXR / Dyna Evo (1985-1998)", start:1989, end:1993},
+  {name:"FXRT Sport Glide", kb:"FXR / Dyna Evo (1985-1998)", start:1985, end:1992},
+  {name:"FXLR Low Rider Custom", kb:"FXR / Dyna Evo (1985-1998)", start:1988, end:1994},
+  {name:"FXRD Sport Glide", kb:"FXR / Dyna Evo (1985-1998)", start:1986, end:1986},
+  {name:"FXDB Sturgis", kb:"FXR / Dyna Evo (1985-1998)", start:1991, end:1992},
+  {name:"FXDB Daytona", kb:"FXR / Dyna Evo (1985-1998)", start:1992, end:1994},
+  {name:"FXDC Dyna Glide Custom", kb:"FXR / Dyna Evo (1985-1998)", start:1992, end:1998},
+  {name:"FXDWG Dyna Wide Glide", kb:"FXR / Dyna Evo (1985-1998)", start:1993, end:1998},
+  {name:"FXDL Dyna Low Rider", kb:"FXR / Dyna Evo (1985-1998)", start:1993, end:1998},
+  {name:"FXD Dyna Super Glide", kb:"FXR / Dyna Evo (1985-1998)", start:1995, end:1998},
+  {name:"FXDS-CONV Dyna Convertible", kb:"FXR / Dyna Evo (1985-1998)", start:1995, end:1998},
+
+  {name:"FXD Dyna Super Glide", kb:"Dyna Twin Cam (1999-2016)", start:1999, end:2005},
+  {name:"FXDX Super Glide Sport", kb:"Dyna Twin Cam (1999-2016)", start:1999, end:2005},
+  {name:"FXDL Dyna Low Rider", kb:"Dyna Twin Cam (1999-2016)", start:1999, end:2009},
+  {name:"FXDL Dyna Low Rider (2014 return)", kb:"Dyna Twin Cam (1999-2016)", start:2014, end:2017},
+  {name:"FXDWG Dyna Wide Glide", kb:"Dyna Twin Cam (1999-2016)", start:1999, end:2008},
+  {name:"FXDWG Dyna Wide Glide (2010 return)", kb:"Dyna Twin Cam (1999-2016)", start:2010, end:2016},
+  {name:"FXDC Super Glide Custom", kb:"Dyna Twin Cam (1999-2016)", start:1999, end:2013},
+  {name:"FXDB Street Bob", kb:"Dyna Twin Cam (1999-2016)", start:2006, end:2017},
+  {name:"FXDF Fat Bob", kb:"Dyna Twin Cam (1999-2016)", start:2008, end:2017},
+  {name:"FLD Switchback", kb:"Dyna Twin Cam (1999-2016)", start:2012, end:2016},
+  {name:"FXDLS Low Rider S", kb:"Dyna Twin Cam (1999-2016)", start:2016, end:2017},
+  {name:"FXDI35 35th Anniversary Super Glide", kb:"Dyna Twin Cam (1999-2016)", start:2006, end:2006},
+
+  {name:"FXST Softail Standard", kb:"Softail (Evolution era, 1984-1999)", start:1984, end:1999},
+  {name:"FXSTC Softail Custom", kb:"Softail (Evolution era, 1984-1999)", start:1986, end:1999},
+  {name:"FXSTS Springer Softail", kb:"Softail (Evolution era, 1984-1999)", start:1988, end:1999},
+  {name:"FXSTSB Bad Boy", kb:"Softail (Evolution era, 1984-1999)", start:1995, end:1996},
+  {name:"FLST Heritage Softail", kb:"Softail (Evolution era, 1984-1999)", start:1986, end:1990},
+  {name:"FLSTC Heritage Softail Classic", kb:"Softail (Evolution era, 1984-1999)", start:1988, end:1999},
+  {name:"FLSTF Fat Boy", kb:"Softail (Evolution era, 1984-1999)", start:1990, end:1999},
+  {name:"FLSTN Softail Nostalgia \"Moo Glide\"", kb:"Softail (Evolution era, 1984-1999)", start:1993, end:1996},
+  {name:"FLSTS Heritage Springer", kb:"Softail (Evolution era, 1984-1999)", start:1997, end:1999},
+
+  {name:"FXST Softail Standard", kb:"Softail (Twin Cam era)", start:2000, end:2013},
+  {name:"FXSTB Night Train", kb:"Softail (Twin Cam era)", start:2000, end:2009},
+  {name:"FXSTC Softail Custom", kb:"Softail (Twin Cam era)", start:2000, end:2010},
+  {name:"FXSTD Deuce", kb:"Softail (Twin Cam era)", start:2000, end:2007},
+  {name:"FXSTS Springer Softail", kb:"Softail (Twin Cam era)", start:2000, end:2006},
+  {name:"FLSTC Heritage Softail Classic", kb:"Softail (Twin Cam era)", start:2000, end:2017},
+  {name:"FLSTF Fat Boy", kb:"Softail (Twin Cam era)", start:2000, end:2017},
+  {name:"FLSTFB Fat Boy Lo", kb:"Softail (Twin Cam era)", start:2010, end:2017},
+  {name:"FLSTN Softail Deluxe", kb:"Softail (Twin Cam era)", start:2005, end:2017},
+  {name:"FLSTS Heritage Springer", kb:"Softail (Twin Cam era)", start:2000, end:2003},
+  {name:"FLSTSC Springer Classic", kb:"Softail (Twin Cam era)", start:2005, end:2007},
+  {name:"FLSTSB Cross Bones", kb:"Softail (Twin Cam era)", start:2008, end:2011},
+  {name:"FLS Softail Slim", kb:"Softail (Twin Cam era)", start:2012, end:2017},
+  {name:"FXS Blackline", kb:"Softail (Twin Cam era)", start:2011, end:2013},
+  {name:"FXSB Breakout", kb:"Softail (Twin Cam era)", start:2013, end:2017},
+  {name:"FXCW / FXCWC Rocker", kb:"Softail (Twin Cam era)", start:2008, end:2011},
+
+  {name:"FXST Softail Standard", kb:"Softail M8 (2018+)", start:2018, end:2100},
+  {name:"FXBB Street Bob", kb:"Softail M8 (2018+)", start:2018, end:2100},
+  {name:"FXLR Low Rider", kb:"Softail M8 (2018+)", start:2018, end:2100},
+  {name:"FXLRS Low Rider S", kb:"Softail M8 (2018+)", start:2020, end:2100},
+  {name:"FXLRST Low Rider ST", kb:"Softail M8 (2018+)", start:2022, end:2100},
+  {name:"FXFB Fat Bob", kb:"Softail M8 (2018+)", start:2018, end:2100},
+  {name:"FXFBS Fat Bob 114", kb:"Softail M8 (2018+)", start:2018, end:2100},
+  {name:"FLFB Fat Boy", kb:"Softail M8 (2018+)", start:2018, end:2100},
+  {name:"FLFBS Fat Boy 114", kb:"Softail M8 (2018+)", start:2018, end:2100},
+  {name:"FLDE Softail Deluxe", kb:"Softail M8 (2018+)", start:2018, end:2100},
+  {name:"FLHC Heritage Classic", kb:"Softail M8 (2018+)", start:2018, end:2100},
+  {name:"FLSL Softail Slim", kb:"Softail M8 (2018+)", start:2018, end:2100},
+  {name:"FLSB Sport Glide", kb:"Softail M8 (2018+)", start:2018, end:2100},
+  {name:"FXBR Breakout", kb:"Softail M8 (2018+)", start:2018, end:2100},
+  {name:"FXBRS Breakout 117", kb:"Softail M8 (2018+)", start:2018, end:2100},
+  {name:"FXDR FXDR 114", kb:"Softail M8 (2018+)", start:2019, end:2020},
+
+  {name:"FLHT Electra Glide Standard", kb:"Touring Evo (1985-1998)", start:1985, end:1998},
+  {name:"FLHTC Electra Glide Classic", kb:"Touring Evo (1985-1998)", start:1985, end:1998},
+  {name:"FLHTCU Ultra Classic Electra Glide", kb:"Touring Evo (1985-1998)", start:1989, end:1998},
+  {name:"FLHS Electra Glide Sport", kb:"Touring Evo (1985-1998)", start:1987, end:1993},
+  {name:"FLHR Road King", kb:"Touring Evo (1985-1998)", start:1994, end:1998},
+  {name:"FLTC Tour Glide Classic", kb:"Touring Evo (1985-1998)", start:1985, end:1995},
+  {name:"FLT Tour Glide", kb:"Touring Evo (1985-1998)", start:1985, end:1995},
+
+  {name:"FLHT Electra Glide Standard", kb:"Touring (Twin Cam era)", start:1999, end:2016},
+  {name:"FLHTC Electra Glide Classic", kb:"Touring (Twin Cam era)", start:1999, end:2008},
+  {name:"FLHTCU Ultra Classic Electra Glide", kb:"Touring (Twin Cam era)", start:1999, end:2013},
+  {name:"FLHTCUI Ultra Classic Electra Glide", kb:"Touring (Twin Cam era)", start:1999, end:2006},
+  {name:"FLHR Road King", kb:"Touring (Twin Cam era)", start:1999, end:2016},
+  {name:"FLHRC Road King Classic", kb:"Touring (Twin Cam era)", start:2003, end:2013},
+  {name:"FLHRS Road King Custom", kb:"Touring (Twin Cam era)", start:2004, end:2007},
+  {name:"FLTR Road Glide", kb:"Touring (Twin Cam era)", start:1998, end:2016},
+  {name:"FLTRU Road Glide Ultra", kb:"Touring (Twin Cam era)", start:2011, end:2016},
+  {name:"FLHX Street Glide", kb:"Touring (Twin Cam era)", start:2006, end:2016},
+  {name:"FLHXS Street Glide Special", kb:"Touring (Twin Cam era)", start:2014, end:2016},
+  {name:"FLHTK Ultra Limited", kb:"Touring (Twin Cam era)", start:2010, end:2016},
+  {name:"FLHTCUSE CVO Ultra Classic", kb:"Touring (Twin Cam era)", start:1999, end:2016},
+
+  {name:"FLHR Road King", kb:"Touring M8 (2017+)", start:2017, end:2100},
+  {name:"FLHRXS Road King Special", kb:"Touring M8 (2017+)", start:2017, end:2100},
+  {name:"FLHX Street Glide", kb:"Touring M8 (2017+)", start:2017, end:2100},
+  {name:"FLHXS Street Glide Special", kb:"Touring M8 (2017+)", start:2017, end:2100},
+  {name:"FLTRX Road Glide", kb:"Touring M8 (2017+)", start:2017, end:2100},
+  {name:"FLTRXS Road Glide Special", kb:"Touring M8 (2017+)", start:2017, end:2100},
+  {name:"FLTRK Road Glide Limited", kb:"Touring M8 (2017+)", start:2017, end:2100},
+  {name:"FLHTK Ultra Limited", kb:"Touring M8 (2017+)", start:2017, end:2100},
+  {name:"FLHTCU Electra Glide Standard", kb:"Touring M8 (2017+)", start:2017, end:2100},
+  {name:"FLHTCUTG Tri Glide Ultra", kb:"Touring M8 (2017+)", start:2017, end:2100},
+  {name:"FLRT Freewheeler", kb:"Touring M8 (2017+)", start:2017, end:2100},
+  {name:"FLHXSE CVO Street Glide", kb:"Touring M8 (2017+)", start:2017, end:2100},
+  {name:"FLTRXSE CVO Road Glide", kb:"Touring M8 (2017+)", start:2017, end:2100},
+  {name:"FLHTKSE CVO Limited", kb:"Touring M8 (2017+)", start:2017, end:2100}
+];
+
+function populateModelDropdown(){
+  const yearVal = document.getElementById('year').value;
+  const modelSelect = document.getElementById('modelName');
+  const year = parseInt(yearVal, 10);
+  if(!yearVal || isNaN(year)){
+    modelSelect.innerHTML = '<option value="" disabled selected>Enter a model year first…</option>';
+    return;
+  }
+  const matches = MODEL_DATA.filter(m => year >= m.start && year <= m.end);
+  if(matches.length === 0){
+    modelSelect.innerHTML = '<option value="" disabled selected>No models found for that year — check the year</option>';
+    return;
+  }
+  modelSelect.innerHTML = '<option value="" disabled selected>Select a model…</option>' +
+    matches.map(m => `<option value="${m.name}" data-kb="${m.kb}">${m.name}</option>`).join('');
+}
+
+
+function esc(s){
+  const d = document.createElement('div');
+  d.innerText = (s === undefined || s === null) ? '' : s;
+  return d.innerHTML;
+}
+
+let progressTimer = null;
+function startProgress(){
+  const fill = document.getElementById('progressFill');
+  const pct = document.getElementById('progressPct');
+  const text = document.getElementById('loadingText');
+  const stages = [
+    {at: 0,  label: "Checking known failure points…"},
+    {at: 20, label: "Matching year and model against the knowledge base…"},
+    {at: 40, label: "Searching current market listings…"},
+    {at: 65, label: "Comparing prices against similar bikes…"},
+    {at: 85, label: "Putting the report together…"}
+  ];
+  fill.style.width = '0%';
+  pct.textContent = '0%';
+  text.textContent = stages[0].label;
+
+  // Move at a steady, even pace based on elapsed time rather than easing (which
+  // decelerates hard near the cap and can look frozen). Estimated duration is a
+  // guess -- if the real request takes longer, progress simply holds at 96%
+  // until it resolves, rather than crawling asymptotically.
+  const startTime = Date.now();
+  const estimatedDurationMs = 18000; // ~18s typical, tune if real reports run longer/shorter
+  const cap = 96;
+  progressTimer = setInterval(() => {
+    const elapsed = Date.now() - startTime;
+    const current = Math.min(cap, (elapsed / estimatedDurationMs) * cap);
+    fill.style.width = current + '%';
+    pct.textContent = Math.round(current) + '%';
+    const stage = [...stages].reverse().find(s => current >= s.at);
+    if(stage) text.textContent = stage.label;
+  }, 150);
+}
+function finishProgress(success){
+  if(progressTimer) clearInterval(progressTimer);
+  const fill = document.getElementById('progressFill');
+  const pct = document.getElementById('progressPct');
+  const text = document.getElementById('loadingText');
+  fill.style.width = '100%';
+  pct.textContent = '100%';
+  text.textContent = success ? "Done." : "Something went wrong.";
+}
+
+
+async function generateReport(){
+  const btn = document.getElementById('submitBtn');
+  const loading = document.getElementById('loading');
+  const sheet = document.getElementById('reportSheet');
+
+  const modelSelectEl = document.getElementById('modelName');
+  const modelName = modelSelectEl.value || '(model not specified)';
+  const modelKbFamily = modelSelectEl.selectedOptions[0]?.dataset.kb;
+  const year = document.getElementById('year').value || '(year not specified)';
+  const mileage = document.getElementById('mileage').value || '(mileage not specified)';
+  const vin = document.getElementById('vin').value;
+  const price = document.getElementById('price').value;
+  const listingText = document.getElementById('listingText').value;
+
+  btn.disabled = true;
+  loading.classList.add('active');
+  sheet.classList.remove('active');
+  startProgress();
+  loading.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+  const kbEntry = KB.find(k => k.model_family === modelKbFamily);
+  if(!kbEntry){
+    if(progressTimer) clearInterval(progressTimer);
+    sheet.innerHTML = `<div style="padding:30px;color:#B23A2E;background:#fff;">Please select a model year and model before generating a report.</div>`;
+    sheet.classList.add('active');
+    btn.disabled = false;
+    loading.classList.remove('active');
+    return;
+  }
+
+  const prompt = `You are generating a pre-purchase inspection report for a used Harley-Davidson motorcycle, for Cold Start Report. Use ONLY the knowledge base entries provided below as your source of known failure points -- do not invent failure points that aren't in this knowledge base. You may use general reasoning to decide which entries are relevant given the year/mileage, and to interpret the seller's listing text for red flags.
+
+KNOWLEDGE BASE (model family: ${kbEntry.model_family}):
+${JSON.stringify(kbEntry.failure_points, null, 2)}
+
+GENERAL KNOWLEDGE BASE (applies to all model families):
+${JSON.stringify(GENERAL_KB.failure_points, null, 2)}
+
+VEHICLE DETAILS:
+- Model: ${modelName}
+- Year: ${year}
+- Mileage: ${mileage}
+- VIN: ${vin || 'not provided'}
+- Asking price: ${price ? '$' + price : 'not provided'}
+- Seller's listing text: ${listingText || 'not provided'}
+
+After you finish any web searches, your FINAL message must contain nothing but a single JSON object -- no leading sentence like "Based on my research..." or "Here's the report:", no markdown fences, no trailing commentary. Just the raw JSON object, matching exactly this schema:
+{
+  "grade": "single letter grade like B+ or C",
+  "grade_label": "short 2-3 word label like 'Solid buy' or 'Proceed with caution'",
+  "grade_note": "one sentence, under 20 words",
+  "summary": "2-3 sentence overall assessment referencing the specific failure points that apply given the year/mileage",
+  "stats": {"items_to_check": number, "red_flags": number},
+  "findings": [
+    {"flag": "check|watch|clear", "title": "short title", "detail": "1-2 sentences explaining what to check and why, referencing the knowledge base entry if relevant"}
+  ],
+  "questions": ["question to ask the seller", "..."],
+  "fair_market": {
+    "low": number (dollars, no symbol/commas),
+    "high": number,
+    "basis": "1-2 sentences on what this range is based on -- name the actual comparable listings/sources found, or say plainly if too few comps were found and this is a rough estimate",
+    "asking_price_assessment": "one sentence on where the asking price falls relative to the range, or 'not provided' if no asking price was given"
+  }
+}
+
+Only include findings for knowledge base entries that are actually relevant given this vehicle's year, mileage, AND specific model name -- some entries only apply to specific named models (check the "applies_to_models" field where present; if the vehicle's model doesn't match, leave that finding out). Include 3-6 findings and 3-5 questions. Be direct and practical, like an experienced dealership GM talking to a buyer.
+
+IMPORTANT: if a knowledge base entry's severity notes it as a safety issue (not just a cost/reliability issue), use flag "check" (not "watch") for that finding, and say plainly in the detail why it matters for safety, not just cost.
+
+For fair_market: use the web_search tool to find 3-5 real, current or recent listings/sold-price references for this specific year and model (or the closest realistic comparable) at roughly this mileage -- try sources like Cycle Trader, RumbleOn, J&P Cycles, or Harley-Davidson dealer listings. Base the range on what you actually find, not a generic guess. If search doesn't turn up enough real data, say so honestly in "basis" rather than inventing a confident-sounding number.`;
+
+  try {
+    const response = await fetch(`${BACKEND_URL}/api/generate-report`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ prompt })
+    });
+    if (!response.ok) {
+      const errBody = await response.json().catch(() => ({}));
+      throw new Error(errBody.error || `Server returned ${response.status}`);
+    }
+    const data = await response.json();
+    const textBlocks = data.content.filter(b => b.type === "text");
+    let raw = textBlocks.length ? textBlocks[textBlocks.length - 1].text : "{}";
+    raw = raw.replace(/```json|```/g, "").trim();
+    // Web search sometimes makes the model add a sentence before/after the JSON despite
+    // instructions -- pull out just the {...} object rather than assuming the whole string is clean JSON.
+    const firstBrace = raw.indexOf('{');
+    const lastBrace = raw.lastIndexOf('}');
+    if(firstBrace === -1 || lastBrace === -1 || lastBrace < firstBrace){
+      throw new Error("Could not find a JSON object in the model's response.");
+    }
+    raw = raw.slice(firstBrace, lastBrace + 1);
+    const report = JSON.parse(raw);
+
+    renderReport(report, { modelName, year, mileage, vin, price });
+    finishProgress(true);
+  } catch (err) {
+    finishProgress(false);
+    sheet.innerHTML = `<div style="padding:30px;color:#B23A2E;background:#fff;">Something went wrong generating the report: ${esc(err.message)}</div>`;
+    sheet.classList.add('active');
+  } finally {
+    await new Promise(r => setTimeout(r, 400)); // let the 100% state be visible briefly
+    btn.disabled = false;
+    loading.classList.remove('active');
+  }
+}
+
+function renderReport(r, vehicle){
+  const sheet = document.getElementById('reportSheet');
+  const formCard = document.getElementById('formCard');
+
+  const findingsHtml = (r.findings || []).map(f => `
+    <div class="finding">
+      <span class="flag ${esc(f.flag)}">${esc(f.flag)}</span>
+      <div class="finding-text"><b>${esc(f.title)}</b><span class="sub">${esc(f.detail)}</span></div>
+    </div>
+  `).join('');
+
+  const questionsHtml = (r.questions || []).map(q => `<li>${esc(q)}</li>`).join('');
+
+  sheet.innerHTML = `
+    <div class="header">
+      <div>
+        <p class="brand-eyebrow">Pre-purchase inspection report</p>
+        <p class="brand-name">Cold Start Report</p>
+        <p class="brand-sub">Pre-purchase inspection reports for used Harley-Davidson motorcycles</p>
+      </div>
+      <div class="report-meta">
+        Report #<strong>HC-${Date.now().toString().slice(-8)}</strong><br>
+        Generated <strong>${new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})}</strong>
+      </div>
+    </div>
+    <div class="vehicle-strip">
+      <div class="vehicle-title">${esc(vehicle.year)} Harley-Davidson <span>${esc(vehicle.modelName)}</span></div>
+      <div class="vehicle-facts">
+        <div>MILEAGE <b>${esc(vehicle.mileage)}</b></div>
+        ${vehicle.vin ? `<div>VIN <b>${esc(vehicle.vin)}</b></div>` : ''}
+        ${vehicle.price ? `<div>ASKING <b>$${esc(vehicle.price)}</b></div>` : ''}
+      </div>
+    </div>
+    <div class="body">
+      <div class="grade-block">
+        <div class="hang-tag">
+          <div class="hang-tag-eyebrow">Buy confidence</div>
+          <div class="hang-tag-grade">${esc(r.grade)}</div>
+          <div class="hang-tag-label">${esc(r.grade_label)}</div>
+          <div class="hang-tag-note">${esc(r.grade_note)}</div>
+        </div>
+        <div class="grade-summary">
+          <h2>Overall assessment</h2>
+          <p>${esc(r.summary)}</p>
+          <div class="stat-row">
+            <div class="stat"><p class="stat-label">Items to check</p><p class="stat-value">${esc(r.stats?.items_to_check)}</p></div>
+            <div class="stat"><p class="stat-label">Red flags</p><p class="stat-value">${esc(r.stats?.red_flags)}</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="section">
+        <div class="section-head"><span class="section-num">01</span><h3 class="section-title">Inspection findings</h3></div>
+        ${findingsHtml}
+      </div>
+      ${r.fair_market ? `
+      <div class="section">
+        <div class="section-head"><span class="section-num">02</span><h3 class="section-title">Fair market range</h3></div>
+        <div class="stat-row" style="margin-bottom:12px;">
+          <div class="stat"><p class="stat-label">Low</p><p class="stat-value">$${Number(r.fair_market.low || 0).toLocaleString()}</p></div>
+          <div class="stat"><p class="stat-label">High</p><p class="stat-value">$${Number(r.fair_market.high || 0).toLocaleString()}</p></div>
+        </div>
+        <p style="font-size:13px;color:var(--ink-soft);line-height:1.6;margin:0 0 6px;">${esc(r.fair_market.basis)}</p>
+        ${r.fair_market.asking_price_assessment ? `<p style="font-size:13px;color:var(--ink);line-height:1.6;margin:0;"><b>Asking price:</b> ${esc(r.fair_market.asking_price_assessment)}</p>` : ''}
+      </div>` : ''}
+      <div class="section">
+        <div class="section-head"><span class="section-num">03</span><h3 class="section-title">Questions to ask the seller</h3></div>
+        <ul class="qlist">${questionsHtml}</ul>
+      </div>
+    </div>
+    <div class="footer">
+      <span>Generated by <strong>Cold Start Report</strong> (prototype)</span>
+      <span>Not a substitute for an in-person mechanical inspection — market range is an estimate from web-search comps, not a guarantee</span>
+    </div>
+    <button class="new-report-btn" onclick="location.reload()">Generate another report</button>
+  `;
+  sheet.classList.add('active');
+  formCard.style.display = 'none';
+  sheet.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+</script>
+</body>
+</html>
