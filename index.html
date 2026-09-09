@@ -189,8 +189,8 @@
       <textarea id="listingText" placeholder="Paste the seller's description here — runs great, minor cosmetic wear, etc."></textarea>
     </div>
 
-    <button class="submit-btn" id="submitBtn" onclick="generateReport()">Generate Inspection Report</button>
-    <p class="hint">This is a prototype. Reports are generated from a hand-built knowledge base of known failure points — not a substitute for an in-person mechanical inspection.</p>
+    <button class="submit-btn" id="submitBtn" onclick="startCheckout()">Pay $29 &amp; Generate Report</button>
+    <p class="hint">Reports are generated from a hand-built knowledge base of known failure points — not a substitute for an in-person mechanical inspection. Payment is securely processed by Stripe.</p>
   </div>
 
   <div class="loading" id="loading">
@@ -443,16 +443,22 @@ function startProgress(){
   pct.textContent = '0%';
   text.textContent = stages[0].label;
 
-  // Move at a steady, even pace based on elapsed time rather than easing (which
-  // decelerates hard near the cap and can look frozen). Estimated duration is a
-  // guess -- if the real request takes longer, progress simply holds at 96%
-  // until it resolves, rather than crawling asymptotically.
+  // Phase 1: linear climb to 85% over the estimated duration -- predictable, even pace.
+  // Phase 2: if the real request runs longer than expected, keep creeping toward 99%
+  // in small but always-nonzero steps, so the number never fully stops moving and
+  // never reads as "frozen," even on an unusually slow report.
   const startTime = Date.now();
   const estimatedDurationMs = 24000; // ~24s typical now that recalls search was added, tune as needed
-  const cap = 96;
+  const linearCeiling = 85;
+  let current = 0;
   progressTimer = setInterval(() => {
     const elapsed = Date.now() - startTime;
-    const current = Math.min(cap, (elapsed / estimatedDurationMs) * cap);
+    if(current < linearCeiling){
+      current = Math.min(linearCeiling, (elapsed / estimatedDurationMs) * linearCeiling);
+    } else {
+      current = current + (99 - current) * 0.02 + 0.05; // always ticks forward, slows near 99 but never stops
+      if(current > 99) current = 99;
+    }
     fill.style.width = current + '%';
     pct.textContent = Math.round(current) + '%';
     const stage = [...stages].reverse().find(s => current >= s.at);
@@ -470,7 +476,106 @@ function finishProgress(success){
 }
 
 
-async function generateReport(){
+// Saves the current form field values to sessionStorage before sending the person
+// to Stripe -- so when they come back after paying, we can restore what they typed.
+function saveFormToSession(){
+  const modelSelectEl = document.getElementById('modelName');
+  const formData = {
+    modelName: modelSelectEl.value,
+    modelKb: modelSelectEl.selectedOptions[0]?.dataset.kb || '',
+    year: document.getElementById('year').value,
+    mileage: document.getElementById('mileage').value,
+    vin: document.getElementById('vin').value,
+    price: document.getElementById('price').value,
+    listingText: document.getElementById('listingText').value
+  };
+  sessionStorage.setItem('coldstart_pending_form', JSON.stringify(formData));
+}
+
+function loadFormFromSession(){
+  const raw = sessionStorage.getItem('coldstart_pending_form');
+  if(!raw) return null;
+  try { return JSON.parse(raw); } catch(e) { return null; }
+}
+
+// Step 1 of payment: send the person to Stripe's hosted checkout page.
+async function startCheckout(){
+  const btn = document.getElementById('submitBtn');
+  const year = document.getElementById('year').value;
+  const modelSelectEl = document.getElementById('modelName');
+  if(!year || !modelSelectEl.value){
+    alert('Please select a model year and model before continuing to payment.');
+    return;
+  }
+  btn.disabled = true;
+  btn.textContent = 'Redirecting to secure payment…';
+  saveFormToSession();
+  try {
+    const response = await fetch(`${BACKEND_URL}/api/create-checkout-session`, { method: 'POST' });
+    const data = await response.json();
+    if(!response.ok || !data.url){
+      throw new Error(data.error || 'Could not start checkout.');
+    }
+    window.location.href = data.url; // off to Stripe
+  } catch(err){
+    alert('Something went wrong starting payment: ' + err.message);
+    btn.disabled = false;
+    btn.textContent = 'Pay $29 & Generate Report';
+  }
+}
+
+// Runs on page load: if Stripe just redirected back with a session_id, verify it
+// was actually paid, restore the form, and generate the report automatically.
+async function checkForReturnFromCheckout(){
+  const params = new URLSearchParams(window.location.search);
+  const sessionId = params.get('session_id');
+  const canceled = params.get('canceled');
+
+  if(canceled){
+    window.history.replaceState({}, document.title, window.location.pathname);
+    return;
+  }
+  if(!sessionId) return;
+
+  const formData = loadFormFromSession();
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = true;
+  btn.textContent = 'Verifying payment…';
+
+  try {
+    const response = await fetch(`${BACKEND_URL}/api/verify-session?session_id=${encodeURIComponent(sessionId)}`);
+    const data = await response.json();
+    window.history.replaceState({}, document.title, window.location.pathname); // clean up the URL
+
+    if(!response.ok || !data.paid){
+      alert(data.alreadyUsed
+        ? 'This payment was already used to generate a report.'
+        : 'We could not confirm payment. If you were charged, please contact support.');
+      btn.disabled = false;
+      btn.textContent = 'Pay $29 & Generate Report';
+      return;
+    }
+
+    // Payment confirmed -- restore the form and generate automatically.
+    if(formData){
+      document.getElementById('year').value = formData.year || '';
+      populateModelDropdown();
+      document.getElementById('modelName').value = formData.modelName || '';
+      document.getElementById('mileage').value = formData.mileage || '';
+      document.getElementById('vin').value = formData.vin || '';
+      document.getElementById('price').value = formData.price || '';
+      document.getElementById('listingText').value = formData.listingText || '';
+    }
+    sessionStorage.removeItem('coldstart_pending_form');
+    generateReport(sessionId);
+  } catch(err){
+    alert('Something went wrong verifying payment: ' + err.message);
+    btn.disabled = false;
+    btn.textContent = 'Pay $29 & Generate Report';
+  }
+}
+
+async function generateReport(sessionId){
   const btn = document.getElementById('submitBtn');
   const loading = document.getElementById('loading');
   const sheet = document.getElementById('reportSheet');
@@ -548,13 +653,13 @@ IMPORTANT: if a knowledge base entry's severity notes it as a safety issue (not 
 
 For fair_market: use the web_search tool to find 3-5 real, current or recent listings/sold-price references for this specific year and model (or the closest realistic comparable) at roughly this mileage -- try sources like Cycle Trader, RumbleOn, J&P Cycles, or Harley-Davidson dealer listings. Base the range on what you actually find, not a generic guess. If search doesn't turn up enough real data, say so honestly in "basis" rather than inventing a confident-sounding number.
 
-For recalls: use the web_search tool to search nhtsa.gov/recalls and Harley-Davidson's own recall pages for official open recalls affecting this specific year and model. List only real recalls you actually find -- never invent a recall number or description. If search finds none, or is inconclusive, set found to false and say so honestly in "note" rather than guessing. A VIN-specific recall lookup on nhtsa.gov always beats a year/model search, so mention in "note" that the buyer should check the actual VIN on nhtsa.gov/recalls for a definitive answer.`;
+For recalls: use the web_search tool to search nhtsa.gov/recalls and Harley-Davidson's own recall pages for official open recalls affecting this specific year and model. List only recalls that actually apply to this exact year and model -- never invent a recall number or description, and never mention recalls you found for other model years or different models even to rule them out; the buyer doesn't need to hear about campaigns that don't apply to their bike. If search finds none that apply, set found to false and keep "note" to a single short sentence: "No open recalls found for this year and model. Check nhtsa.gov/recalls with your VIN to confirm." Do not restate the VIN number, do not explain your search process, and do not justify why nhtsa.gov is authoritative -- just the plain confirmation and the one-line pointer.`;
 
   try {
     const response = await fetch(`${BACKEND_URL}/api/generate-report`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ prompt })
+      body: JSON.stringify({ prompt, session_id: sessionId })
     });
     if (!response.ok) {
       const errBody = await response.json().catch(() => ({}));
@@ -687,6 +792,8 @@ function renderReport(r, vehicle){
   formCard.style.display = 'none';
   sheet.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
+
+checkForReturnFromCheckout();
 </script>
 </body>
 </html>
