@@ -434,9 +434,10 @@ function startProgress(){
   const stages = [
     {at: 0,  label: "Checking known failure points…"},
     {at: 20, label: "Matching year and model against the knowledge base…"},
-    {at: 40, label: "Searching current market listings…"},
-    {at: 65, label: "Comparing prices against similar bikes…"},
-    {at: 85, label: "Putting the report together…"}
+    {at: 38, label: "Checking for open safety recalls…"},
+    {at: 55, label: "Searching current market listings…"},
+    {at: 72, label: "Comparing prices against similar bikes…"},
+    {at: 87, label: "Putting the report together…"}
   ];
   fill.style.width = '0%';
   pct.textContent = '0%';
@@ -447,7 +448,7 @@ function startProgress(){
   // guess -- if the real request takes longer, progress simply holds at 96%
   // until it resolves, rather than crawling asymptotically.
   const startTime = Date.now();
-  const estimatedDurationMs = 18000; // ~18s typical, tune if real reports run longer/shorter
+  const estimatedDurationMs = 24000; // ~24s typical now that recalls search was added, tune as needed
   const cap = 96;
   progressTimer = setInterval(() => {
     const elapsed = Date.now() - startTime;
@@ -526,6 +527,13 @@ After you finish any web searches, your FINAL message must contain nothing but a
     {"flag": "check|watch|clear", "title": "short title", "detail": "1-2 sentences explaining what to check and why, referencing the knowledge base entry if relevant"}
   ],
   "questions": ["question to ask the seller", "..."],
+  "recalls": {
+    "found": true or false,
+    "items": [
+      {"title": "short recall title", "description": "1-2 sentences on what the recall covers and the safety risk", "recall_number": "NHTSA campaign number if found, otherwise omit"}
+    ],
+    "note": "1-2 sentences -- confirm whether search found official NHTSA/manufacturer recall data for this specific year/model, or say plainly that none were found / search was inconclusive and the buyer should check nhtsa.gov/recalls with their VIN directly"
+  },
   "fair_market": {
     "low": number (dollars, no symbol/commas),
     "high": number,
@@ -538,7 +546,9 @@ Only include findings for knowledge base entries that are actually relevant give
 
 IMPORTANT: if a knowledge base entry's severity notes it as a safety issue (not just a cost/reliability issue), use flag "check" (not "watch") for that finding, and say plainly in the detail why it matters for safety, not just cost.
 
-For fair_market: use the web_search tool to find 3-5 real, current or recent listings/sold-price references for this specific year and model (or the closest realistic comparable) at roughly this mileage -- try sources like Cycle Trader, RumbleOn, J&P Cycles, or Harley-Davidson dealer listings. Base the range on what you actually find, not a generic guess. If search doesn't turn up enough real data, say so honestly in "basis" rather than inventing a confident-sounding number.`;
+For fair_market: use the web_search tool to find 3-5 real, current or recent listings/sold-price references for this specific year and model (or the closest realistic comparable) at roughly this mileage -- try sources like Cycle Trader, RumbleOn, J&P Cycles, or Harley-Davidson dealer listings. Base the range on what you actually find, not a generic guess. If search doesn't turn up enough real data, say so honestly in "basis" rather than inventing a confident-sounding number.
+
+For recalls: use the web_search tool to search nhtsa.gov/recalls and Harley-Davidson's own recall pages for official open recalls affecting this specific year and model. List only real recalls you actually find -- never invent a recall number or description. If search finds none, or is inconclusive, set found to false and say so honestly in "note" rather than guessing. A VIN-specific recall lookup on nhtsa.gov always beats a year/model search, so mention in "note" that the buyer should check the actual VIN on nhtsa.gov/recalls for a definitive answer.`;
 
   try {
     const response = await fetch(`${BACKEND_URL}/api/generate-report`, {
@@ -631,9 +641,30 @@ function renderReport(r, vehicle){
         <div class="section-head"><span class="section-num">01</span><h3 class="section-title">Inspection findings</h3></div>
         ${findingsHtml}
       </div>
+      ${r.recalls ? `
+      <div class="section">
+        <div class="section-head"><span class="section-num">02</span><h3 class="section-title">Safety recalls</h3></div>
+        ${r.recalls.found && (r.recalls.items || []).length ? `
+          ${r.recalls.items.map(item => `
+            <div class="finding">
+              <span class="flag check">Recall</span>
+              <div class="finding-text">
+                <b>${esc(item.title)}</b>${item.recall_number ? ` <span style="color:var(--ink-soft);font-weight:400;">(${esc(item.recall_number)})</span>` : ''}
+                <span class="sub">${esc(item.description)}</span>
+              </div>
+            </div>
+          `).join('')}
+        ` : `
+          <div class="finding">
+            <span class="flag clear">Clear</span>
+            <div class="finding-text"><b>No open recalls found</b><span class="sub">${esc(r.recalls.note)}</span></div>
+          </div>
+        `}
+        ${r.recalls.found && (r.recalls.items || []).length ? `<p style="font-size:12px;color:var(--ink-soft);line-height:1.5;margin:10px 0 0;">${esc(r.recalls.note)}</p>` : ''}
+      </div>` : ''}
       ${r.fair_market ? `
       <div class="section">
-        <div class="section-head"><span class="section-num">02</span><h3 class="section-title">Fair market range</h3></div>
+        <div class="section-head"><span class="section-num">03</span><h3 class="section-title">Fair market range</h3></div>
         <div class="stat-row" style="margin-bottom:12px;">
           <div class="stat"><p class="stat-label">Low</p><p class="stat-value">$${Number(r.fair_market.low || 0).toLocaleString()}</p></div>
           <div class="stat"><p class="stat-label">High</p><p class="stat-value">$${Number(r.fair_market.high || 0).toLocaleString()}</p></div>
@@ -642,7 +673,7 @@ function renderReport(r, vehicle){
         ${r.fair_market.asking_price_assessment ? `<p style="font-size:13px;color:var(--ink);line-height:1.6;margin:0;"><b>Asking price:</b> ${esc(r.fair_market.asking_price_assessment)}</p>` : ''}
       </div>` : ''}
       <div class="section">
-        <div class="section-head"><span class="section-num">03</span><h3 class="section-title">Questions to ask the seller</h3></div>
+        <div class="section-head"><span class="section-num">04</span><h3 class="section-title">Questions to ask the seller</h3></div>
         <ul class="qlist">${questionsHtml}</ul>
       </div>
     </div>
