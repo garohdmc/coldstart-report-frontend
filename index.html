@@ -4,6 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Cold Start Report</title>
+<meta name="description" content="Get a $29 pre-purchase inspection report for a used Harley-Davidson — known failure points, safety recalls, and fair market price, built from 30 years on a dealership sales floor.">
+<meta property="og:title" content="Cold Start Report — Know Before You Buy the Bike">
+<meta property="og:description" content="A $29 pre-purchase inspection report for used Harley-Davidson motorcycles — known failure points, safety recalls, and a fair market price check.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://coldstartreport.com">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Cold Start Report — Know Before You Buy the Bike">
+<meta name="twitter:description" content="A $29 pre-purchase inspection report for used Harley-Davidson motorcycles — known failure points, safety recalls, and a fair market price check.">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTIwIDEyMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8ZGVmcz4KICAgIDxzdHlsZT4KICAgICAgLnN0ZWVsIHsgZmlsbDogIzIyMjYyQjsgfQogICAgICAuYW1iZXIgeyBmaWxsOiAjQzg3NTJCOyB9CiAgICAgIC5mcm9zdCB7IGZpbGw6IG5vbmU7IHN0cm9rZTogIzhBOEY5ODsgc3Ryb2tlLXdpZHRoOiAyLjU7IHN0cm9rZS1saW5lY2FwOiByb3VuZDsgfQogICAgPC9zdHlsZT4KICA8L2RlZnM+CgogIDwhLS0gQmFkZ2UgYmFzZSAtLT4KICA8Y2lyY2xlIGN4PSI2MCIgY3k9IjYwIiByPSI1OCIgY2xhc3M9InN0ZWVsIiBzdHJva2U9IiMzQTQwNDgiIHN0cm9rZS13aWR0aD0iMiIvPgoKICA8IS0tIEZyb3N0IHRpY2sgbWFya3MgKGNvbGQpIC0tPgogIDxnIGNsYXNzPSJmcm9zdCI+CiAgICA8bGluZSB4MT0iNjAiIHkxPSIxNCIgeDI9IjYwIiB5Mj0iMjQiLz4KICAgIDxsaW5lIHgxPSI2MCIgeTE9Ijk2IiB4Mj0iNjAiIHkyPSIxMDYiLz4KICAgIDxsaW5lIHgxPSIxNCIgeTE9IjYwIiB4Mj0iMjQiIHkyPSI2MCIvPgogICAgPGxpbmUgeDE9Ijk2IiB5MT0iNjAiIHgyPSIxMDYiIHkyPSI2MCIvPgogICAgPGxpbmUgeDE9IjI3IiB5MT0iMjciIHgyPSIzNCIgeTI9IjM0Ii8+CiAgICA8bGluZSB4MT0iOTMiIHkxPSIyNyIgeDI9Ijg2IiB5Mj0iMzQiLz4KICAgIDxsaW5lIHgxPSIyNyIgeTE9IjkzIiB4Mj0iMzQiIHkyPSI4NiIvPgogICAgPGxpbmUgeDE9IjkzIiB5MT0iOTMiIHgyPSI4NiIgeTI9Ijg2Ii8+CiAgPC9nPgoKICA8IS0tIFNwYXJrIC8gaWduaXRpb24gYm9sdCAoc3RhcnQpIC0tPgogIDxwYXRoIGQ9Ik02NyAyOCBMNDIgNjYgTDU3IDY2IEw1MiA5NCBMODAgNTQgTDY0IDU0IFoiIGNsYXNzPSJhbWJlciIvPgo8L3N2Zz4K">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -41,6 +49,16 @@
   .submit-btn:hover{background:var(--amber-deep);}
   .submit-btn:disabled{background:#B9B6AE;cursor:not-allowed;}
   .hint{font-size:11.5px;color:var(--ink-soft);margin-top:8px;line-height:1.5;}
+  .coverage-note{font-size:11.5px;color:var(--ink-soft);margin:-8px 0 14px;font-style:italic;}
+
+  /* ===== FAQ ===== */
+  .faq-wrap{max-width:700px;margin:0 auto 30px;background:rgba(255,255,255,0.55);border-radius:8px;padding:24px 28px;}
+  .faq-heading{font-family:'Oswald',sans-serif;font-size:17px;font-weight:600;text-transform:uppercase;letter-spacing:.02em;color:var(--ink);margin:0 0 14px;text-align:center;}
+  .faq-item{padding:12px 0;border-top:1px solid var(--hairline);}
+  .faq-item:first-of-type{border-top:none;padding-top:0;}
+  .faq-q{font-family:'Oswald',sans-serif;font-size:14.5px;font-weight:500;color:var(--ink);margin:0 0 5px;}
+  .faq-a{font-size:13px;color:var(--ink-soft);line-height:1.55;margin:0;}
+  .time-hint{font-size:12.5px;color:var(--amber-deep);margin-top:10px;font-weight:600;text-align:center;}
 
   /* ===== HERO / WHAT YOU GET ===== */
   .hero{
@@ -61,6 +79,9 @@
   .form-title-row{display:flex;align-items:center;gap:2px;}
   .hero h1 span{color:var(--amber);}
   .hero p{font-size:15px;color:#D8D5CC;max-width:560px;margin:0 auto;line-height:1.6;}
+  .hero-price-line{margin-top:10px !important;font-size:15px;color:#fff !important;}
+  .hero-price-line .strike{text-decoration:line-through;color:#A8A59C;}
+  .hero-price-line strong{color:var(--amber);font-size:17px;}
   .feature-grid{
     display:grid;grid-template-columns:repeat(4,1fr);gap:14px;
     max-width:900px;margin:26px auto 0;
@@ -251,7 +272,8 @@
       </svg>
       <h1>Know before you buy <span>the bike</span></h1>
     </div>
-    <p>$29 gets you a pre-purchase inspection report for a used Harley-Davidson — built from real dealership experience, the same things a 30-year Harley GM would check before he'd let you hand over cash.</p>
+    <p>Built from 30 years on a Harley dealership sales floor — the same things a Harley GM checks before he'd let you hand over cash.</p>
+    <p class="hero-price-line">A real in-person inspection runs <span class="strike">$75–150</span>. This is <strong>$29</strong>, delivered in about 30 seconds.</p>
     <div class="feature-grid">
       <div class="feature-card">
         <p class="feature-eyebrow">01</p>
@@ -339,9 +361,54 @@
               <div class="finding-text"><b>Battery age unknown</b><span class="sub">Ask when the battery was last replaced — a weak battery is a cheap fix but easy leverage in price talks.</span></div>
             </div>
           </div>
+          <div class="section">
+            <div class="section-head"><span class="section-num">02</span><h3 class="section-title">Safety recalls</h3></div>
+            <div class="finding">
+              <span class="flag clear">Clear</span>
+              <div class="finding-text"><b>No open recalls found</b><span class="sub">No open recalls found for this year and model. Check nhtsa.gov/recalls with your VIN to confirm.</span></div>
+            </div>
+          </div>
+          <div class="section">
+            <div class="section-head"><span class="section-num">03</span><h3 class="section-title">Fair market range</h3></div>
+            <div class="stat-row" style="margin-bottom:12px;">
+              <div class="stat"><p class="stat-label">Low</p><p class="stat-value">$7,900</p></div>
+              <div class="stat"><p class="stat-label">High</p><p class="stat-value">$10,100</p></div>
+            </div>
+            <p style="font-size:13px;color:var(--ink-soft);line-height:1.6;margin:0 0 6px;">Based on 4 comparable 2011 Heritage Softail Classic listings at similar mileage found in current market searches.</p>
+            <p style="font-size:13px;color:var(--ink);line-height:1.6;margin:0;"><b>Asking price:</b> $9,200 falls within the fair range, close to the middle.</p>
+          </div>
+          <div class="section">
+            <div class="section-head"><span class="section-num">04</span><h3 class="section-title">Questions to ask the seller</h3></div>
+            <ul class="qlist">
+              <li>When was the battery last replaced?</li>
+              <li>Has the cam chain tensioner ever been serviced or inspected?</li>
+              <li>Do you have maintenance records or receipts?</li>
+              <li>Has the bike ever been laid down or in an accident?</li>
+            </ul>
+          </div>
         </div>
       </div>
-      <div class="sample-fade"></div>
+    </div>
+  </div>
+  <p style="text-align:center;color:#D8D5CC;font-size:13.5px;margin:-12px auto 30px;max-width:520px;">That's the full report — every real report is built the same way, matched to your bike's exact year, model, and mileage.</p>
+
+  <div class="faq-wrap">
+    <h2 class="faq-heading">Common questions</h2>
+    <div class="faq-item">
+      <p class="faq-q">Is this affiliated with Harley-Davidson?</p>
+      <p class="faq-a">No. Cold Start Report is an independent service, not affiliated with, endorsed by, or sponsored by Harley-Davidson Motor Company.</p>
+    </div>
+    <div class="faq-item">
+      <p class="faq-q">What if my model isn't listed?</p>
+      <p class="faq-a">Coverage currently spans Softail, Touring, and Dyna/FXR models from 1985 to present. If your exact model or year isn't in the dropdown yet, email us — we're adding more regularly.</p>
+    </div>
+    <div class="faq-item">
+      <p class="faq-q">Do I get to keep the report?</p>
+      <p class="faq-a">Yes. Once it generates, you can download it as a PDF right from the page — save it, print it, or bring it with you to the sale.</p>
+    </div>
+    <div class="faq-item">
+      <p class="faq-q">Is this a substitute for a mechanic's inspection?</p>
+      <p class="faq-a">No. Think of it as knowing what to check and what questions to ask before you buy — not a replacement for a hands-on inspection if you want one.</p>
     </div>
   </div>
 
@@ -373,6 +440,7 @@
         </select>
       </div>
     </div>
+    <p class="coverage-note">Currently covers Softail, Touring, and Dyna/FXR models (1985–present). More models added regularly.</p>
 
     <div class="field-row">
       <div class="field">
@@ -399,6 +467,7 @@
     </div>
 
     <button class="submit-btn" id="submitBtn" onclick="startCheckout()">Pay $29 &amp; Generate Report</button>
+    <p class="time-hint">⏱ Takes about 30 seconds after payment — your report generates automatically.</p>
     <p class="hint">Reports are generated from a hand-built knowledge base of known failure points — not a substitute for an in-person mechanical inspection. Payment is securely processed by Stripe.</p>
   </div>
 
