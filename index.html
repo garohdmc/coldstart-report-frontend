@@ -94,7 +94,30 @@
   .feature-card h3{font-family:'Oswald',sans-serif;font-size:14px;font-weight:500;color:#fff;margin:0 0 6px;}
   .feature-card p{font-size:12px;color:#B9B6AE;line-height:1.5;margin:0;}
 
-  .sample-wrap{max-width:880px;margin:0 auto 30px;}
+  .sample-cta{text-align:center;margin:0 auto 24px;}
+  .sample-link{
+    background:none;border:2px solid var(--steel);color:var(--steel);
+    font-family:'Oswald',sans-serif;font-size:15px;font-weight:600;
+    text-transform:uppercase;letter-spacing:.02em;
+    padding:12px 26px;border-radius:5px;cursor:pointer;
+  }
+  .sample-link:hover{background:var(--steel);color:#fff;}
+  .sample-cta-sub{font-size:12.5px;color:var(--ink-soft);margin:8px 0 0;}
+
+  .modal-overlay{
+    display:none;position:fixed;inset:0;background:rgba(20,18,15,0.72);
+    z-index:100;padding:24px 12px;overflow-y:auto;
+  }
+  .modal-overlay.active{display:block;}
+  .modal-panel{
+    position:relative;max-width:900px;margin:0 auto;
+    background:var(--paper);border-radius:8px;padding:20px;
+  }
+  .modal-close{
+    position:absolute;top:12px;right:16px;z-index:3;
+    background:var(--steel);color:#fff;border:none;border-radius:50%;
+    width:32px;height:32px;font-size:20px;line-height:1;cursor:pointer;
+  }
   .sample-label{
     text-align:center;color:#B9B6AE;font-family:'IBM Plex Mono',monospace;
     font-size:12px;letter-spacing:.08em;text-transform:uppercase;margin:0 0 12px;
@@ -107,19 +130,25 @@
     box-shadow:0 2px 6px rgba(0,0,0,0.3);
   }
   .sample-sheet{position:relative;}
-  .sample-fade{
-    position:absolute;bottom:0;left:0;right:0;height:90px;
-    background:linear-gradient(to bottom, rgba(250,248,243,0), var(--paper));
-    pointer-events:none;
-  }
 
   @media(max-width:900px){
     .feature-grid{grid-template-columns:1fr 1fr;}
   }
   @media(max-width:640px){
-    .hero h1{font-size:22px;}
+    .hero{padding:22px 16px 24px;}
+    .hero-title-row{flex-direction:column;gap:8px;}
+    .logo-mark{width:36px;height:36px;margin-right:0;}
+    .hero h1{font-size:20px;margin-top:2px;}
     .hero p{font-size:13.5px;}
+    .hero-price-line{font-size:13.5px !important;}
+    .hero-price-line strong{font-size:15px;}
     .feature-grid{grid-template-columns:1fr;margin-top:18px;}
+    .faq-wrap{padding:18px 16px;margin:0 auto 20px;}
+    .site-footer{padding:18px 16px;font-size:12px;}
+    .site-disclaimer{font-size:11px;}
+    .modal-overlay{padding:12px 8px;}
+    .modal-panel{padding:16px 12px;}
+    .sample-link{font-size:13px;padding:11px 20px;}
   }
 
   /* ===== LOADING ===== */
@@ -227,14 +256,16 @@
 
   /* ===== SITE FOOTER ===== */
   .site-footer{
-    text-align:center;color:#C9C6BE;font-size:12.5px;
-    padding:24px 12px 8px;line-height:1.6;
+    text-align:center;color:#E8E5DC;font-size:13px;
+    background:var(--steel);border-radius:8px;
+    padding:22px 20px;line-height:1.6;
+    max-width:880px;margin:24px auto 0;
   }
   .site-footer a{color:#fff;text-decoration:underline;font-weight:600;}
   .site-footer a:hover{text-decoration:underline;}
-  .site-footer-sub{font-size:11.5px;color:#A8A59C;margin-top:4px;max-width:480px;margin-left:auto;margin-right:auto;}
+  .site-footer-sub{font-size:11.5px;color:#B9B6AE;margin-top:4px;max-width:480px;margin-left:auto;margin-right:auto;}
   .site-disclaimer{
-    font-size:11px;color:#C9C6BE;line-height:1.6;
+    font-size:11.5px;color:#B9B6AE;line-height:1.6;
     max-width:640px;margin:12px auto 0;
   }
 
@@ -248,7 +279,7 @@
   .report-actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:16px;}
   @media print{
     body{background:#fff !important;padding:0 !important;}
-    .hero, .sample-wrap, .form-card, .loading, .report-actions, .site-footer{display:none !important;}
+    .hero, .sample-cta, .modal-overlay, .faq-wrap, .form-card, .loading, .report-actions, .site-footer{display:none !important;}
     .sheet{box-shadow:none !important;max-width:100% !important;}
     .wrap{max-width:100% !important;}
   }
@@ -298,99 +329,110 @@
     </div>
   </div>
 
-  <div class="sample-wrap">
-    <p class="sample-label">Example report — real data shown, illustrative bike</p>
-    <div class="sample-sheet">
-      <span class="sample-badge">Sample</span>
-      <div class="sheet" style="display:block;">
-        <div class="header">
-          <div>
-            <p class="brand-eyebrow">Pre-purchase inspection report</p>
-            <div class="brand-row">
-              <svg class="logo-mark small" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="60" cy="60" r="58" fill="#2E333A" stroke="#3A4048" stroke-width="2"/>
-                <g fill="none" stroke="#8A8F98" stroke-width="2.5" stroke-linecap="round">
-                  <line x1="60" y1="14" x2="60" y2="24"/><line x1="60" y1="96" x2="60" y2="106"/>
-                  <line x1="14" y1="60" x2="24" y2="60"/><line x1="96" y1="60" x2="106" y2="60"/>
-                  <line x1="27" y1="27" x2="34" y2="34"/><line x1="93" y1="27" x2="86" y2="34"/>
-                  <line x1="27" y1="93" x2="34" y2="86"/><line x1="93" y1="93" x2="86" y2="86"/>
-                </g>
-                <path d="M67 28 L42 66 L57 66 L52 94 L80 54 L64 54 Z" fill="#C8752B"/>
-              </svg>
-              <p class="brand-name">Cold Start Report</p>
+  <div class="sample-cta">
+    <button class="sample-link" onclick="openSampleModal()">
+      See a sample report &rarr;
+    </button>
+    <p class="sample-cta-sub">Real data, illustrative bike — see exactly what you get before you pay.</p>
+  </div>
+
+  <div class="modal-overlay" id="sampleModalOverlay" onclick="if(event.target===this) closeSampleModal()">
+    <div class="modal-panel">
+      <button class="modal-close" onclick="closeSampleModal()" aria-label="Close">&times;</button>
+      <p class="sample-label">Example report — real data shown, illustrative bike</p>
+      <div class="sample-sheet">
+        <span class="sample-badge">Sample</span>
+        <div class="sheet" style="display:block;">
+          <div class="header">
+            <div>
+              <p class="brand-eyebrow">Pre-purchase inspection report</p>
+              <div class="brand-row">
+                <svg class="logo-mark small" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="60" cy="60" r="58" fill="#2E333A" stroke="#3A4048" stroke-width="2"/>
+                  <g fill="none" stroke="#8A8F98" stroke-width="2.5" stroke-linecap="round">
+                    <line x1="60" y1="14" x2="60" y2="24"/><line x1="60" y1="96" x2="60" y2="106"/>
+                    <line x1="14" y1="60" x2="24" y2="60"/><line x1="96" y1="60" x2="106" y2="60"/>
+                    <line x1="27" y1="27" x2="34" y2="34"/><line x1="93" y1="27" x2="86" y2="34"/>
+                    <line x1="27" y1="93" x2="34" y2="86"/><line x1="93" y1="93" x2="86" y2="86"/>
+                  </g>
+                  <path d="M67 28 L42 66 L57 66 L52 94 L80 54 L64 54 Z" fill="#C8752B"/>
+                </svg>
+                <p class="brand-name">Cold Start Report</p>
+              </div>
+              <p class="brand-sub">Pre-purchase inspection reports for used Harley-Davidson motorcycles</p>
             </div>
-            <p class="brand-sub">Pre-purchase inspection reports for used Harley-Davidson motorcycles</p>
-          </div>
-          <div class="report-meta">
-            Report #<strong>HC-88213042</strong><br>
-            Generated <strong>Sep 8, 2026</strong>
-          </div>
-        </div>
-        <div class="vehicle-strip">
-          <div class="vehicle-title">2011 Harley-Davidson <span>FLSTC Heritage Softail Classic</span></div>
-          <div class="vehicle-facts">
-            <div>MILEAGE <b>26,400</b></div>
-            <div>ASKING <b>$9,200</b></div>
-          </div>
-        </div>
-        <div class="body">
-          <div class="grade-block">
-            <div class="hang-tag">
-              <div class="hang-tag-eyebrow">Buy confidence</div>
-              <div class="hang-tag-grade">B</div>
-              <div class="hang-tag-label">Solid buy</div>
-              <div class="hang-tag-note">Priced fairly; a couple of age-related items worth checking in person.</div>
+            <div class="report-meta">
+              Report #<strong>HC-88213042</strong><br>
+              Generated <strong>Sep 8, 2026</strong>
             </div>
-            <div class="grade-summary">
-              <h2>Overall assessment</h2>
-              <p>This 2011 Heritage Softail Classic falls squarely in the Twin Cam era, with mileage and price both landing in a reasonable range for the model. Two known wear items apply at this mileage — nothing that should stop the sale, but worth checking before you commit.</p>
-              <div class="stat-row">
-                <div class="stat"><p class="stat-label">Items to check</p><p class="stat-value">2</p></div>
-                <div class="stat"><p class="stat-label">Red flags</p><p class="stat-value">0</p></div>
+          </div>
+          <div class="vehicle-strip">
+            <div class="vehicle-title">2011 Harley-Davidson <span>FLSTC Heritage Softail Classic</span></div>
+            <div class="vehicle-facts">
+              <div>MILEAGE <b>26,400</b></div>
+              <div>ASKING <b>$9,200</b></div>
+            </div>
+          </div>
+          <div class="body">
+            <div class="grade-block">
+              <div class="hang-tag">
+                <div class="hang-tag-eyebrow">Buy confidence</div>
+                <div class="hang-tag-grade">B</div>
+                <div class="hang-tag-label">Solid buy</div>
+                <div class="hang-tag-note">Priced fairly; a couple of age-related items worth checking in person.</div>
+              </div>
+              <div class="grade-summary">
+                <h2>Overall assessment</h2>
+                <p>This 2011 Heritage Softail Classic falls squarely in the Twin Cam era, with mileage and price both landing in a reasonable range for the model. Two known wear items apply at this mileage — nothing that should stop the sale, but worth checking before you commit.</p>
+                <div class="stat-row">
+                  <div class="stat"><p class="stat-label">Items to check</p><p class="stat-value">2</p></div>
+                  <div class="stat"><p class="stat-label">Red flags</p><p class="stat-value">0</p></div>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="section">
-            <div class="section-head"><span class="section-num">01</span><h3 class="section-title">Inspection findings</h3></div>
-            <div class="finding">
-              <span class="flag watch">Watch</span>
-              <div class="finding-text"><b>Cam chain tensioner wear window</b><span class="sub">This falls inside the mileage range where tensioner failure becomes more common. Ask for a cold-start listen test before you buy.</span></div>
+            <div class="section">
+              <div class="section-head"><span class="section-num">01</span><h3 class="section-title">Inspection findings</h3></div>
+              <div class="finding">
+                <span class="flag watch">Watch</span>
+                <div class="finding-text"><b>Cam chain tensioner wear window</b><span class="sub">This falls inside the mileage range where tensioner failure becomes more common. Ask for a cold-start listen test before you buy.</span></div>
+              </div>
+              <div class="finding">
+                <span class="flag watch">Watch</span>
+                <div class="finding-text"><b>Battery age unknown</b><span class="sub">Ask when the battery was last replaced — a weak battery is a cheap fix but easy leverage in price talks.</span></div>
+              </div>
             </div>
-            <div class="finding">
-              <span class="flag watch">Watch</span>
-              <div class="finding-text"><b>Battery age unknown</b><span class="sub">Ask when the battery was last replaced — a weak battery is a cheap fix but easy leverage in price talks.</span></div>
+            <div class="section">
+              <div class="section-head"><span class="section-num">02</span><h3 class="section-title">Safety recalls</h3></div>
+              <div class="finding">
+                <span class="flag clear">Clear</span>
+                <div class="finding-text"><b>No open recalls found</b><span class="sub">No open recalls found for this year and model. Check nhtsa.gov/recalls with your VIN to confirm.</span></div>
+              </div>
             </div>
-          </div>
-          <div class="section">
-            <div class="section-head"><span class="section-num">02</span><h3 class="section-title">Safety recalls</h3></div>
-            <div class="finding">
-              <span class="flag clear">Clear</span>
-              <div class="finding-text"><b>No open recalls found</b><span class="sub">No open recalls found for this year and model. Check nhtsa.gov/recalls with your VIN to confirm.</span></div>
+            <div class="section">
+              <div class="section-head"><span class="section-num">03</span><h3 class="section-title">Fair market range</h3></div>
+              <div class="stat-row" style="margin-bottom:12px;">
+                <div class="stat"><p class="stat-label">Low</p><p class="stat-value">$7,900</p></div>
+                <div class="stat"><p class="stat-label">High</p><p class="stat-value">$10,100</p></div>
+              </div>
+              <p style="font-size:13px;color:var(--ink-soft);line-height:1.6;margin:0 0 6px;">Based on 4 comparable 2011 Heritage Softail Classic listings at similar mileage found in current market searches.</p>
+              <p style="font-size:13px;color:var(--ink);line-height:1.6;margin:0;"><b>Asking price:</b> $9,200 falls within the fair range, close to the middle.</p>
             </div>
-          </div>
-          <div class="section">
-            <div class="section-head"><span class="section-num">03</span><h3 class="section-title">Fair market range</h3></div>
-            <div class="stat-row" style="margin-bottom:12px;">
-              <div class="stat"><p class="stat-label">Low</p><p class="stat-value">$7,900</p></div>
-              <div class="stat"><p class="stat-label">High</p><p class="stat-value">$10,100</p></div>
+            <div class="section">
+              <div class="section-head"><span class="section-num">04</span><h3 class="section-title">Questions to ask the seller</h3></div>
+              <ul class="qlist">
+                <li>When was the battery last replaced?</li>
+                <li>Has the cam chain tensioner ever been serviced or inspected?</li>
+                <li>Do you have maintenance records or receipts?</li>
+                <li>Has the bike ever been laid down or in an accident?</li>
+              </ul>
             </div>
-            <p style="font-size:13px;color:var(--ink-soft);line-height:1.6;margin:0 0 6px;">Based on 4 comparable 2011 Heritage Softail Classic listings at similar mileage found in current market searches.</p>
-            <p style="font-size:13px;color:var(--ink);line-height:1.6;margin:0;"><b>Asking price:</b> $9,200 falls within the fair range, close to the middle.</p>
-          </div>
-          <div class="section">
-            <div class="section-head"><span class="section-num">04</span><h3 class="section-title">Questions to ask the seller</h3></div>
-            <ul class="qlist">
-              <li>When was the battery last replaced?</li>
-              <li>Has the cam chain tensioner ever been serviced or inspected?</li>
-              <li>Do you have maintenance records or receipts?</li>
-              <li>Has the bike ever been laid down or in an accident?</li>
-            </ul>
           </div>
         </div>
       </div>
+      <p style="text-align:center;color:var(--ink-soft);font-size:13px;margin:16px auto 0;max-width:480px;">That's the full report — every real report is built the same way, matched to your bike's exact year, model, and mileage.</p>
     </div>
   </div>
-  <p style="text-align:center;color:#D8D5CC;font-size:13.5px;margin:-12px auto 30px;max-width:520px;">That's the full report — every real report is built the same way, matched to your bike's exact year, model, and mileage.</p>
+
 
   <div class="faq-wrap">
     <h2 class="faq-heading">Common questions</h2>
@@ -685,6 +727,18 @@ const MODEL_DATA = [
   {name:"FLTRXSE CVO Road Glide", kb:"Touring M8 (2017+)", start:2017, end:2100},
   {name:"FLHTKSE CVO Limited", kb:"Touring M8 (2017+)", start:2017, end:2100}
 ];
+
+function openSampleModal(){
+  document.getElementById('sampleModalOverlay').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+function closeSampleModal(){
+  document.getElementById('sampleModalOverlay').classList.remove('active');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', function(e){
+  if(e.key === 'Escape') closeSampleModal();
+});
 
 function populateModelDropdown(){
   const yearVal = document.getElementById('year').value;
