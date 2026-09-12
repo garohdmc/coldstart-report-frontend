@@ -297,35 +297,35 @@
       </svg>
       <h1>Know before you buy <span>the bike</span></h1>
     </div>
-    <p>Built from 30 years on a Harley dealership sales floor — the same things a Harley GM checks before he'd let you hand over cash.</p>
+    <p>Real dealership experience. No guesswork. No sales pitch.</p>
     <p class="hero-price-line">A real in-person inspection runs <span class="strike">$75–150</span>. This is <strong>$29</strong>, delivered in about 30 seconds.</p>
     <div class="feature-grid">
       <div class="feature-card">
         <p class="feature-eyebrow">01</p>
-        <div>
-          <h3>Known failure points</h3>
-          <p>Matched to the exact year and model — not generic advice, the specific things that actually go wrong on that bike.</p>
-        </div>
-      </div>
-      <div class="feature-card">
-        <p class="feature-eyebrow">02</p>
-        <div>
-          <h3>Safety recall check</h3>
-          <p>A real search of NHTSA and manufacturer recall records for that year and model, with an honest note if nothing was found.</p>
-        </div>
-      </div>
-      <div class="feature-card">
-        <p class="feature-eyebrow">03</p>
         <div>
           <h3>Live market price range</h3>
           <p>Pulled from current comparable listings, so you know if the asking price is fair before you negotiate.</p>
         </div>
       </div>
       <div class="feature-card">
-        <p class="feature-eyebrow">04</p>
+        <p class="feature-eyebrow">02</p>
+        <div>
+          <h3>Known failure points</h3>
+          <p>Matched to the exact year and model — not generic advice, the specific things that actually go wrong on that bike.</p>
+        </div>
+      </div>
+      <div class="feature-card">
+        <p class="feature-eyebrow">03</p>
         <div>
           <h3>Questions to ask the seller</h3>
           <p>The exact questions that surface problems a seller won't volunteer on their own.</p>
+        </div>
+      </div>
+      <div class="feature-card">
+        <p class="feature-eyebrow">04</p>
+        <div>
+          <h3>Safety recall check</h3>
+          <p>A real search of NHTSA and manufacturer recall records for that year and model, with an honest note if nothing was found.</p>
         </div>
       </div>
     </div>
@@ -452,7 +452,16 @@
               </div>
             </div>
             <div class="section">
-              <div class="section-head"><span class="section-num">01</span><h3 class="section-title">Inspection findings</h3></div>
+              <div class="section-head"><span class="section-num">01</span><h3 class="section-title">Fair market range</h3></div>
+              <div class="stat-row" style="margin-bottom:12px;">
+                <div class="stat"><p class="stat-label">Low</p><p class="stat-value">$7,900</p></div>
+                <div class="stat"><p class="stat-label">High</p><p class="stat-value">$10,100</p></div>
+              </div>
+              <p style="font-size:13px;color:var(--ink-soft);line-height:1.6;margin:0 0 6px;">Based on 4 comparable 2011 Heritage Softail Classic listings at similar mileage found in current market searches.</p>
+              <p style="font-size:13px;color:var(--ink);line-height:1.6;margin:0;"><b>Asking price:</b> $9,200 falls within the fair range, close to the middle.</p>
+            </div>
+            <div class="section">
+              <div class="section-head"><span class="section-num">02</span><h3 class="section-title">Inspection findings</h3></div>
               <div class="finding">
                 <span class="flag watch">Watch</span>
                 <div class="finding-text"><b>Cam chain tensioner wear window</b><span class="sub">This falls inside the mileage range where tensioner failure becomes more common. Ask for a cold-start listen test before you buy.</span></div>
@@ -463,29 +472,20 @@
               </div>
             </div>
             <div class="section">
-              <div class="section-head"><span class="section-num">02</span><h3 class="section-title">Safety recalls</h3></div>
-              <div class="finding">
-                <span class="flag clear">Clear</span>
-                <div class="finding-text"><b>No open recalls found</b><span class="sub">No open recalls found for this year and model. Check nhtsa.gov/recalls with your VIN to confirm.</span></div>
-              </div>
-            </div>
-            <div class="section">
-              <div class="section-head"><span class="section-num">03</span><h3 class="section-title">Fair market range</h3></div>
-              <div class="stat-row" style="margin-bottom:12px;">
-                <div class="stat"><p class="stat-label">Low</p><p class="stat-value">$7,900</p></div>
-                <div class="stat"><p class="stat-label">High</p><p class="stat-value">$10,100</p></div>
-              </div>
-              <p style="font-size:13px;color:var(--ink-soft);line-height:1.6;margin:0 0 6px;">Based on 4 comparable 2011 Heritage Softail Classic listings at similar mileage found in current market searches.</p>
-              <p style="font-size:13px;color:var(--ink);line-height:1.6;margin:0;"><b>Asking price:</b> $9,200 falls within the fair range, close to the middle.</p>
-            </div>
-            <div class="section">
-              <div class="section-head"><span class="section-num">04</span><h3 class="section-title">Questions to ask the seller</h3></div>
+              <div class="section-head"><span class="section-num">03</span><h3 class="section-title">Questions to ask the seller</h3></div>
               <ul class="qlist">
                 <li>When was the battery last replaced?</li>
                 <li>Has the cam chain tensioner ever been serviced or inspected?</li>
                 <li>Do you have maintenance records or receipts?</li>
                 <li>Has the bike ever been laid down or in an accident?</li>
               </ul>
+            </div>
+            <div class="section">
+              <div class="section-head"><span class="section-num">04</span><h3 class="section-title">Safety recalls</h3></div>
+              <div class="finding">
+                <span class="flag clear">Clear</span>
+                <div class="finding-text"><b>No open recalls found</b><span class="sub">No open recalls found for this year and model. Check nhtsa.gov/recalls with your VIN to confirm.</span></div>
+              </div>
             </div>
           </div>
         </div>
@@ -1105,13 +1105,27 @@ function renderReport(r, vehicle){
           </div>
         </div>
       </div>
+      ${r.fair_market ? `
       <div class="section">
-        <div class="section-head"><span class="section-num">01</span><h3 class="section-title">Inspection findings</h3></div>
+        <div class="section-head"><span class="section-num">01</span><h3 class="section-title">Fair market range</h3></div>
+        <div class="stat-row" style="margin-bottom:12px;">
+          <div class="stat"><p class="stat-label">Low</p><p class="stat-value">$${Number(r.fair_market.low || 0).toLocaleString()}</p></div>
+          <div class="stat"><p class="stat-label">High</p><p class="stat-value">$${Number(r.fair_market.high || 0).toLocaleString()}</p></div>
+        </div>
+        <p style="font-size:13px;color:var(--ink-soft);line-height:1.6;margin:0 0 6px;">${esc(r.fair_market.basis)}</p>
+        ${r.fair_market.asking_price_assessment ? `<p style="font-size:13px;color:var(--ink);line-height:1.6;margin:0;"><b>Asking price:</b> ${esc(r.fair_market.asking_price_assessment)}</p>` : ''}
+      </div>` : ''}
+      <div class="section">
+        <div class="section-head"><span class="section-num">02</span><h3 class="section-title">Inspection findings</h3></div>
         ${findingsHtml}
+      </div>
+      <div class="section">
+        <div class="section-head"><span class="section-num">03</span><h3 class="section-title">Questions to ask the seller</h3></div>
+        <ul class="qlist">${questionsHtml}</ul>
       </div>
       ${r.recalls ? `
       <div class="section">
-        <div class="section-head"><span class="section-num">02</span><h3 class="section-title">Safety recalls</h3></div>
+        <div class="section-head"><span class="section-num">04</span><h3 class="section-title">Safety recalls</h3></div>
         ${r.recalls.found && (r.recalls.items || []).length ? `
           ${r.recalls.items.map(item => `
             <div class="finding">
@@ -1130,20 +1144,6 @@ function renderReport(r, vehicle){
         `}
         ${r.recalls.found && (r.recalls.items || []).length ? `<p style="font-size:12px;color:var(--ink-soft);line-height:1.5;margin:10px 0 0;">${esc(r.recalls.note)}</p>` : ''}
       </div>` : ''}
-      ${r.fair_market ? `
-      <div class="section">
-        <div class="section-head"><span class="section-num">03</span><h3 class="section-title">Fair market range</h3></div>
-        <div class="stat-row" style="margin-bottom:12px;">
-          <div class="stat"><p class="stat-label">Low</p><p class="stat-value">$${Number(r.fair_market.low || 0).toLocaleString()}</p></div>
-          <div class="stat"><p class="stat-label">High</p><p class="stat-value">$${Number(r.fair_market.high || 0).toLocaleString()}</p></div>
-        </div>
-        <p style="font-size:13px;color:var(--ink-soft);line-height:1.6;margin:0 0 6px;">${esc(r.fair_market.basis)}</p>
-        ${r.fair_market.asking_price_assessment ? `<p style="font-size:13px;color:var(--ink);line-height:1.6;margin:0;"><b>Asking price:</b> ${esc(r.fair_market.asking_price_assessment)}</p>` : ''}
-      </div>` : ''}
-      <div class="section">
-        <div class="section-head"><span class="section-num">04</span><h3 class="section-title">Questions to ask the seller</h3></div>
-        <ul class="qlist">${questionsHtml}</ul>
-      </div>
     </div>
     <div class="footer">
       <span>Generated by <strong>Cold Start Report</strong></span>
