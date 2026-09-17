@@ -3,15 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cold Start Report</title>
+<title>Used Harley-Davidson Pre-Purchase Report | Cold Start Report</title>
 <meta name="description" content="Get a $29 pre-purchase inspection report for a used Harley-Davidson — known failure points, safety recalls, and fair market price, built from 30 years on a dealership sales floor.">
 <meta property="og:title" content="Cold Start Report — Know Before You Buy the Bike">
 <meta property="og:description" content="A $29 pre-purchase inspection report for used Harley-Davidson motorcycles — known failure points, safety recalls, and a fair market price check.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://coldstartreport.com">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://coldstartreport.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Cold Start Report — Know Before You Buy the Bike">
 <meta name="twitter:description" content="A $29 pre-purchase inspection report for used Harley-Davidson motorcycles — known failure points, safety recalls, and a fair market price check.">
+<meta name="twitter:image" content="https://coldstartreport.com/og-image.png">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTIwIDEyMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8ZGVmcz4KICAgIDxzdHlsZT4KICAgICAgLnN0ZWVsIHsgZmlsbDogIzIyMjYyQjsgfQogICAgICAuYW1iZXIgeyBmaWxsOiAjQzg3NTJCOyB9CiAgICAgIC5mcm9zdCB7IGZpbGw6IG5vbmU7IHN0cm9rZTogIzhBOEY5ODsgc3Ryb2tlLXdpZHRoOiAyLjU7IHN0cm9rZS1saW5lY2FwOiByb3VuZDsgfQogICAgPC9zdHlsZT4KICA8L2RlZnM+CgogIDwhLS0gQmFkZ2UgYmFzZSAtLT4KICA8Y2lyY2xlIGN4PSI2MCIgY3k9IjYwIiByPSI1OCIgY2xhc3M9InN0ZWVsIiBzdHJva2U9IiMzQTQwNDgiIHN0cm9rZS13aWR0aD0iMiIvPgoKICA8IS0tIEZyb3N0IHRpY2sgbWFya3MgKGNvbGQpIC0tPgogIDxnIGNsYXNzPSJmcm9zdCI+CiAgICA8bGluZSB4MT0iNjAiIHkxPSIxNCIgeDI9IjYwIiB5Mj0iMjQiLz4KICAgIDxsaW5lIHgxPSI2MCIgeTE9Ijk2IiB4Mj0iNjAiIHkyPSIxMDYiLz4KICAgIDxsaW5lIHgxPSIxNCIgeTE9IjYwIiB4Mj0iMjQiIHkyPSI2MCIvPgogICAgPGxpbmUgeDE9Ijk2IiB5MT0iNjAiIHgyPSIxMDYiIHkyPSI2MCIvPgogICAgPGxpbmUgeDE9IjI3IiB5MT0iMjciIHgyPSIzNCIgeTI9IjM0Ii8+CiAgICA8bGluZSB4MT0iOTMiIHkxPSIyNyIgeDI9Ijg2IiB5Mj0iMzQiLz4KICAgIDxsaW5lIHgxPSIyNyIgeTE9IjkzIiB4Mj0iMzQiIHkyPSI4NiIvPgogICAgPGxpbmUgeDE9IjkzIiB5MT0iOTMiIHgyPSI4NiIgeTI9Ijg2Ii8+CiAgPC9nPgoKICA8IS0tIFNwYXJrIC8gaWduaXRpb24gYm9sdCAoc3RhcnQpIC0tPgogIDxwYXRoIGQ9Ik02NyAyOCBMNDIgNjYgTDU3IDY2IEw1MiA5NCBMODAgNTQgTDY0IDU0IFoiIGNsYXNzPSJhbWJlciIvPgo8L3N2Zz4K">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -43,6 +47,7 @@
     border-radius:2px;background:#fff;color:var(--ink);
   }
   .field textarea{resize:vertical;min-height:70px;font-family:'Inter',sans-serif;}
+  .field-hint{font-size:11.5px;color:var(--ink-soft);margin:5px 0 0;font-style:italic;}
   .submit-btn{
     margin-top:6px;background:#B4571F;color:#fff;border:none;padding:16px 22px;
     font-family:'Oswald',sans-serif;font-size:15px;letter-spacing:.04em;text-transform:uppercase;
@@ -51,7 +56,19 @@
   .submit-btn:hover{background:#943F13;}
   .submit-btn:disabled{background:#B8B2A2;cursor:not-allowed;}
   .hint{font-size:11.5px;color:var(--ink-soft);margin-top:16px;line-height:1.6;text-align:center;max-width:420px;margin-left:auto;margin-right:auto;}
-  .coverage-note{font-size:12px;color:var(--ink-soft);margin:-10px 0 20px;font-style:italic;}
+  .coverage-note{font-size:12px;color:var(--ink-soft);margin:-10px 0 10px;font-style:italic;}
+  .notify-row{display:flex;gap:8px;margin:0 0 6px;}
+  .notify-row input{
+    flex:1;font-family:'Inter',sans-serif;font-size:13px;padding:9px 11px;
+    border:1px solid var(--hairline);border-radius:2px;background:#fff;color:var(--ink);
+  }
+  .notify-row button{
+    background:none;border:1px solid var(--ink);color:var(--ink);
+    font-family:'Oswald',sans-serif;font-size:12px;font-weight:600;text-transform:uppercase;
+    letter-spacing:.03em;padding:0 16px;border-radius:2px;cursor:pointer;white-space:nowrap;
+  }
+  .notify-row button:hover{background:var(--ink);color:#fff;}
+  .notify-status{font-size:11.5px;color:var(--ink-soft);margin:0 0 14px;min-height:14px;}
 
   /* ===== FAQ ===== */
   .faq-wrap{max-width:640px;margin:0 auto 44px;padding-top:40px;border-top:1px solid var(--hairline);}
@@ -80,6 +97,10 @@
   .hero h1 span{color:#B4571F;}
   .hero h1 span.underline-text{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:6px;color:#000;}
   .hero p{font-size:16px;color:var(--ink-soft);max-width:460px;margin:0 auto 26px;line-height:1.75;}
+  .hero-eyebrow-2{
+    font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.03em;
+    color:#B4571F;font-weight:600;margin:0 0 10px;
+  }
   .hero-price-line{margin-top:0 !important;font-size:13px !important;color:var(--ink-soft) !important;font-family:'IBM Plex Mono',monospace;}
   .hero-price-line .strike{text-decoration:line-through;opacity:.6;}
   .hero-price-line strong{color:#B4571F;font-weight:600;}
@@ -121,6 +142,13 @@
     width:44px;height:44px;font-size:22px;line-height:1;cursor:pointer;
     display:flex;align-items:center;justify-content:center;
   }
+  .sample-tabs{display:flex;justify-content:center;gap:8px;margin:0 0 18px;flex-wrap:wrap;}
+  .sample-tab{
+    background:none;border:1px solid var(--hairline);color:var(--ink-soft);
+    font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.03em;
+    padding:8px 16px;border-radius:20px;cursor:pointer;transition:all .15s;
+  }
+  .sample-tab.active{background:var(--ink);border-color:var(--ink);color:#fff;}
   .sample-label{
     text-align:center;color:#B9B6AE;font-family:'IBM Plex Mono',monospace;
     font-size:12px;letter-spacing:.08em;text-transform:uppercase;margin:0 0 12px;
@@ -298,8 +326,9 @@
       </svg>
       <h1><span class="underline-text">Know before you buy</span> <span>the bike</span></h1>
     </div>
+    <p class="hero-eyebrow-2">30 years on a Harley-Davidson dealership sales floor, built into every report</p>
     <p>Real dealership experience. No guesswork. No sales pitch.</p>
-    <p class="hero-price-line">A real in-person inspection runs <span class="strike">$120–$300</span>. This is <strong>$29</strong>, delivered in about 30 seconds.</p>
+    <p class="hero-price-line">Know what to look for before you drive out or pay for an inspection.</p>
     <div class="feature-grid">
       <div class="feature-card">
         <p class="feature-eyebrow">01</p>
@@ -345,7 +374,7 @@
         </g>
         <path d="M67 28 L42 66 L57 66 L52 94 L80 54 L64 54 Z" fill="#C8752B"/>
       </svg>
-      <h1 class="form-title">Cold Start Report</h1>
+      <h2 class="form-title">Cold Start Report</h2>
     </div>
 
     <div class="field-row">
@@ -360,7 +389,12 @@
         </select>
       </div>
     </div>
-    <p class="coverage-note">Currently covers Softail, Touring, and Dyna/FXR models (1985–present). More models added regularly.</p>
+    <p class="coverage-note">Currently covers Softail, Touring, and Dyna/FXR models (1985–present). Sportster coverage is coming soon.</p>
+    <div class="notify-row" id="notifyRow">
+      <input type="email" id="notifyEmail" placeholder="Riding a Sportster? Get notified when it's covered">
+      <button type="button" onclick="submitNotifySignup()" id="notifyBtn">Notify me</button>
+    </div>
+    <p class="notify-status" id="notifyStatus"></p>
 
     <div class="field-row">
       <div class="field">
@@ -384,6 +418,7 @@
     <div class="field">
       <label>Seller's listing text / description (copy and paste it below)</label>
       <textarea id="listingText" placeholder="Paste the seller's description here — runs great, minor cosmetic wear, etc."></textarea>
+      <p class="field-hint">We scan the seller's own words for red flags and things they left out — this is often what makes a report most useful.</p>
     </div>
 
     <button class="submit-btn" id="submitBtn" onclick="startCheckout()">Pay $29 &amp; Generate Report</button>
@@ -401,8 +436,106 @@
   <div class="modal-overlay" id="sampleModalOverlay" onclick="if(event.target===this) closeSampleModal()">
     <div class="modal-panel">
       <button class="modal-close" onclick="closeSampleModal()" aria-label="Close">&times;</button>
-      <p class="sample-label">Example report — real data shown, illustrative bike</p>
-      <div class="sample-sheet">
+      <p class="sample-label">Example reports — real data shown, illustrative bikes</p>
+
+      <div class="sample-tabs">
+        <button class="sample-tab active" id="tabBtnFlag" onclick="switchSampleTab('flag')">When there's a problem</button>
+        <button class="sample-tab" id="tabBtnClean" onclick="switchSampleTab('clean')">When it's a solid buy</button>
+      </div>
+
+      <!-- TAB 1: Red flag example -->
+      <div class="sample-sheet" id="sampleTabFlag">
+        <span class="sample-badge">Sample</span>
+        <div class="sheet" style="display:block;">
+          <div class="header">
+            <div>
+              <p class="brand-eyebrow">Pre-purchase inspection report</p>
+              <div class="brand-row">
+                <svg class="logo-mark small" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="60" cy="60" r="58" fill="#2E333A" stroke="#3A4048" stroke-width="2"/>
+                  <g fill="none" stroke="#8A8F98" stroke-width="2.5" stroke-linecap="round">
+                    <line x1="60" y1="14" x2="60" y2="24"/><line x1="60" y1="96" x2="60" y2="106"/>
+                    <line x1="14" y1="60" x2="24" y2="60"/><line x1="96" y1="60" x2="106" y2="60"/>
+                    <line x1="27" y1="27" x2="34" y2="34"/><line x1="93" y1="27" x2="86" y2="34"/>
+                    <line x1="27" y1="93" x2="34" y2="86"/><line x1="93" y1="93" x2="86" y2="86"/>
+                  </g>
+                  <path d="M67 28 L42 66 L57 66 L52 94 L80 54 L64 54 Z" fill="#C8752B"/>
+                </svg>
+                <p class="brand-name">Cold Start Report</p>
+              </div>
+              <p class="brand-sub">Pre-purchase inspection reports for used Harley-Davidson motorcycles</p>
+            </div>
+            <div class="report-meta">
+              Report #<strong>HC-40217319</strong><br>
+              Generated <strong>Sep 12, 2026</strong>
+            </div>
+          </div>
+          <div class="vehicle-strip">
+            <div class="vehicle-title">2010 Harley-Davidson <span>FLHX Street Glide</span></div>
+            <div class="vehicle-facts">
+              <div>MILEAGE <b>58,200</b></div>
+              <div>ASKING <b>$9,500</b></div>
+            </div>
+          </div>
+          <div class="body">
+            <div class="grade-block">
+              <div class="hang-tag">
+                <div class="hang-tag-eyebrow">Buy confidence</div>
+                <div class="hang-tag-grade">C</div>
+                <div class="hang-tag-label">Proceed with caution</div>
+                <div class="hang-tag-note">A real mechanical red flag plus an asking price well above market.</div>
+              </div>
+              <div class="grade-summary">
+                <h2>Overall assessment</h2>
+                <p>The seller's own listing text mentions a clunk on shutdown — that's a known compensator wear symptom on 2007-2013 Touring models, not a minor issue. On top of that, the $9,500 asking price sits well above what comparable 2010 Street Glides are actually selling for at this mileage. Two real reasons to negotiate hard or walk.</p>
+                <div class="stat-row">
+                  <div class="stat"><p class="stat-label">Items to check</p><p class="stat-value">2</p></div>
+                  <div class="stat"><p class="stat-label">Red flags</p><p class="stat-value">1</p></div>
+                </div>
+              </div>
+            </div>
+            <div class="section">
+              <div class="section-head"><span class="section-num">01</span><h3 class="section-title">Fair market range</h3></div>
+              <div class="stat-row" style="margin-bottom:12px;">
+                <div class="stat"><p class="stat-label">Low</p><p class="stat-value">$6,800</p></div>
+                <div class="stat"><p class="stat-label">High</p><p class="stat-value">$8,200</p></div>
+              </div>
+              <p style="font-size:13px;color:var(--ink-soft);line-height:1.6;margin:0 0 6px;">Based on 5 comparable 2010 Street Glide listings at similar mileage found in current market searches.</p>
+              <p style="font-size:13px;color:var(--ink);line-height:1.6;margin:0;"><b>Asking price:</b> $9,500 is $1,300–$2,700 above fair market — the loudest red flag in this listing.</p>
+            </div>
+            <div class="section">
+              <div class="section-head"><span class="section-num">02</span><h3 class="section-title">Inspection findings</h3></div>
+              <div class="finding">
+                <span class="flag check">Check</span>
+                <div class="finding-text"><b>Compensator failure symptom in the listing text</b><span class="sub">The seller wrote "clunk when you turn it off" — that's a textbook compensator wear symptom on 2007-2013 Touring models. Confirm this in person before you buy; budget for a compensator replacement if present.</span></div>
+              </div>
+              <div class="finding">
+                <span class="flag watch">Watch</span>
+                <div class="finding-text"><b>Y-pipe exhaust cracking risk</b><span class="sub">This year falls inside the range where Y-pipe cracking is common on Touring models. Check for soot staining or an exhaust leak tick at idle.</span></div>
+              </div>
+            </div>
+            <div class="section">
+              <div class="section-head"><span class="section-num">03</span><h3 class="section-title">Questions to ask the seller</h3></div>
+              <ul class="qlist">
+                <li>Can you describe the clunk on shutdown in more detail — when did it start?</li>
+                <li>Has the compensator ever been inspected or replaced?</li>
+                <li>Why is this priced above what similar bikes are selling for?</li>
+                <li>Do you have maintenance records or receipts?</li>
+              </ul>
+            </div>
+            <div class="section">
+              <div class="section-head"><span class="section-num">04</span><h3 class="section-title">Safety recalls</h3></div>
+              <div class="finding">
+                <span class="flag clear">Clear</span>
+                <div class="finding-text"><b>No open recalls found</b><span class="sub">No open recalls found for this year and model. Check nhtsa.gov/recalls with your VIN to confirm.</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 2: Clean example -->
+      <div class="sample-sheet" id="sampleTabClean" style="display:none;">
         <span class="sample-badge">Sample</span>
         <div class="sheet" style="display:block;">
           <div class="header">
@@ -491,7 +624,8 @@
           </div>
         </div>
       </div>
-      <p style="text-align:center;color:var(--ink-soft);font-size:13px;margin:16px auto 0;max-width:480px;">That's the full report — every real report is built the same way, matched to your bike's exact year, model, and mileage.</p>
+
+      <p style="text-align:center;color:var(--ink-soft);font-size:13px;margin:16px auto 0;max-width:480px;">Every real report is built the same way — matched to your bike's exact year, model, and mileage, with real search behind the price and recall checks.</p>
     </div>
   </div>
 
@@ -501,6 +635,10 @@
     <div class="faq-item">
       <p class="faq-q">Is this affiliated with Harley-Davidson?</p>
       <p class="faq-a">No. Cold Start Report is an independent service, not affiliated with, endorsed by, or sponsored by Harley-Davidson Motor Company.</p>
+    </div>
+    <div class="faq-item">
+      <p class="faq-q">Who — or what — actually writes the report?</p>
+      <p class="faq-a">Your report is written by AI, using a hand-built knowledge base of known issues compiled from 30 years of real Harley-Davidson dealership experience, cross-referenced against public data (current market listings, NHTSA recall records) at the time you order.</p>
     </div>
     <div class="faq-item">
       <p class="faq-q">What if my model isn't listed?</p>
@@ -754,6 +892,13 @@ document.addEventListener('keydown', function(e){
   if(e.key === 'Escape') closeSampleModal();
 });
 
+function switchSampleTab(tab){
+  document.getElementById('sampleTabFlag').style.display = tab === 'flag' ? 'block' : 'none';
+  document.getElementById('sampleTabClean').style.display = tab === 'clean' ? 'block' : 'none';
+  document.getElementById('tabBtnFlag').classList.toggle('active', tab === 'flag');
+  document.getElementById('tabBtnClean').classList.toggle('active', tab === 'clean');
+}
+
 function populateModelDropdown(){
   const yearVal = document.getElementById('year').value;
   const modelSelect = document.getElementById('modelName');
@@ -851,6 +996,38 @@ function loadFormFromSession(){
 }
 
 // Step 1 of payment: send the person to Stripe's hosted checkout page.
+async function submitNotifySignup(){
+  const emailInput = document.getElementById('notifyEmail');
+  const statusEl = document.getElementById('notifyStatus');
+  const btn = document.getElementById('notifyBtn');
+  const email = emailInput.value.trim();
+  if(!email || !email.includes('@')){
+    statusEl.textContent = 'Please enter a valid email.';
+    statusEl.style.color = '#B23A2E';
+    return;
+  }
+  btn.disabled = true;
+  btn.textContent = '...';
+  try {
+    const response = await fetch(`${BACKEND_URL}/api/notify-signup`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, model_interest: 'Sportster' })
+    });
+    if(!response.ok) throw new Error('Signup failed');
+    statusEl.textContent = "You're on the list — we'll email you when Sportster coverage is live.";
+    statusEl.style.color = '#4C7A52';
+    emailInput.value = '';
+    emailInput.disabled = true;
+    btn.textContent = 'Added';
+  } catch(err){
+    statusEl.textContent = 'Something went wrong — please try again.';
+    statusEl.style.color = '#B23A2E';
+    btn.disabled = false;
+    btn.textContent = 'Notify me';
+  }
+}
+
 async function startCheckout(){
   const btn = document.getElementById('submitBtn');
   const year = document.getElementById('year').value;
