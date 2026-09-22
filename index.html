@@ -1,1343 +1,597 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Used Harley-Davidson Pre-Purchase Report | Cold Start Report</title>
-<meta name="description" content="Get a $29 pre-purchase inspection report for a used Harley-Davidson — known failure points, safety recalls, and fair market price, built from 30 years on a dealership sales floor.">
-<meta property="og:title" content="Cold Start Report — Know Before You Buy the Bike">
-<meta property="og:description" content="A $29 pre-purchase inspection report for used Harley-Davidson motorcycles — known failure points, safety recalls, and a fair market price check.">
+<meta charset="utf-8">
+<script>
+  // Stripe sends buyers back to the site root; the report generator lives on /report.html.
+  (function(){var q=location.search; if(/[?&](session_id|canceled)=/.test(q)) location.replace('/report.html'+q);})();
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cold Start Report | Used Harley-Davidson Research Reports, $29.99</title>
+<meta name="description" content="Know what you're buying before you buy it. Model- and year-specific research reports on used Harley-Davidson motorcycles: specs, recalls, known failure points, maintenance and a price check. $29.99.">
+<link rel="canonical" href="https://coldstartreport.com/">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#0A0E14">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://coldstartreport.com">
+<meta property="og:site_name" content="Cold Start Report">
+<meta property="og:title" content="Cold Start Report | Know what you're buying before you buy it">
+<meta property="og:description" content="Research reports on used Harley-Davidson motorcycles. Specs, recalls, known failure points and what to check before you pay. $29.99 per report.">
+<meta property="og:url" content="https://coldstartreport.com/">
 <meta property="og:image" content="https://coldstartreport.com/og-image.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Cold Start Report — Know Before You Buy the Bike">
-<meta name="twitter:description" content="A $29 pre-purchase inspection report for used Harley-Davidson motorcycles — known failure points, safety recalls, and a fair market price check.">
-<meta name="twitter:image" content="https://coldstartreport.com/og-image.png">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTIwIDEyMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8ZGVmcz4KICAgIDxzdHlsZT4KICAgICAgLnN0ZWVsIHsgZmlsbDogIzIyMjYyQjsgfQogICAgICAuYW1iZXIgeyBmaWxsOiAjQzg3NTJCOyB9CiAgICAgIC5mcm9zdCB7IGZpbGw6IG5vbmU7IHN0cm9rZTogIzhBOEY5ODsgc3Ryb2tlLXdpZHRoOiAyLjU7IHN0cm9rZS1saW5lY2FwOiByb3VuZDsgfQogICAgPC9zdHlsZT4KICA8L2RlZnM+CgogIDwhLS0gQmFkZ2UgYmFzZSAtLT4KICA8Y2lyY2xlIGN4PSI2MCIgY3k9IjYwIiByPSI1OCIgY2xhc3M9InN0ZWVsIiBzdHJva2U9IiMzQTQwNDgiIHN0cm9rZS13aWR0aD0iMiIvPgoKICA8IS0tIEZyb3N0IHRpY2sgbWFya3MgKGNvbGQpIC0tPgogIDxnIGNsYXNzPSJmcm9zdCI+CiAgICA8bGluZSB4MT0iNjAiIHkxPSIxNCIgeDI9IjYwIiB5Mj0iMjQiLz4KICAgIDxsaW5lIHgxPSI2MCIgeTE9Ijk2IiB4Mj0iNjAiIHkyPSIxMDYiLz4KICAgIDxsaW5lIHgxPSIxNCIgeTE9IjYwIiB4Mj0iMjQiIHkyPSI2MCIvPgogICAgPGxpbmUgeDE9Ijk2IiB5MT0iNjAiIHgyPSIxMDYiIHkyPSI2MCIvPgogICAgPGxpbmUgeDE9IjI3IiB5MT0iMjciIHgyPSIzNCIgeTI9IjM0Ii8+CiAgICA8bGluZSB4MT0iOTMiIHkxPSIyNyIgeDI9Ijg2IiB5Mj0iMzQiLz4KICAgIDxsaW5lIHgxPSIyNyIgeTE9IjkzIiB4Mj0iMzQiIHkyPSI4NiIvPgogICAgPGxpbmUgeDE9IjkzIiB5MT0iOTMiIHgyPSI4NiIgeTI9Ijg2Ii8+CiAgPC9nPgoKICA8IS0tIFNwYXJrIC8gaWduaXRpb24gYm9sdCAoc3RhcnQpIC0tPgogIDxwYXRoIGQ9Ik02NyAyOCBMNDIgNjYgTDU3IDY2IEw1MiA5NCBMODAgNTQgTDY0IDU0IFoiIGNsYXNzPSJhbWJlciIvPgo8L3N2Zz4K">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    { "@type": "Organization", "@id": "https://coldstartreport.com/#org", "name": "Cold Start Report",
+      "url": "https://coldstartreport.com/", "email": "support@coldstartreport.com" },
+    { "@type": "WebSite", "url": "https://coldstartreport.com/", "name": "Cold Start Report",
+      "publisher": { "@id": "https://coldstartreport.com/#org" } },
+    { "@type": "Product", "name": "Cold Start Report: used Harley-Davidson research report",
+      "description": "Model- and year-specific pre-purchase research report for a used Harley-Davidson motorcycle: specs, recalls, known failure points, maintenance insights, price check and inspection checklist.",
+      "brand": { "@type": "Brand", "name": "Cold Start Report" },
+      "offers": { "@type": "Offer", "price": "29.99", "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock", "url": "https://coldstartreport.com/#lookup" } },
+    { "@type": "FAQPage", "mainEntity": [
+      { "@type": "Question", "name": "What is a Cold Start Report?",
+        "acceptedAnswer": { "@type": "Answer", "text": "A pre-purchase research report for a specific used Harley-Davidson. It covers specs, recalls, known failure points, maintenance, a price check and an inspection checklist you can use at the dealership or private sale." } },
+      { "@type": "Question", "name": "How is this different from a vehicle history report?",
+        "acceptedAnswer": { "@type": "Answer", "text": "A history report tells you where a bike has been. Cold Start Report tells you what tends to go wrong on that model and year, and how to check for it before you pay." } },
+      { "@type": "Question", "name": "How long does it take to get my report?",
+        "acceptedAnswer": { "@type": "Answer", "text": "A few minutes after payment. You can read it on screen, download it as a PDF, and it's emailed to you." } },
+      { "@type": "Question", "name": "Is $29.99 a one-time charge?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. One payment, one report, no subscription." } }
+    ] }
+  ]
+}
+</script>
+
 <style>
-  :root{
-    --steel:#22262B; --steel-2:#2E333A; --paper:#FAF8F3; --paper-2:#F1EDE3;
-    --ink:#2A2926; --ink-soft:#5B5852; --amber:#C8752B; --amber-deep:#8A4E17;
-    --amber-bg:#FBE9D3; --red:#B23A2E; --red-bg:#F6DEDB; --green:#4C7A52;
-    --green-bg:#E1EBDE; --hairline:#D8D2C4;
-  }
-  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
-  html{-webkit-text-size-adjust:100%;text-size-adjust:100%;}
-  button, .submit-btn, .sample-link, .download-btn, .new-report-btn{-webkit-appearance:none;touch-action:manipulation;}
-  body{margin:0;background:#F7F4EC;padding:40px 16px;font-family:'Inter',sans-serif;color:var(--ink);}
-  .wrap{max-width:720px;margin:0 auto;}
-  .hairline-rule{border:none;border-top:1px solid var(--hairline);margin:0 0 40px;}
+:root{
+  --bg:#0A0E14; --bg-2:#0D121A; --card:#111823; --card-2:#151D2A; --line:#1E2836;
+  --text:#E9EEF4; --muted:#8793A5; --dim:#5E6A7C;
+  --blue:#3D8BFD; --blue-hi:#5C9FFF; --blue-soft:rgba(61,139,253,.12);
+  --gold:#F5A524; --warn:#F2B35B; --err:#F28B7D; --ok:#4CC38A;
+  --head:"Space Grotesk","Helvetica Neue",Arial,sans-serif;
+  --body:"Inter","Helvetica Neue",Arial,sans-serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-behavior:smooth;scroll-padding-top:calc(env(safe-area-inset-top,0px) + 5rem);-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--text);font:400 1rem/1.6 var(--body)}
+img,svg{max-width:100%}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--blue-hi);outline-offset:3px}
+.wrap{max-width:76rem;margin:0 auto;padding:0 1.25rem}
+h1,h2,h3{font-family:var(--head);font-weight:700;margin:0;letter-spacing:-.02em;line-height:1.08}
+p{margin:0 0 1rem}
+.blue{color:var(--blue)}
+.eyebrow{display:block;font:600 .8rem/1 var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--blue);margin-bottom:.9rem}
+.sec{padding:5rem 0;border-top:1px solid var(--line)}
+.sec-head{text-align:center;max-width:44rem;margin:0 auto 3rem}
+.sec-head h2{font-size:clamp(2rem,5vw,2.9rem)}
+.sec-head p{color:var(--muted);font-size:1.08rem;margin:1rem auto 0}
 
-  /* ===== FORM CARD ===== */
-  .form-card{
-    max-width:600px;margin:48px auto 40px;
-  }
-  .form-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#B4571F;margin:0 0 4px;text-align:center;}
-  .form-title{font-family:'Oswald',sans-serif;font-weight:600;font-size:26px;text-transform:uppercase;margin:0 0 28px;color:var(--ink);text-align:center;}
-  .field-row{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:20px;}
-  .field{display:flex;flex-direction:column;gap:5px;}
-  .field label{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);}
-  .field select, .field input, .field textarea{
-    font-family:'Inter',sans-serif;font-size:15px;padding:11px 12px;border:1px solid var(--hairline);
-    border-radius:2px;background:#fff;color:var(--ink);
-  }
-  .field textarea{resize:vertical;min-height:70px;font-family:'Inter',sans-serif;}
-  .field-hint{font-size:11.5px;color:var(--ink-soft);margin:5px 0 0;font-style:italic;}
-  .submit-btn{
-    margin-top:6px;background:#B4571F;color:#fff;border:none;padding:16px 22px;
-    font-family:'Oswald',sans-serif;font-size:15px;letter-spacing:.04em;text-transform:uppercase;
-    border-radius:2px;cursor:pointer;width:100%;transition:background .2s;font-weight:600;
-  }
-  .submit-btn:hover{background:#943F13;}
-  .submit-btn:disabled{background:#B8B2A2;cursor:not-allowed;}
-  .hint{font-size:11.5px;color:var(--ink-soft);margin-top:16px;line-height:1.6;text-align:center;max-width:420px;margin-left:auto;margin-right:auto;}
-  .coverage-note{font-size:12px;color:var(--ink-soft);margin:-10px 0 10px;font-style:italic;}
-  .notify-row{display:flex;gap:8px;margin:0 0 6px;}
-  .notify-row input{
-    flex:1;font-family:'Inter',sans-serif;font-size:13px;padding:9px 11px;
-    border:1px solid var(--hairline);border-radius:2px;background:#fff;color:var(--ink);
-  }
-  .notify-row button{
-    background:none;border:1px solid var(--ink);color:var(--ink);
-    font-family:'Oswald',sans-serif;font-size:12px;font-weight:600;text-transform:uppercase;
-    letter-spacing:.03em;padding:0 16px;border-radius:2px;cursor:pointer;white-space:nowrap;
-  }
-  .notify-row button:hover{background:var(--ink);color:#fff;}
-  .notify-status{font-size:11.5px;color:var(--ink-soft);margin:0 0 14px;min-height:14px;}
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.55rem;font:600 1rem/1 var(--head);border:0;border-radius:8px;padding:1rem 1.6rem;min-height:52px;cursor:pointer;text-decoration:none;background:var(--blue);color:#fff;transition:background .15s}
+.btn:hover{background:var(--blue-hi)}
+.btn-sm{min-height:42px;padding:.7rem 1.1rem;font-size:.95rem}
+.btn svg{width:18px;height:18px}
 
-  /* ===== FAQ ===== */
-  .faq-wrap{max-width:640px;margin:0 auto 44px;padding-top:40px;border-top:1px solid var(--hairline);}
-  .faq-heading{font-family:'Oswald',sans-serif;font-size:17px;font-weight:600;text-transform:uppercase;letter-spacing:.02em;color:var(--ink);margin:0 0 14px;text-align:center;}
-  .faq-item{padding:14px 0;border-top:1px solid var(--hairline);}
-  .faq-item:first-of-type{border-top:none;padding-top:0;}
-  .faq-q{font-family:'Oswald',sans-serif;font-size:14.5px;font-weight:500;color:var(--ink);margin:0 0 5px;}
-  .faq-a{font-size:13px;color:var(--ink-soft);line-height:1.55;margin:0;}
-  .time-hint{font-size:12.5px;color:#B4571F;margin-top:10px;font-weight:600;text-align:center;}
+/* Nav */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:rgba(10,14,20,.88);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:4.5rem;gap:1rem}
+.logo{display:flex;align-items:center;gap:.55rem;text-decoration:none;font:700 1.2rem var(--head);letter-spacing:-.01em;white-space:nowrap}
+.logo svg{width:24px;height:24px;color:var(--blue)}
+.logo b{color:var(--blue);font-weight:700}
+.nav-links{display:none;gap:2rem;font-size:.93rem}
+.nav-links a{text-decoration:none;color:var(--muted)}
+.nav-links a:hover{color:var(--text)}
+@media (min-width:56rem){.nav-links{display:flex}}
 
-  /* ===== HERO / WHAT YOU GET ===== */
-  .hero{
-    color:var(--ink);text-align:center;
-    padding:8px 0 0;margin-bottom:0;
-  }
-  .hero-eyebrow{
-    font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.2em;
-    text-transform:uppercase;color:#B4571F;margin:0 0 4px;font-weight:500;
-  }
-  .hero h1{font-family:'Oswald',sans-serif;font-size:38px;font-weight:600;margin:18px 0 18px;text-transform:uppercase;letter-spacing:.005em;line-height:1.15;}
-  .logo-mark{width:64px;height:64px;vertical-align:middle;margin-right:0;flex-shrink:0;}
-  .logo-mark.small{width:26px;height:26px;margin-right:8px;}
-  .hero-title-row{display:flex;flex-direction:column;align-items:center;justify-content:center;}
-  .brand-row{display:flex;align-items:center;}
-  .form-title-row{display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:6px;}
-  .hero h1 span{color:#B4571F;}
-  .hero h1 span.underline-text{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:6px;color:#000;}
-  .hero p{font-size:16px;color:var(--ink-soft);max-width:460px;margin:0 auto 26px;line-height:1.75;}
-  .hero-eyebrow-2{
-    font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.03em;
-    color:#B4571F;font-weight:600;margin:0 0 10px;
-  }
-  .hero-price-line{margin-top:0 !important;font-size:13px !important;color:var(--ink-soft) !important;font-family:'IBM Plex Mono',monospace;}
-  .hero-price-line .strike{text-decoration:line-through;opacity:.6;}
-  .hero-price-line strong{color:#B4571F;font-weight:600;}
-  .feature-grid{
-    max-width:640px;margin:52px auto 0;padding:0 0 40px;
-    border-bottom:1px solid var(--hairline);
-  }
-  .feature-card{
-    display:grid;grid-template-columns:48px 1fr;gap:18px;
-    padding:20px 0;border-top:1px solid var(--hairline);text-align:left;
-  }
-  .feature-card:first-child{border-top:none;padding-top:0;}
-  .feature-card .feature-eyebrow{font-family:'Oswald',sans-serif;font-weight:600;font-size:24px;letter-spacing:.02em;color:#B4571F;margin:0;line-height:1;}
-  .feature-card h3{font-family:'Oswald',sans-serif;font-size:16px;font-weight:600;text-transform:uppercase;color:var(--ink);margin:2px 0 6px;}
-  .feature-card p{font-size:13.5px;color:var(--ink-soft);line-height:1.6;margin:0;}
+/* Hero */
+.hero{position:relative;overflow:hidden;padding:4rem 0 4.5rem}
+.hero::before{content:"";position:absolute;inset:0;background:url("hero-engine.jpg") center right/cover no-repeat;opacity:.22}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--bg) 20%,rgba(10,14,20,.7) 60%,rgba(10,14,20,.85));pointer-events:none}
+.hero .wrap{position:relative;z-index:1;display:grid;gap:3rem}
+.pill{display:inline-flex;align-items:center;gap:.5rem;border:1px solid rgba(61,139,253,.4);background:var(--blue-soft);color:var(--blue-hi);border-radius:999px;padding:.45rem .95rem;font-size:.86rem;font-weight:500;margin-bottom:1.6rem}
+.pill svg{width:14px;height:14px}
+.hero h1{font-size:clamp(2.7rem,9vw,4.4rem)}
+.hero .lead{color:var(--muted);font-size:1.12rem;max-width:36rem;margin-top:1.5rem}
+.hero-cta{display:flex;flex-wrap:wrap;align-items:center;gap:1rem 1.4rem;margin-top:2rem}
+.price-tag{display:flex;align-items:baseline;gap:.5rem}
+.price-tag b{font:700 1.5rem var(--head);color:var(--gold)}
+.price-tag span{color:var(--muted);font-size:.9rem}
+.bullets{display:flex;flex-wrap:wrap;gap:.5rem 1.6rem;margin:2.2rem 0 0;padding:0;list-style:none;font-size:.88rem;color:var(--dim)}
+.bullets li::before{content:"•";color:var(--blue);margin-right:.5rem}
+@media (min-width:62rem){.hero{padding:6rem 0 7rem}.hero .wrap{grid-template-columns:1.15fr 1fr;align-items:center;gap:4rem}}
 
-  .sample-cta{text-align:center;margin:0 auto 44px;}
-  .sample-link{
-    background:none;border:1px solid #B4571F;color:var(--ink);
-    font-family:'Oswald',sans-serif;font-size:14px;font-weight:600;
-    text-transform:uppercase;letter-spacing:.04em;
-    padding:14px 30px;border-radius:2px;cursor:pointer;transition:all .2s;
-  }
-  .sample-link:hover{background:#B4571F;color:#fff;}
-  .sample-cta-sub{font-size:12.5px;color:var(--ink-soft);margin:10px 0 0;}
+/* Lookup card */
+.tabs{display:inline-flex;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:4px;margin-bottom:1rem}
+.tab{background:none;border:0;color:var(--muted);font:600 .95rem var(--body);padding:.65rem 1.1rem;border-radius:7px;cursor:pointer;min-height:44px}
+.tab[aria-selected="true"]{background:var(--blue);color:#fff}
+.lookup{background:rgba(17,24,35,.85);border:1px solid var(--line);border-radius:14px;padding:1.5rem}
+.field{display:block;margin-bottom:1rem}
+.field>span{display:block;color:var(--muted);font-size:.88rem;margin-bottom:.45rem}
+input[type=text],select{width:100%;min-height:52px;background:var(--bg-2);border:1px solid var(--line);border-radius:8px;color:var(--text);font:500 1rem var(--body);padding:.8rem .95rem}
+input[type=text]::placeholder{color:var(--dim);text-transform:none;letter-spacing:.02em}
+input[type=text]:focus,select:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px var(--blue-soft)}
+#vin{font:600 1.1rem var(--head);letter-spacing:.1em;text-transform:uppercase}
+.help{font-size:.83rem;color:var(--dim);margin:-.4rem 0 1.1rem;min-height:1.3em}
+.help.warn{color:var(--warn)}.help.ok{color:var(--ok)}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+.row .field:last-child{grid-column:1/-1}
+@media (min-width:30rem){.row{grid-template-columns:.8fr 1.2fr 1.1fr}.row .field:last-child{grid-column:auto}}
+.lookup .btn{width:100%;margin-top:.3rem}
+.err{color:var(--err);font-size:.9rem;min-height:1.2em;margin:.7rem 0 0}
+[hidden]{display:none!important}
 
-  .modal-overlay{
-    display:none;position:fixed;inset:0;background:rgba(20,18,15,0.72);
-    z-index:100;padding:24px 12px;overflow-y:auto;
-  }
-  .modal-overlay.active{display:block;}
-  .modal-panel{
-    position:relative;max-width:900px;margin:0 auto;
-    background:var(--paper);border-radius:8px;padding:20px;
-  }
-  .modal-close{
-    position:absolute;top:8px;right:10px;z-index:3;
-    background:var(--steel);color:#fff;border:none;border-radius:50%;
-    width:44px;height:44px;font-size:22px;line-height:1;cursor:pointer;
-    display:flex;align-items:center;justify-content:center;
-  }
-  .sample-tabs{display:flex;justify-content:center;gap:8px;margin:0 0 18px;flex-wrap:wrap;}
-  .sample-tab{
-    background:none;border:1px solid var(--hairline);color:var(--ink-soft);
-    font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.03em;
-    padding:8px 16px;border-radius:20px;cursor:pointer;transition:all .15s;
-  }
-  .sample-tab.active{background:var(--ink);border-color:var(--ink);color:#fff;}
-  .sample-label{
-    text-align:center;color:#B9B6AE;font-family:'IBM Plex Mono',monospace;
-    font-size:12px;letter-spacing:.08em;text-transform:uppercase;margin:0 0 12px;
-  }
-  .sample-badge{
-    position:absolute;top:-11px;right:24px;z-index:2;
-    background:var(--amber);color:#fff;font-family:'IBM Plex Mono',monospace;
-    font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
-    padding:4px 10px;border-radius:3px;
-    box-shadow:0 2px 6px rgba(0,0,0,0.3);
-  }
-  .sample-sheet{position:relative;}
+/* Order panel */
+#order{display:none}
+#order.active{display:block}
+.order-grid{display:grid;gap:1.5rem}
+@media (min-width:60rem){.order-grid{grid-template-columns:1.4fr 1fr;align-items:start}}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:1.6rem}
+.ymm{font:700 clamp(1.7rem,5vw,2.3rem)/1.1 var(--head)}
+.meta{color:var(--muted);margin:.5rem 0 0}
+.vin-line{font:600 .95rem var(--head);letter-spacing:.1em;color:var(--blue-hi);margin-top:.8rem}
+.inc{list-style:none;margin:1.4rem 0 0;padding:0;display:grid;gap:.55rem}
+.inc li{display:flex;gap:.7rem;align-items:flex-start;color:var(--text)}
+.inc svg{width:18px;height:18px;color:var(--blue);flex:none;margin-top:.2rem}
+.note{font-size:.9rem;color:var(--muted);margin:1rem 0 0}
+.note.warn{color:var(--warn)}
+.checkout .total{display:flex;justify-content:space-between;align-items:baseline;padding:1rem 0;margin:1rem 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.checkout .total b{font:700 2rem var(--head);color:var(--gold)}
+.checkout .btn{width:100%;margin-top:1rem}
+.fine{font-size:.82rem;color:var(--dim);margin:.9rem 0 0}
+.linkbtn{background:none;border:0;color:var(--muted);text-decoration:underline;font:inherit;font-size:.9rem;cursor:pointer;padding:.5rem 0;margin-top:.4rem}
+.progress{list-style:none;margin:0 0 2rem;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem;font-size:.8rem;color:var(--dim)}
+.progress li{border-top:3px solid var(--line);padding-top:.5rem}
+.progress li.done{border-color:var(--blue);color:var(--muted)}
+.progress li.now{border-color:var(--blue);color:var(--text);font-weight:600}
 
-  @media(max-width:640px){
-    .hero h1{font-size:26px;margin-top:2px;}
-    .hero p{font-size:14px;}
-    .hero-price-line{font-size:12px !important;}
-    .feature-grid{margin-top:36px;padding-bottom:28px;}
-    .feature-card{grid-template-columns:36px 1fr;gap:12px;padding:16px 0;}
-    .faq-wrap{padding-top:28px;margin:0 auto 32px;}
-    .site-footer{padding:18px 12px;font-size:12px;}
-    .site-disclaimer{font-size:11px;}
-    .modal-overlay{padding:12px 8px;}
-    .modal-panel{padding:16px 12px;}
-    .sample-link{font-size:13px;padding:11px 20px;}
-  }
+/* Steps */
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:1rem;counter-reset:s}
+.steps li{counter-increment:s;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:1.6rem}
+.steps li::before{content:counter(s,decimal-leading-zero);display:block;font:700 2.3rem/1 var(--head);color:#23406B;margin-bottom:1.2rem}
+.steps h3{font-size:1.2rem;margin-bottom:.6rem}
+.steps p{color:var(--muted);margin:0;font-size:.95rem}
+@media (min-width:40rem){.steps{grid-template-columns:1fr 1fr}}
+@media (min-width:64rem){.steps{grid-template-columns:repeat(4,1fr)}}
 
-  /* ===== LOADING ===== */
-  .loading{display:none;text-align:center;padding:40px;color:var(--ink);font-family:'IBM Plex Mono',monospace;font-size:13px;}
-  .loading.active{display:block;}
-  .progress-track{
-    max-width:340px;margin:16px auto 8px;height:8px;border-radius:4px;
-    background:var(--hairline);overflow:hidden;
-  }
-  .progress-fill{
-    height:100%;width:0%;border-radius:4px;
-    background:var(--amber);
-    background-image:linear-gradient(
-      110deg,
-      var(--amber) 0%, var(--amber) 35%,
-      #E8A85C 50%,
-      var(--amber) 65%, var(--amber) 100%
-    );
-    background-size:200% 100%;
-    animation:shimmer 1.3s linear infinite;
-    transition:width .3s ease;
-  }
-  @keyframes shimmer{
-    0%{background-position:200% 0;}
-    100%{background-position:-200% 0;}
-  }
-  .progress-pct{font-size:22px;font-weight:600;color:var(--ink);margin:4px 0 0;letter-spacing:.02em;}
+/* Inside cards */
+.cards{display:grid;gap:1rem}
+@media (min-width:44rem){.cards{grid-template-columns:1fr 1fr}}
+@media (min-width:66rem){.cards{grid-template-columns:repeat(3,1fr)}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:1.6rem}
+.card-top{display:flex;align-items:center;gap:1rem;margin-bottom:1.1rem}
+.icon{width:44px;height:44px;border-radius:9px;background:var(--blue-soft);border:1px solid rgba(61,139,253,.25);display:grid;place-items:center;flex:none}
+.icon svg{width:20px;height:20px;color:var(--blue)}
+.card h3{font-size:1.18rem}
+.card>p{color:var(--muted);font-size:.95rem}
+.card ul{list-style:none;margin:0;padding:0;display:grid;gap:.35rem;font-size:.9rem;color:var(--dim)}
+.card li::before{content:"•";color:var(--blue);margin-right:.55rem}
 
-  /* ===== REPORT (reused design) ===== */
-  .sheet{display:none;max-width:880px;margin:0 auto;background:var(--paper);border-radius:2px;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,0.25);}
-  .sheet.active{display:block;}
-  .header{background:var(--steel);color:#fff;padding:28px 36px 24px;display:flex;justify-content:space-between;align-items:flex-start;gap:20px;}
-  .brand-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);margin:0 0 6px;}
-  .brand-name{font-family:'Oswald',sans-serif;font-weight:600;font-size:26px;letter-spacing:.02em;margin:0;text-transform:uppercase;}
-  .brand-sub{font-size:12.5px;color:#B9B6AE;margin:4px 0 0;}
-  .report-meta{text-align:right;font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:#C9C6BE;line-height:1.7;}
-  .report-meta strong{color:#fff;font-weight:500;}
-  .vehicle-strip{background:var(--steel-2);color:#fff;padding:16px 36px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,0.08);flex-wrap:wrap;gap:10px;}
-  .vehicle-title{font-family:'Oswald',sans-serif;font-size:19px;font-weight:500;letter-spacing:.01em;}
-  .vehicle-title span{color:var(--amber);}
-  .vehicle-facts{display:flex;gap:24px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:#B9B6AE;flex-wrap:wrap;}
-  .vehicle-facts b{color:#fff;font-weight:500;}
-  .body{padding:30px 36px 20px;}
-  .grade-block{display:flex;gap:24px;align-items:stretch;margin-bottom:32px;flex-wrap:wrap;}
-  .hang-tag{flex:0 0 168px;background:var(--steel);color:#fff;border-radius:6px;padding:18px 14px 16px;position:relative;text-align:center;}
-  .hang-tag::before{content:'';position:absolute;top:12px;left:50%;width:12px;height:12px;margin-left:-6px;border-radius:50%;background:var(--paper);box-shadow:inset 0 0 0 2px var(--steel-2);}
-  .hang-tag-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:#9A968C;margin:20px 0 4px;}
-  .hang-tag-grade{font-family:'Oswald',sans-serif;font-size:56px;font-weight:600;line-height:1;color:var(--amber);}
-  .hang-tag-label{font-family:'Oswald',sans-serif;font-size:13px;letter-spacing:.04em;text-transform:uppercase;margin-top:4px;}
-  .hang-tag-note{font-size:10.5px;color:#B9B6AE;margin-top:10px;line-height:1.5;}
-  .grade-summary{flex:1;min-width:260px;}
-  .grade-summary h2{font-family:'Oswald',sans-serif;font-size:15px;font-weight:500;text-transform:uppercase;letter-spacing:.03em;margin:0 0 10px;color:var(--ink);}
-  .grade-summary p{font-size:14.5px;line-height:1.65;color:var(--ink-soft);margin:0 0 14px;}
-  .stat-row{display:flex;gap:12px;flex-wrap:wrap;}
-  .stat{flex:1;min-width:110px;background:var(--paper-2);border:1px solid var(--hairline);border-radius:4px;padding:10px 12px;}
-  .stat-label{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin:0 0 3px;}
-  .stat-value{font-family:'Oswald',sans-serif;font-size:18px;font-weight:500;}
-  .section{margin-bottom:28px;border-top:1px solid var(--hairline);padding-top:20px;}
-  .section-head{display:flex;align-items:baseline;gap:10px;margin-bottom:14px;}
-  .section-num{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--amber-deep);font-weight:600;}
-  .section-title{font-family:'Oswald',sans-serif;font-size:16px;font-weight:500;text-transform:uppercase;letter-spacing:.02em;margin:0;}
-  .finding{display:grid;grid-template-columns:100px 1fr;gap:14px;padding:10px 0;border-bottom:1px solid var(--hairline);font-size:13.5px;line-height:1.55;}
-  .finding:last-child{border-bottom:none;}
-  .flag{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;padding:3px 8px;border-radius:3px;height:fit-content;text-align:center;}
-  .flag.check{background:var(--red-bg);color:var(--red);}
-  .flag.watch{background:var(--amber-bg);color:var(--amber-deep);}
-  .flag.clear{background:var(--green-bg);color:var(--green);}
-  .finding-text b{font-weight:600;}
-  .finding-text .sub{color:var(--ink-soft);display:block;margin-top:2px;font-size:12.5px;}
-  .qlist{margin:0;padding:0;list-style:none;}
-  .qlist li{font-size:13.5px;line-height:1.6;padding:8px 0 8px 24px;position:relative;border-bottom:1px solid var(--hairline);}
-  .qlist li:last-child{border-bottom:none;}
-  .qlist li::before{content:'?';position:absolute;left:0;top:8px;font-family:'IBM Plex Mono',monospace;font-weight:600;color:var(--amber-deep);font-size:12px;}
-  .footer{background:var(--steel);color:#B9B6AE;padding:18px 36px;display:flex;justify-content:space-between;align-items:center;font-size:11px;font-family:'IBM Plex Mono',monospace;flex-wrap:wrap;gap:8px;}
-  .footer strong{color:#fff;}
-  .new-report-btn{
-    display:block;margin:16px auto 0;background:none;border:1px solid #fff;color:#fff;
-    padding:8px 16px;border-radius:4px;font-family:'IBM Plex Mono',monospace;font-size:11px;cursor:pointer;
-  }
-  @media(max-width:640px){
-    body{padding:16px 10px;}
-    .form-title{font-size:22px;}
-    .field-row{grid-template-columns:1fr;gap:12px;}
-    .field select, .field input, .field textarea{
-      font-size:16px; /* prevents iOS Safari auto-zoom on focus */
-      padding:11px 12px;
-    }
-    .submit-btn{padding:15px 20px;font-size:13px;}
-    .header,.vehicle-strip,.footer{flex-direction:column;align-items:flex-start;}
-    .report-meta{text-align:left;margin-top:4px;}
-    .header{padding:22px 20px 18px;}
-    .vehicle-strip{padding:14px 20px;}
-    .body{padding:22px 20px 16px;}
-    .vehicle-facts{gap:14px;font-size:11px;}
-    .hang-tag{flex:1 1 100%;}
-    .grade-block{flex-direction:column;}
-    .stat-row{flex-wrap:wrap;}
-    .stat{min-width:100px;}
-    .finding{grid-template-columns:76px 1fr;gap:10px;}
-    .flag{font-size:9px;padding:3px 6px;}
-    .footer{padding:16px 20px;font-size:10px;gap:6px;}
-    .kp-grid{grid-template-columns:1fr;}
-  }
+/* Why */
+.why{display:grid;gap:3rem;align-items:center}
+@media (min-width:62rem){.why{grid-template-columns:1fr 1fr;gap:4.5rem}}
+.photo{position:relative;border-radius:14px;min-height:320px;background:var(--card-2) url("shop-photo.jpg") center/cover no-repeat;border:1px solid var(--line)}
+.photo-card{position:absolute;right:1rem;bottom:-1.5rem;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:1.1rem 1.3rem;max-width:15rem;box-shadow:0 20px 40px -20px #000}
+.photo-card b{display:block;font:700 1.9rem var(--head);color:var(--gold)}
+.photo-card span{font-size:.86rem;color:var(--muted)}
+.why h2{font-size:clamp(2rem,5vw,2.7rem)}
+.why .lead{color:var(--muted);font-size:1.08rem;margin:1.3rem 0 2rem}
+.stats{display:grid;gap:1.3rem}
+.stat{display:grid;grid-template-columns:6.8rem 1fr;gap:1.2rem;align-items:center}
+.stat b{font:700 2rem var(--head);color:var(--blue);text-align:right;border-right:1px solid var(--line);padding-right:1.2rem}
+.stat strong{display:block;font-weight:600}
+.stat span{font-size:.86rem;color:var(--dim)}
 
-  /* ===== SITE FOOTER ===== */
-  .site-footer{
-    text-align:center;color:var(--ink-soft);font-size:13px;
-    padding:32px 20px 8px;line-height:1.6;
-    max-width:640px;margin:0 auto;border-top:1px solid var(--hairline);
-  }
-  .site-footer a{color:var(--ink);text-decoration:underline;font-weight:600;}
-  .site-footer a:hover{color:#B4571F;}
-  .site-footer-sub{font-size:11.5px;color:var(--ink-soft);margin-top:4px;max-width:480px;margin-left:auto;margin-right:auto;}
-  .site-disclaimer{
-    font-size:11.5px;color:var(--ink-soft);line-height:1.6;opacity:.85;
-    max-width:560px;margin:12px auto 0;
-  }
+/* Pricing */
+.price-card{max-width:30rem;margin:0 auto;background:var(--card);border:1px solid rgba(61,139,253,.45);border-radius:16px;padding:2.2rem;text-align:center;box-shadow:0 0 0 6px var(--blue-soft)}
+.big-price{font:700 clamp(3.5rem,12vw,4.6rem)/1 var(--head);letter-spacing:-.03em}
+.big-price sup{font-size:.45em;vertical-align:.8em;color:var(--muted);margin-right:.1em}
+.price-card .per{color:var(--muted);margin:.6rem 0 1.6rem}
+.price-card ul{list-style:none;margin:0 0 1.8rem;padding:0;text-align:left;display:grid;gap:.7rem}
+.price-card li{display:flex;gap:.7rem}
+.price-card li svg{width:18px;height:18px;color:var(--blue);flex:none;margin-top:.2rem}
+.price-card .btn{width:100%}
 
-  /* ===== PRINT / PDF DOWNLOAD ===== */
-  .download-btn{
-    display:inline-flex;align-items:center;gap:8px;margin:16px auto 0;
-    background:var(--amber);color:#fff;border:none;
-    padding:11px 22px;border-radius:4px;font-family:'Oswald',sans-serif;
-    font-size:13px;letter-spacing:.03em;text-transform:uppercase;cursor:pointer;
-  }
-  .report-actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:16px;}
-  @media print{
-    body{background:#fff !important;padding:0 !important;}
-    .hero, .sample-cta, .modal-overlay, .faq-wrap, .form-card, .loading, .report-actions, .site-footer{display:none !important;}
-    .sheet{box-shadow:none !important;max-width:100% !important;}
-    .wrap{max-width:100% !important;}
-  }
+/* FAQ */
+.faq{max-width:44rem;margin:0 auto;display:grid;gap:.8rem}
+.faq details{background:var(--card);border:1px solid var(--line);border-radius:12px}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:1.15rem 1.3rem;font:600 1.02rem var(--head)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary svg{width:18px;height:18px;color:var(--muted);flex:none;transition:transform .2s}
+.faq details[open] summary svg{transform:rotate(180deg)}
+.faq details p{color:var(--muted);padding:0 1.3rem 1.2rem;margin:0}
+
+/* Final CTA */
+.final{text-align:center;padding:6rem 0}
+.final svg.mark{width:44px;height:44px;color:var(--blue);margin-bottom:1.6rem}
+.final h2{font-size:clamp(2.2rem,6vw,3.4rem)}
+.final p{color:var(--muted);font-size:1.08rem;max-width:32rem;margin:1.2rem auto 2rem}
+
+/* Footer */
+footer{border-top:1px solid var(--line);padding:3.5rem 0 2.5rem;font-size:.92rem}
+.foot{display:grid;gap:2.2rem}
+@media (min-width:48rem){.foot{grid-template-columns:1.3fr 1fr 1fr 1.2fr}}
+.foot p{color:var(--dim);margin-top:1rem;max-width:18rem}
+.foot h3{font:600 .95rem var(--head);margin-bottom:1rem}
+.foot ul{list-style:none;margin:0;padding:0;display:grid;gap:.6rem}
+.foot a{color:var(--muted);text-decoration:none}
+.foot a:hover{color:var(--text)}
+.legal{border-top:1px solid var(--line);margin-top:2.5rem;padding-top:1.5rem;display:grid;gap:.8rem;color:var(--dim);font-size:.82rem}
+@media (min-width:48rem){.legal{grid-template-columns:auto 1fr;gap:2rem}.legal p:last-child{text-align:right}}
+.legal p{margin:0}
+
+@media (prefers-reduced-motion:reduce){*{transition:none!important}html{scroll-behavior:auto}}
 </style>
 </head>
 <body>
-<div class="wrap">
 
-  <div class="hero">
-    <p class="hero-eyebrow">For Harley-Davidson motorcycles only</p>
-    <div class="hero-title-row">
-      <svg class="logo-mark" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="60" cy="60" r="58" fill="#2E333A" stroke="#3A4048" stroke-width="2"/>
-        <g fill="none" stroke="#8A8F98" stroke-width="2.5" stroke-linecap="round">
-          <line x1="60" y1="14" x2="60" y2="24"/><line x1="60" y1="96" x2="60" y2="106"/>
-          <line x1="14" y1="60" x2="24" y2="60"/><line x1="96" y1="60" x2="106" y2="60"/>
-          <line x1="27" y1="27" x2="34" y2="34"/><line x1="93" y1="27" x2="86" y2="34"/>
-          <line x1="27" y1="93" x2="34" y2="86"/><line x1="93" y1="93" x2="86" y2="86"/>
-        </g>
-        <path d="M67 28 L42 66 L57 66 L52 94 L80 54 L64 54 Z" fill="#C8752B"/>
-      </svg>
-      <h1><span class="underline-text">Know before you buy</span> <span>the bike</span></h1>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="flake" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+    <path d="M12 2v20M3.3 7l17.4 10M3.3 17L20.7 7"/>
+    <path d="M9.5 3.5 12 6l2.5-2.5M9.5 20.5 12 18l2.5 2.5M3.6 10.4l3.4-.9-.9-3.4M20.4 13.6l-3.4.9.9 3.4M6.1 17.9l.9-3.4-3.4-.9M17.9 6.1l-.9 3.4 3.4.9"/>
+  </symbol>
+  <symbol id="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></symbol>
+  <symbol id="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></symbol>
+</svg>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="Cold Start Report home"><svg aria-hidden="true"><use href="#flake"/></svg><span>Cold Start <b>Report</b></span></a>
+    <nav class="nav-links" aria-label="Main">
+      <a href="#how">How It Works</a><a href="#inside">What's Inside</a><a href="#pricing">Pricing</a><a href="#faq">FAQ</a>
+    </nav>
+    <a class="btn btn-sm" href="#lookup">Get a Report</a>
+  </div>
+</header>
+
+<main id="top">
+  <!-- HERO -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="wrap">
+      <div>
+        <span class="pill"><svg aria-hidden="true"><use href="#flake"/></svg>Pre-Purchase Harley-Davidson Research</span>
+        <h1 id="hero-title">Know what you're buying<br><span class="blue">before you buy it.</span></h1>
+        <p class="lead">Cold Start Report puts together detailed research on the used Harley-Davidson you're looking at: specs, recalls, known failure points, maintenance and a price check. So you can negotiate with confidence and skip the costly surprises.</p>
+        <div class="hero-cta">
+          <a class="btn" href="#lookup">Start a Harley Lookup</a>
+          <div class="price-tag"><b>$29.99</b><span>per report, no subscription</span></div>
+        </div>
+        <ul class="bullets">
+          <li>Recalls and safety data</li><li>Model-specific failure points</li><li>Ready in minutes</li><li>6 report sections</li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="tabs" role="tablist" aria-label="Lookup method">
+          <button class="tab" role="tab" id="tab-vin" aria-selected="true" aria-controls="pane-vin" type="button">Enter VIN</button>
+          <button class="tab" role="tab" id="tab-ymm" aria-selected="false" aria-controls="pane-ymm" type="button">Year / Model</button>
+        </div>
+        <form class="lookup" id="lookup" novalidate aria-label="Look up a motorcycle">
+          <div id="pane-vin" role="tabpanel" aria-labelledby="tab-vin">
+            <label class="field" for="vin"><span>17-Digit VIN</span>
+              <input id="vin" type="text" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="17" placeholder="e.g. 1HD1KBC13DB…" aria-describedby="vin-help">
+            </label>
+            <div class="help" id="vin-help" aria-live="polite">Stamped on the right side of the steering head, and on your title or registration.</div>
+            <label class="field" for="year-v" id="year-v-wrap" hidden><span>Model year</span>
+              <select id="year-v"></select>
+            </label>
+            <label class="field" for="family-v"><span>Model family</span>
+              <select id="family-v"></select>
+            </label>
+          </div>
+          <div id="pane-ymm" role="tabpanel" aria-labelledby="tab-ymm" hidden>
+            <div class="row">
+              <label class="field" for="year"><span>Year</span><select id="year"></select></label>
+              <label class="field" for="make"><span>Make</span><select id="make"><option>Harley-Davidson</option></select></label>
+              <label class="field" for="family"><span>Model family</span><select id="family"></select></label>
+            </div>
+            <label class="field" for="model"><span>Model name (optional)</span>
+              <input id="model" type="text" autocomplete="off" placeholder="Street Glide, Fat Boy, Low Rider…">
+            </label>
+          </div>
+          <button class="btn" type="submit"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>Check This Harley</button>
+          <p class="err" id="form-err" role="alert"></p>
+        </form>
+      </div>
     </div>
-    <p class="hero-eyebrow-2">30 years on a Harley-Davidson dealership sales floor, built into every report</p>
-    <p>Real dealership experience. No guesswork. No sales pitch.</p>
-    <p class="hero-price-line">Know what to look for before you drive out or pay for an inspection.</p>
-    <div class="feature-grid">
-      <div class="feature-card">
-        <p class="feature-eyebrow">01</p>
-        <div>
-          <h3>Live market price range</h3>
-          <p>Pulled from current comparable listings, so you know if the asking price is fair before you negotiate.</p>
+  </section>
+
+  <!-- ORDER FLOW -->
+  <section class="sec" id="order" aria-labelledby="order-title" tabindex="-1">
+    <div class="wrap">
+      <ol class="progress" id="progress"><li>Enter bike</li><li>What's included</li><li>Pay</li><li>Your report</li></ol>
+      <h2 id="order-title" class="eyebrow" style="font-family:var(--body);letter-spacing:.14em">Your report</h2>
+      <div class="order-grid">
+        <div class="panel">
+          <div class="ymm" id="o-ymm"></div>
+          <p class="meta" id="o-meta"></p>
+          <div class="vin-line" id="o-vin"></div>
+          <ul class="inc" id="o-inc"></ul>
+          <p class="note" id="o-note"></p>
+        </div>
+        <form class="panel checkout" id="pay">
+          <h3 style="font-size:1.4rem">Get the full report</h3>
+          <div class="total"><span>One Cold Start Report</span><b>$29.99</b></div>
+          <p style="color:var(--muted);margin:0">Next, add the mileage, asking price and the seller's listing if you have it. The more we know, the sharper the report.</p>
+          <button class="btn" type="submit">Continue to checkout</button>
+          <p class="fine">Secure checkout by Stripe. Ready in minutes, emailed to you, and downloadable as a PDF.</p>
+          <button class="linkbtn" type="button" id="edit-bike">Change bike</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="sec" id="how" aria-labelledby="how-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">The Process</span>
+        <h2 id="how-title">Four steps. One report. Total clarity.</h2>
+        <p>No accounts, no subscriptions, no upsells. Enter your bike, see what you get, pay once, and read your report.</p>
+      </div>
+      <ol class="steps">
+        <li><h3>Enter Your Harley</h3><p>Type in the VIN, or the year and model of the bike you're considering. Takes less than a minute.</p></li>
+        <li><h3>See What's Included</h3><p>Preview what the report covers for that model and year, so there are no surprises about what you get.</p></li>
+        <li><h3>Pay $29.99</h3><p>One-time payment through Stripe. No subscription, no recurring charges. You own the report.</p></li>
+        <li><h3>Get Your Report</h3><p>Ready in minutes. Download it, print it, or pull it up on your phone when you go see the bike.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- WHAT'S INSIDE -->
+  <section class="sec" id="inside" aria-labelledby="inside-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">What's Inside</span>
+        <h2 id="inside-title">Six sections. One thorough report.</h2>
+        <p>Every Cold Start Report covers the same six areas, tailored to the exact model and year you're researching.</p>
+      </div>
+      <div class="cards">
+        <article class="card">
+          <div class="card-top"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 14l4-4"/><path d="M3.3 17a9 9 0 1 1 17.4 0"/></svg></div><h3>Vehicle Specifications</h3></div>
+          <p>The factory specs for that model and year, so you can spot what's been changed.</p>
+          <ul><li>Engine and displacement</li><li>Transmission and final drive</li><li>Brakes and ABS</li><li>Weights and seat height</li><li>Factory equipment</li></ul>
+        </article>
+        <article class="card">
+          <div class="card-top"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><h3>Recalls &amp; Safety</h3></div>
+          <p>Safety recall campaigns for that model and year, and how to confirm the work was done.</p>
+          <ul><li>Recall campaigns</li><li>What each recall fixes</li><li>How to verify completion</li><li>What to ask the seller</li></ul>
+        </article>
+        <article class="card">
+          <div class="card-top"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.5-.5-.5-2.5z"/></svg></div><h3>Common Failure Points</h3></div>
+          <p>The known weak spots for that engine and chassis, what they sound like and how to check.</p>
+          <ul><li>Cam chest and tensioners</li><li>Primary drive and compensator</li><li>Charging system</li><li>Oil leak points</li><li>Cold start noises</li></ul>
+        </article>
+        <article class="card">
+          <div class="card-top"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div><h3>Maintenance Insights</h3></div>
+          <p>Service intervals and the overdue jobs that get expensive, so the price accounts for them.</p>
+          <ul><li>Service interval schedule</li><li>Major service milestones</li><li>Fluids and belt</li><li>Overdue-work red flags</li></ul>
+        </article>
+        <article class="card">
+          <div class="card-top"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 17 6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg></div><h3>Price Check</h3></div>
+          <p>How the asking price stacks up against similar bikes for sale right now.</p>
+          <ul><li>Comparable listings</li><li>Mileage and condition context</li><li>Negotiation talking points</li></ul>
+        </article>
+        <article class="card">
+          <div class="card-top"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="19" rx="2"/><path d="M9 3h6v3H9zM9 13l2 2 4-4"/></svg></div><h3>Buyer's Inspection Checklist</h3></div>
+          <p>A model-specific checklist of what to inspect, test and ask before you hand over any money.</p>
+          <ul><li>Cold start checklist</li><li>Walk-around inspection</li><li>Test ride checklist</li><li>Questions to ask the seller</li><li>Aftermarket and tuning notes</li></ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY -->
+  <section class="sec" aria-labelledby="why-title">
+    <div class="wrap why">
+      <div class="photo" role="img" aria-label="Harley-Davidson on the lift at a service shop">
+        <div class="photo-card"><b>$29.99</b><span>Could save you thousands in surprise repairs.</span></div>
+      </div>
+      <div>
+        <span class="eyebrow">Why It Matters</span>
+        <h2 id="why-title">A test ride won't tell you<br><span class="blue">what's about to break.</span></h2>
+        <p class="lead">A used Harley can look and sound fine in a driveway. The real risks are in what that model and year is known for, and those are the things a seller won't bring up. Cold Start Report puts it all in one place before you spend a dollar.</p>
+        <div class="stats">
+          <div class="stat"><b>30</b><div><strong>years in the Harley business</strong><span>Dealership sales and service experience behind every report.</span></div></div>
+          <div class="stat"><b>6</b><div><strong>sections in every report</strong><span>From specs to the inspection checklist.</span></div></div>
+          <div class="stat"><b>1984</b><div><strong>through current models</strong><span>Evolution, Twin Cam and Milwaukee-Eight Big Twins.</span></div></div>
         </div>
       </div>
-      <div class="feature-card">
-        <p class="feature-eyebrow">02</p>
-        <div>
-          <h3>Known failure points</h3>
-          <p>Matched to the exact year and model — not generic advice, the specific things that actually go wrong on that bike.</p>
-        </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="sec" id="pricing" aria-labelledby="pricing-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">Pricing</span>
+        <h2 id="pricing-title">One price. One bike. No surprises.</h2>
       </div>
-      <div class="feature-card">
-        <p class="feature-eyebrow">03</p>
-        <div>
-          <h3>Questions to ask the seller</h3>
-          <p>The exact questions that surface problems a seller won't volunteer on their own.</p>
-        </div>
+      <div class="price-card">
+        <div class="big-price" aria-label="29 dollars and 99 cents"><sup>$</sup>29.99</div>
+        <p class="per">per report, one-time payment</p>
+        <ul>
+          <li><svg aria-hidden="true"><use href="#check"/></svg>All six report sections</li>
+          <li><svg aria-hidden="true"><use href="#check"/></svg>Specific to the model and year</li>
+          <li><svg aria-hidden="true"><use href="#check"/></svg>Ready in minutes, PDF download</li>
+          <li><svg aria-hidden="true"><use href="#check"/></svg>No account, no subscription</li>
+        </ul>
+        <a class="btn" href="#lookup">Get a Report</a>
       </div>
-      <div class="feature-card">
-        <p class="feature-eyebrow">04</p>
-        <div>
-          <h3>Safety recall check</h3>
-          <p>A real search of NHTSA and manufacturer recall records for that year and model, with an honest note if nothing was found.</p>
-        </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="sec" id="faq" aria-labelledby="faq-title">
+    <div class="wrap">
+      <div class="sec-head"><span class="eyebrow">FAQ</span><h2 id="faq-title">Questions, answered.</h2></div>
+      <div class="faq">
+        <details open><summary>What is a Cold Start Report?<svg aria-hidden="true"><use href="#chev"/></svg></summary><p>A pre-purchase research report for a specific used Harley-Davidson. It covers specs, recalls, known failure points, maintenance, a price check and an inspection checklist you can use at the dealership or private sale.</p></details>
+        <details><summary>How is this different from a vehicle history report?<svg aria-hidden="true"><use href="#chev"/></svg></summary><p>A history report tells you where a bike has been: titles, accidents, odometer records. Cold Start Report tells you what tends to go wrong on that model and year, and how to check for it before you pay. They answer different questions.</p></details>
+        <details><summary>How long does it take to get my report?<svg aria-hidden="true"><use href="#chev"/></svg></summary><p>A few minutes after payment. You can read it on screen, download it as a PDF, and it's emailed to you.</p></details>
+        <details><summary>Which bikes do you cover?<svg aria-hidden="true"><use href="#chev"/></svg></summary><p>Big Twin Harley-Davidsons from the Evolution era through Milwaukee-Eight: Touring, Softail, Dyna and FXR models, 1984 to current.</p></details>
+        <details><summary>Do I need the VIN?<svg aria-hidden="true"><use href="#chev"/></svg></summary><p>No. Year and model are enough. The VIN confirms the exact model year and lets you check it against what the seller told you.</p></details>
+        <details><summary>Is $29.99 a one-time charge?<svg aria-hidden="true"><use href="#chev"/></svg></summary><p>Yes. One payment, one report, no subscription.</p></details>
+        <details><summary>Are you affiliated with Harley-Davidson?<svg aria-hidden="true"><use href="#chev"/></svg></summary><p>No. Cold Start Report is independent. Harley-Davidson is a trademark of H-D U.S.A., LLC.</p></details>
       </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="sec final" aria-labelledby="final-title">
+    <div class="wrap">
+      <svg class="mark" aria-hidden="true"><use href="#flake"/></svg>
+      <h2 id="final-title">Don't buy that bike<br><span class="blue">without reading this first.</span></h2>
+      <p>Enter the VIN or the bike's details and get a full research report in minutes. One-time $29.99. No subscription.</p>
+      <a class="btn" href="#lookup">Start My Harley Lookup <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <a class="logo" href="#top"><svg aria-hidden="true"><use href="#flake"/></svg><span>Cold Start <b>Report</b></span></a>
+        <p>Pre-purchase Harley-Davidson research. Know what you're buying before you buy it.</p>
+      </div>
+      <nav aria-label="Service"><h3>Service</h3><ul><li><a href="#how">How It Works</a></li><li><a href="#inside">What's Inside</a></li><li><a href="#pricing">Pricing</a></li><li><a href="#faq">FAQ</a></li></ul></nav>
+      <nav aria-label="Legal"><h3>Legal</h3><ul><li><a href="/terms.html">Terms of Service</a></li><li><a href="/privacy.html">Privacy Policy</a></li><li><a href="/refunds.html">Refund Policy</a></li><li><a href="/disclaimer.html">Disclaimer</a></li></ul></nav>
+      <div><h3>Get in Touch</h3><ul><li><a href="mailto:support@coldstartreport.com">support@coldstartreport.com</a></li><li><a href="https://coldstartreport.com/">coldstartreport.com</a></li></ul></div>
+    </div>
+    <div class="legal">
+      <p>© <span id="yr">2026</span> Cold Start Report. All rights reserved.</p>
+      <p>Independent and not affiliated with Harley-Davidson. Reports are research and inspection guidance, not a mechanical inspection or guarantee of condition.</p>
     </div>
   </div>
-
-  <div class="form-card" id="formCard">
-    <p class="form-eyebrow">Pre-purchase inspection assist</p>
-    <div class="form-title-row">
-      <svg class="logo-mark small" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="60" cy="60" r="58" fill="#2E333A" stroke="#6B6862" stroke-width="2.5"/>
-        <g fill="none" stroke="#8A8F98" stroke-width="2.5" stroke-linecap="round">
-          <line x1="60" y1="14" x2="60" y2="24"/><line x1="60" y1="96" x2="60" y2="106"/>
-          <line x1="14" y1="60" x2="24" y2="60"/><line x1="96" y1="60" x2="106" y2="60"/>
-          <line x1="27" y1="27" x2="34" y2="34"/><line x1="93" y1="27" x2="86" y2="34"/>
-          <line x1="27" y1="93" x2="34" y2="86"/><line x1="93" y1="93" x2="86" y2="86"/>
-        </g>
-        <path d="M67 28 L42 66 L57 66 L52 94 L80 54 L64 54 Z" fill="#C8752B"/>
-      </svg>
-      <h2 class="form-title">Cold Start Report</h2>
-    </div>
-
-    <div class="field-row">
-      <div class="field">
-        <label>Model year</label>
-        <input id="year" type="number" placeholder="e.g. 2013" oninput="populateModelDropdown()">
-      </div>
-      <div class="field">
-        <label>Specific model</label>
-        <select id="modelName">
-          <option value="" disabled selected>Enter a model year first…</option>
-        </select>
-      </div>
-    </div>
-    <p class="coverage-note">Currently covers Softail, Touring, and Dyna/FXR models (1985–present). Sportster coverage is coming soon.</p>
-    <div class="notify-row" id="notifyRow">
-      <input type="email" id="notifyEmail" placeholder="Riding a Sportster? Get notified when it's covered">
-      <button type="button" onclick="submitNotifySignup()" id="notifyBtn">Notify me</button>
-    </div>
-    <p class="notify-status" id="notifyStatus"></p>
-
-    <div class="field-row">
-      <div class="field">
-        <label>Mileage</label>
-        <input id="mileage" type="number" placeholder="e.g. 38412">
-      </div>
-      <div class="field">
-        <label>Asking price (optional)</label>
-        <input id="price" type="number" placeholder="e.g. 11999">
-      </div>
-    </div>
-
-    <div class="field-row">
-      <div class="field">
-        <label>VIN (optional)</label>
-        <input id="vin" type="text" placeholder="e.g. 1HD1...4392">
-      </div>
-      <div class="field"></div>
-    </div>
-
-    <div class="field">
-      <label>Seller's listing text / description (copy and paste it below)</label>
-      <textarea id="listingText" placeholder="Paste the seller's description here — runs great, minor cosmetic wear, etc."></textarea>
-      <p class="field-hint">We scan the seller's own words for red flags and things they left out — this is often what makes a report most useful.</p>
-    </div>
-
-    <button class="submit-btn" id="submitBtn" onclick="startCheckout()">Pay $29 &amp; Generate Report</button>
-    <p class="time-hint">⏱ Takes about 30 seconds after payment — your report generates automatically.</p>
-    <p class="hint">Reports are generated from a hand-built knowledge base of known failure points — not a substitute for an in-person mechanical inspection. Payment is securely processed by Stripe.</p>
-  </div>
-
-  <div class="sample-cta">
-    <button class="sample-link" onclick="openSampleModal()">
-      See a sample report &rarr;
-    </button>
-    <p class="sample-cta-sub">Real data, illustrative bike — see exactly what you get before you pay.</p>
-  </div>
-
-  <div class="modal-overlay" id="sampleModalOverlay" onclick="if(event.target===this) closeSampleModal()">
-    <div class="modal-panel">
-      <button class="modal-close" onclick="closeSampleModal()" aria-label="Close">&times;</button>
-      <p class="sample-label">Example reports — real data shown, illustrative bikes</p>
-
-      <div class="sample-tabs">
-        <button class="sample-tab active" id="tabBtnFlag" onclick="switchSampleTab('flag')">When there's a problem</button>
-        <button class="sample-tab" id="tabBtnClean" onclick="switchSampleTab('clean')">When it's a solid buy</button>
-      </div>
-
-      <!-- TAB 1: Red flag example -->
-      <div class="sample-sheet" id="sampleTabFlag">
-        <span class="sample-badge">Sample</span>
-        <div class="sheet" style="display:block;">
-          <div class="header">
-            <div>
-              <p class="brand-eyebrow">Pre-purchase inspection report</p>
-              <div class="brand-row">
-                <svg class="logo-mark small" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
-                  <circle cx="60" cy="60" r="58" fill="#2E333A" stroke="#3A4048" stroke-width="2"/>
-                  <g fill="none" stroke="#8A8F98" stroke-width="2.5" stroke-linecap="round">
-                    <line x1="60" y1="14" x2="60" y2="24"/><line x1="60" y1="96" x2="60" y2="106"/>
-                    <line x1="14" y1="60" x2="24" y2="60"/><line x1="96" y1="60" x2="106" y2="60"/>
-                    <line x1="27" y1="27" x2="34" y2="34"/><line x1="93" y1="27" x2="86" y2="34"/>
-                    <line x1="27" y1="93" x2="34" y2="86"/><line x1="93" y1="93" x2="86" y2="86"/>
-                  </g>
-                  <path d="M67 28 L42 66 L57 66 L52 94 L80 54 L64 54 Z" fill="#C8752B"/>
-                </svg>
-                <p class="brand-name">Cold Start Report</p>
-              </div>
-              <p class="brand-sub">Pre-purchase inspection reports for used Harley-Davidson motorcycles</p>
-            </div>
-            <div class="report-meta">
-              Report #<strong>HC-40217319</strong><br>
-              Generated <strong>Sep 12, 2026</strong>
-            </div>
-          </div>
-          <div class="vehicle-strip">
-            <div class="vehicle-title">2010 Harley-Davidson <span>FLHX Street Glide</span></div>
-            <div class="vehicle-facts">
-              <div>MILEAGE <b>58,200</b></div>
-              <div>ASKING <b>$9,500</b></div>
-            </div>
-          </div>
-          <div class="body">
-            <div class="grade-block">
-              <div class="hang-tag">
-                <div class="hang-tag-eyebrow">Buy confidence</div>
-                <div class="hang-tag-grade">C</div>
-                <div class="hang-tag-label">Proceed with caution</div>
-                <div class="hang-tag-note">A real mechanical red flag plus an asking price well above market.</div>
-              </div>
-              <div class="grade-summary">
-                <h2>Overall assessment</h2>
-                <p>The seller's own listing text mentions a clunk on shutdown — that's a known compensator wear symptom on 2007-2013 Touring models, not a minor issue. On top of that, the $9,500 asking price sits well above what comparable 2010 Street Glides are actually selling for at this mileage. Two real reasons to negotiate hard or walk.</p>
-                <div class="stat-row">
-                  <div class="stat"><p class="stat-label">Items to check</p><p class="stat-value">2</p></div>
-                  <div class="stat"><p class="stat-label">Red flags</p><p class="stat-value">1</p></div>
-                </div>
-              </div>
-            </div>
-            <div class="section">
-              <div class="section-head"><span class="section-num">01</span><h3 class="section-title">Fair market range</h3></div>
-              <div class="stat-row" style="margin-bottom:12px;">
-                <div class="stat"><p class="stat-label">Low</p><p class="stat-value">$6,800</p></div>
-                <div class="stat"><p class="stat-label">High</p><p class="stat-value">$8,200</p></div>
-              </div>
-              <p style="font-size:13px;color:var(--ink-soft);line-height:1.6;margin:0 0 6px;">Based on 5 comparable 2010 Street Glide listings at similar mileage found in current market searches.</p>
-              <p style="font-size:13px;color:var(--ink);line-height:1.6;margin:0;"><b>Asking price:</b> $9,500 is $1,300–$2,700 above fair market — the loudest red flag in this listing.</p>
-            </div>
-            <div class="section">
-              <div class="section-head"><span class="section-num">02</span><h3 class="section-title">Inspection findings</h3></div>
-              <div class="finding">
-                <span class="flag check">Check</span>
-                <div class="finding-text"><b>Compensator failure symptom in the listing text</b><span class="sub">The seller wrote "clunk when you turn it off" — that's a textbook compensator wear symptom on 2007-2013 Touring models. Confirm this in person before you buy; budget for a compensator replacement if present.</span></div>
-              </div>
-              <div class="finding">
-                <span class="flag watch">Watch</span>
-                <div class="finding-text"><b>Y-pipe exhaust cracking risk</b><span class="sub">This year falls inside the range where Y-pipe cracking is common on Touring models. Check for soot staining or an exhaust leak tick at idle.</span></div>
-              </div>
-            </div>
-            <div class="section">
-              <div class="section-head"><span class="section-num">03</span><h3 class="section-title">Questions to ask the seller</h3></div>
-              <ul class="qlist">
-                <li>Can you describe the clunk on shutdown in more detail — when did it start?</li>
-                <li>Has the compensator ever been inspected or replaced?</li>
-                <li>Why is this priced above what similar bikes are selling for?</li>
-                <li>Do you have maintenance records or receipts?</li>
-              </ul>
-            </div>
-            <div class="section">
-              <div class="section-head"><span class="section-num">04</span><h3 class="section-title">Safety recalls</h3></div>
-              <div class="finding">
-                <span class="flag clear">Clear</span>
-                <div class="finding-text"><b>No open recalls found</b><span class="sub">No open recalls found for this year and model. Check nhtsa.gov/recalls with your VIN to confirm.</span></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- TAB 2: Clean example -->
-      <div class="sample-sheet" id="sampleTabClean" style="display:none;">
-        <span class="sample-badge">Sample</span>
-        <div class="sheet" style="display:block;">
-          <div class="header">
-            <div>
-              <p class="brand-eyebrow">Pre-purchase inspection report</p>
-              <div class="brand-row">
-                <svg class="logo-mark small" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
-                  <circle cx="60" cy="60" r="58" fill="#2E333A" stroke="#3A4048" stroke-width="2"/>
-                  <g fill="none" stroke="#8A8F98" stroke-width="2.5" stroke-linecap="round">
-                    <line x1="60" y1="14" x2="60" y2="24"/><line x1="60" y1="96" x2="60" y2="106"/>
-                    <line x1="14" y1="60" x2="24" y2="60"/><line x1="96" y1="60" x2="106" y2="60"/>
-                    <line x1="27" y1="27" x2="34" y2="34"/><line x1="93" y1="27" x2="86" y2="34"/>
-                    <line x1="27" y1="93" x2="34" y2="86"/><line x1="93" y1="93" x2="86" y2="86"/>
-                  </g>
-                  <path d="M67 28 L42 66 L57 66 L52 94 L80 54 L64 54 Z" fill="#C8752B"/>
-                </svg>
-                <p class="brand-name">Cold Start Report</p>
-              </div>
-              <p class="brand-sub">Pre-purchase inspection reports for used Harley-Davidson motorcycles</p>
-            </div>
-            <div class="report-meta">
-              Report #<strong>HC-88213042</strong><br>
-              Generated <strong>Sep 8, 2026</strong>
-            </div>
-          </div>
-          <div class="vehicle-strip">
-            <div class="vehicle-title">2011 Harley-Davidson <span>FLSTC Heritage Softail Classic</span></div>
-            <div class="vehicle-facts">
-              <div>MILEAGE <b>26,400</b></div>
-              <div>ASKING <b>$9,200</b></div>
-            </div>
-          </div>
-          <div class="body">
-            <div class="grade-block">
-              <div class="hang-tag">
-                <div class="hang-tag-eyebrow">Buy confidence</div>
-                <div class="hang-tag-grade">B</div>
-                <div class="hang-tag-label">Solid buy</div>
-                <div class="hang-tag-note">Priced fairly; a couple of age-related items worth checking in person.</div>
-              </div>
-              <div class="grade-summary">
-                <h2>Overall assessment</h2>
-                <p>This 2011 Heritage Softail Classic falls squarely in the Twin Cam era, with mileage and price both landing in a reasonable range for the model. Two known wear items apply at this mileage — nothing that should stop the sale, but worth checking before you commit.</p>
-                <div class="stat-row">
-                  <div class="stat"><p class="stat-label">Items to check</p><p class="stat-value">2</p></div>
-                  <div class="stat"><p class="stat-label">Red flags</p><p class="stat-value">0</p></div>
-                </div>
-              </div>
-            </div>
-            <div class="section">
-              <div class="section-head"><span class="section-num">01</span><h3 class="section-title">Fair market range</h3></div>
-              <div class="stat-row" style="margin-bottom:12px;">
-                <div class="stat"><p class="stat-label">Low</p><p class="stat-value">$7,900</p></div>
-                <div class="stat"><p class="stat-label">High</p><p class="stat-value">$10,100</p></div>
-              </div>
-              <p style="font-size:13px;color:var(--ink-soft);line-height:1.6;margin:0 0 6px;">Based on 4 comparable 2011 Heritage Softail Classic listings at similar mileage found in current market searches.</p>
-              <p style="font-size:13px;color:var(--ink);line-height:1.6;margin:0;"><b>Asking price:</b> $9,200 falls within the fair range, close to the middle.</p>
-            </div>
-            <div class="section">
-              <div class="section-head"><span class="section-num">02</span><h3 class="section-title">Inspection findings</h3></div>
-              <div class="finding">
-                <span class="flag watch">Watch</span>
-                <div class="finding-text"><b>Cam chain tensioner wear window</b><span class="sub">This falls inside the mileage range where tensioner failure becomes more common. Ask for a cold-start listen test before you buy.</span></div>
-              </div>
-              <div class="finding">
-                <span class="flag watch">Watch</span>
-                <div class="finding-text"><b>Battery age unknown</b><span class="sub">Ask when the battery was last replaced — a weak battery is a cheap fix but easy leverage in price talks.</span></div>
-              </div>
-            </div>
-            <div class="section">
-              <div class="section-head"><span class="section-num">03</span><h3 class="section-title">Questions to ask the seller</h3></div>
-              <ul class="qlist">
-                <li>When was the battery last replaced?</li>
-                <li>Has the cam chain tensioner ever been serviced or inspected?</li>
-                <li>Do you have maintenance records or receipts?</li>
-                <li>Has the bike ever been laid down or in an accident?</li>
-              </ul>
-            </div>
-            <div class="section">
-              <div class="section-head"><span class="section-num">04</span><h3 class="section-title">Safety recalls</h3></div>
-              <div class="finding">
-                <span class="flag clear">Clear</span>
-                <div class="finding-text"><b>No open recalls found</b><span class="sub">No open recalls found for this year and model. Check nhtsa.gov/recalls with your VIN to confirm.</span></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <p style="text-align:center;color:var(--ink-soft);font-size:13px;margin:16px auto 0;max-width:480px;">Every real report is built the same way — matched to your bike's exact year, model, and mileage, with real search behind the price and recall checks.</p>
-    </div>
-  </div>
-
-
-  <div class="faq-wrap">
-    <h2 class="faq-heading">Common questions</h2>
-    <div class="faq-item">
-      <p class="faq-q">Is this affiliated with Harley-Davidson?</p>
-      <p class="faq-a">No. Cold Start Report is an independent service, not affiliated with, endorsed by, or sponsored by Harley-Davidson Motor Company.</p>
-    </div>
-    <div class="faq-item">
-      <p class="faq-q">Who — or what — actually writes the report?</p>
-      <p class="faq-a">Your report is written by AI, using a hand-built knowledge base of known issues compiled from 30 years of real Harley-Davidson dealership experience, cross-referenced against public data (current market listings, NHTSA recall records) at the time you order.</p>
-    </div>
-    <div class="faq-item">
-      <p class="faq-q">What if my model isn't listed?</p>
-      <p class="faq-a">Coverage currently spans Softail, Touring, and Dyna/FXR models from 1985 to present. If your exact model or year isn't in the dropdown yet, email us — we're adding more regularly.</p>
-    </div>
-    <div class="faq-item">
-      <p class="faq-q">Do I get to keep the report?</p>
-      <p class="faq-a">Yes. Once it generates, you can download it as a PDF right from the page — save it, print it, or bring it with you to the sale.</p>
-    </div>
-    <div class="faq-item">
-      <p class="faq-q">Is this a substitute for a mechanic's inspection?</p>
-      <p class="faq-a">No. Think of it as knowing what to check and what questions to ask before you buy — not a replacement for a hands-on inspection if you want one.</p>
-    </div>
-  </div>
-
-  <div class="loading" id="loading">
-    <p id="loadingText">Checking known failure points…</p>
-    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
-    <p class="progress-pct" id="progressPct">0%</p>
-  </div>
-
-  <div class="sheet" id="reportSheet"></div>
-
-  <div class="site-footer">
-    <p>Questions about a report? <a href="mailto:support@coldstartreport.com">support@coldstartreport.com</a></p>
-    <p class="site-disclaimer">Cold Start Report is an independent service and is not affiliated with, endorsed by, or sponsored by Harley-Davidson Motor Company. "Harley-Davidson" and related model names are trademarks of their respective owner, used here only to describe the vehicles this service covers.</p>
-    <p class="site-disclaimer">Reports are generated using AI, informed by a hand-built knowledge base of known issues and cross-referenced against public data where noted (comparable listings, NHTSA recall records). They are provided for informational purposes only, do not constitute a professional mechanical inspection, and Cold Start Report makes no guarantee as to completeness or accuracy. Always have a vehicle inspected in person before purchase.</p>
-  </div>
-
-</div>
+</footer>
 
 <script>
-// Once your backend is deployed (see deployment steps), replace this with your real
-// backend URL, e.g. "https://coldstart-report-backend.onrender.com"
-const BACKEND_URL = "https://coldstart-report-backend.onrender.com";
-const KB = [
-  {
-    "model_family": "Softail (Twin Cam era)",
-    "models": ["Fat Boy","Heritage Softail Classic","Softail Deluxe","Softail Custom / Custom FXSTC","Night Train","Cross Bones","Blackline","Breakout","Fat Bob (Softail chassis)"],
-    "years": "2000-2017",
-    "failure_points": [
-      {"id":"fp_001","name":"Cam chain tensioner failure","applies_to_years":"2000-2006 (spring-loaded tensioner design)","typical_failure_mileage":"20,000 miles and up","symptom":"Rattling noise on cold start, worsens with mileage; can lead to chain failure and engine damage if ignored","check_method":"Cold start listen test; ask if updated tensioner was ever installed","severity":"dealbreaker if rattle persists after warm idle, or seller has no service history past 20k miles","typical_fix_cost_usd":"400-900"},
-      {"id":"fp_002","name":"Battery life","applies_to_years":"all","typical_lifespan":"~3 years (age-based, not mileage-based)","symptom":"Weak/slow cranking, dim gauges at idle, dead battery after sitting","check_method":"Ask battery age/replacement date; check date code if visible","severity":"watch if battery is 3+ years old regardless of mileage","typical_fix_cost_usd":"150-250"},
-      {"id":"fp_003","name":"Rocker box oil leaks","applies_to_years":"all","typical_failure_mileage":"any mileage — not tied to wear/age","symptom":"Oil seepage/leak at rocker box gasket seams","check_method":"Visual check of rocker box seams and underneath engine for oil residue","severity":"watch — common, usually not a dealbreaker, factor into negotiation","typical_fix_cost_usd":"TBD"},
-      {"id":"fp_006","name":"Springer front end handlebar clamps","applies_to_years":"all (springer-equipped models below)","applies_to_models":"Softail Springer, Heritage Springer, Springer Classic, Bad Boy, Cross Bones, Springer Softail","symptom":"Handlebar clamps on springer front ends don't hold well; handlebars tend to move/shift, especially worse if bars were swapped to ape hangers (added leverage/weight)","check_method":"Check for handlebar movement/play by hand; ask if bars have been changed from stock, especially to ape hangers","severity":"watch — safety-relevant since loose handlebars affect control; more likely on bikes with aftermarket ape hangers installed","typical_fix_cost_usd":"TBD"}
-    ]
-  },
-  {
-    "model_family": "Touring (Twin Cam era)",
-    "models": ["Road King","Road Glide","Road Glide Ultra","Street Glide","Street Glide Special","Electra Glide Standard","Electra Glide Classic (EGC)","Electra Glide Ultra Classic","Electra Glide Ultra Limited","CVO Touring models"],
-    "years": "2000-2016",
-    "failure_points": [
-      {"id":"fp_t001","name":"Y-pipe exhaust cracking","applies_to_years":"1995-2008","applies_to_models":"all Touring models","symptom":"Cracking at the Y-pipe (head pipe junction), often heard as an exhaust leak tick/tap or louder-than-stock exhaust note","check_method":"Visual inspection of Y-pipe junction for cracks/soot staining; listen for exhaust leak tick at idle","severity":"watch — common wear item on this era, not a dealbreaker","typical_fix_cost_usd":"TBD"},
-      {"id":"fp_t002","name":"Charging system / voltage regulator","applies_to_years":"all","applies_to_models":"all Touring models","symptom":"Weak charging, dim gauges/lights at idle, dead battery, intermittent electrical issues","check_method":"Multimeter test across battery terminals with engine running — should read 14.2 volts at 2,500 RPM. Lower reading indicates charging system issue.","severity":"watch if reading below 14.2V at 2,500 RPM","typical_fix_cost_usd":"TBD"},
-      {"id":"fp_t003","name":"Oil pan bolts backing out","applies_to_years":"1999-2016","applies_to_models":"all Touring models","symptom":"Oil leak from oil pan area caused by bolts loosening/backing out over time","check_method":"Visual check underneath oil pan for leak residue","severity":"watch — common wear item, cheap fix if caught early","typical_fix_cost_usd":"TBD"},
-      {"id":"fp_t004","name":"Compensator failure","applies_to_years":"2007-2013","applies_to_models":"all Touring models","symptom":"Clunk noise when the motorcycle is shut off","check_method":"Start the bike, let it idle briefly, then turn it off and listen for a clunk from the primary/drivetrain area","severity":"watch — known weak point on this year range","typical_fix_cost_usd":"TBD"},
-      {"id":"fp_t005","name":"2008 first-year ABS and Throttle-by-Wire issues","applies_to_years":"2008 only","applies_to_models":"all Touring models","symptom":"ABS unit failure: front brake lever feels rock hard and won't pull in. Separate ABS issue: hitting a bump (e.g. speed bump) while applying the front brake can cause the lever to sink to the grip, requiring the rider to release and reapply -- a real safety concern. Throttle-by-Wire failure: bike goes into limp mode.","check_method":"Test front brake lever feel at a stop; if possible, test brake response over an uneven surface/bump at low speed. Ask seller if ABS or throttle-by-wire have ever thrown a code, gone into limp mode, or been serviced.","severity":"SAFETY ISSUE, not just cost -- flag prominently on any 2008 Touring model regardless of mileage, this affects effective front brake stopping power","typical_fix_cost_usd":"TBD"},
-      {"id":"fp_t006","name":"Weak fairing brackets (FLH models)","applies_to_years":"1994-2010","applies_to_models":"FLHT, FLHTC, FLHTCI, FLHTI, FLHTCU, FLHTCUI, FLHX, FLHXI, FLHTCUSE","symptom":"Fairing brackets are weak and tend to break; fairing begins to shake and rattle","check_method":"Hand-test fairing for play/looseness; ask seller if any shake/rattle from the fairing has been noticed, especially at speed","severity":"watch — not a safety/dangerous issue, but affects ride quality and is a real repair cost","typical_fix_cost_usd":"500-600"}
-    ]
+(() => {
+  const $ = id => document.getElementById(id);
+  const MIN = 1984, MAX = 2027;
+  const state = { vin:"", year:"", family:"", model:"" };
+  $("yr").textContent = new Date().getFullYear();
+
+  /* Selects */
+  const FAMILIES = [["","Select family"],["Touring","Touring"],["Softail","Softail"],["Dyna","Dyna"],["FXR","FXR"],["Other","Other / not sure"]];
+  ["family","family-v"].forEach(id => FAMILIES.forEach(([v,t]) => $(id).add(new Option(t,v))));
+  $("year").add(new Option("Year",""));
+  for (let y = MAX; y >= MIN; y--) $("year").add(new Option(y,y));
+
+  /* Tabs */
+  const tabs = [$("tab-vin"),$("tab-ymm")];
+  function selectTab(t){
+    tabs.forEach(x => { const on = x === t; x.setAttribute("aria-selected", on); x.tabIndex = on ? 0 : -1; $(x.getAttribute("aria-controls")).hidden = !on; });
+    $("form-err").textContent = "";
   }
-];
-const EVO_SOFTAIL_KB = {
-  "model_family": "Softail (Evolution era, 1984-1999)",
-  "years": "1984-1999",
-  "failure_points": [
-    {"id":"fp_e001","name":"Timing plate melting","applies_to_years":"1984-1999","applies_to_models":"all Evolution-era Softail models","symptom":"Timing plate (located in the cam cover, behind the timing cover) has a tendency to melt","check_method":"Likely requires cover removal or diagnosis of ignition symptoms tied to timing plate failure","severity":"watch — part is obsolete/discontinued from OEM; if it fails, buyer must upgrade to a different ignition system or go aftermarket, not a simple like-for-like part replacement","typical_fix_cost_usd":"TBD"}
-  ]
-};
-KB.push(EVO_SOFTAIL_KB);
+  tabs.forEach(t => {
+    t.addEventListener("click", () => selectTab(t));
+    t.addEventListener("keydown", e => { if (e.key === "ArrowRight" || e.key === "ArrowLeft"){ const o = tabs[1 - tabs.indexOf(t)]; selectTab(o); o.focus(); }});
+  });
+  selectTab(tabs[0]);
 
-const SOFTAIL_M8_KB = {
-  "model_family": "Softail M8 (2018+)",
-  "years": "2018-present",
-  "failure_points": [
-    {"id":"fp_m8001","name":"Oil pump issue — transmission oil transfer to primary case","applies_to_years":"2018-2019 (early Softail M8)","applies_to_models":"early Softail Milwaukee-Eight models","symptom":"Oil pump pressure issue causes transmission oil to transfer into the primary case, which can lead to transmission failure","check_method":"Check primary case oil level/condition for signs of transmission fluid contamination; ask seller about any transmission service history or known oil pump recalls/updates performed","severity":"watch — can lead to transmission failure if not caught; ask specifically about this on any 2018-2019 model","typical_fix_cost_usd":"TBD"}
-  ]
-};
-KB.push(SOFTAIL_M8_KB);
+  /* VIN */
+  const TR = {A:1,B:2,C:3,D:4,E:5,F:6,G:7,H:8,J:1,K:2,L:3,M:4,N:5,P:7,R:9,S:2,T:3,U:4,V:5,W:6,X:7,Y:8,Z:9};
+  const W = [8,7,6,5,4,3,2,10,0,9,8,7,6,5,4,3,2];
+  const L = "ABCDEFGHJKLMNPRSTVWXY";
+  const checkOk = v => { let s = 0; for (let i = 0; i < 17; i++){ const c = v[i]; s += (/\d/.test(c) ? +c : TR[c]) * W[i]; } const r = s % 11; return (r === 10 ? "X" : String(r)) === v[8]; };
+  const yearsFor = c => { const o = []; if (/[1-9]/.test(c)) o.push(2000 + +c); const i = L.indexOf(c); if (i >= 0) o.push(1980 + i, 2010 + i); return o.filter(y => y >= MIN && y <= MAX); };
 
-const TOURING_EVO_KB = {
-  "model_family": "Touring Evo (1985-1998)",
-  "years": "1985-1998",
-  "failure_points": []
-};
-KB.push(TOURING_EVO_KB);
-
-const TOURING_M8_KB = {
-  "model_family": "Touring M8 (2017+)",
-  "years": "2017-present",
-  "failure_points": [
-    {"id":"fp_m8002","name":"Oil pump issue — transmission oil transfer to primary case","applies_to_years":"2017-2019 (early Touring M8)","applies_to_models":"early Touring Milwaukee-Eight models","symptom":"Oil pump pressure issue causes transmission oil to transfer into the primary case, which can lead to transmission failure","check_method":"Check primary case oil level/condition for signs of transmission fluid contamination; ask seller about any transmission service history or known oil pump recalls/updates performed","severity":"watch — can lead to transmission failure if not caught; ask specifically about this on any 2017-2019 model","typical_fix_cost_usd":"TBD"}
-  ]
-};
-KB.push(TOURING_M8_KB);
-
-const FXR_DYNA_EVO_KB = {
-  "model_family": "FXR / Dyna Evo (1985-1998)",
-  "years": "1985-1998",
-  "failure_points": []
-};
-KB.push(FXR_DYNA_EVO_KB);
-
-const DYNA_TWINCAM_KB = {
-  "model_family": "Dyna Twin Cam (1999-2016)",
-  "years": "1999-2016",
-  "failure_points": []
-};
-KB.push(DYNA_TWINCAM_KB);
-
-const GENERAL_KB = {
-  "model_family": "General (applies across model families)",
-  "failure_points": [
-    {"id":"fp_gen001","name":"Fuel tank rust from moisture","applies_to":"older, very low-mileage bikes especially — moisture buildup from long periods of sitting","symptom":"Rust forming inside the fuel tank, can lead to costly fuel system damage (clogged injectors/carb, fuel pump wear)","check_method":"Inspect inside fuel tank with a flashlight through the filler neck","severity":"watch — can become very costly if present; low mileage does NOT mean low risk, can be the opposite","typical_fix_cost_usd":"TBD"},
-    {"id":"fp_gen002","name":"CVO 110ci engine premature lifter failure","applies_to":"CVO models equipped with the 110ci engine (any model family — Touring CVO, Softail CVO, etc.)","symptom":"Clacking sound from the engine, accompanied by loss of power","check_method":"Listen for a clack/clacking noise from the top end at idle and under load; ask seller if they've noticed any power loss or unusual engine noise","severity":"watch — known weak point on CVO 110ci engines specifically, not the standard 103/96/88 engines","typical_fix_cost_usd":"TBD"}
-  ]
-};
-
-// Each entry: code/name, the KB section it maps to (for pulling the right failure points),
-// and the approximate year range it was in production. Year boundaries are best-effort from
-// research, not verified against Garo's direct knowledge -- worth spot-checking edge years.
-const MODEL_DATA = [
-  {name:"FXR Super Glide", kb:"FXR / Dyna Evo (1985-1998)", start:1985, end:1994},
-  {name:"FXRS Low Rider", kb:"FXR / Dyna Evo (1985-1998)", start:1985, end:1994},
-  {name:"FXRS-Conv Low Rider Convertible", kb:"FXR / Dyna Evo (1985-1998)", start:1989, end:1993},
-  {name:"FXRT Sport Glide", kb:"FXR / Dyna Evo (1985-1998)", start:1985, end:1992},
-  {name:"FXLR Low Rider Custom", kb:"FXR / Dyna Evo (1985-1998)", start:1988, end:1994},
-  {name:"FXRD Sport Glide", kb:"FXR / Dyna Evo (1985-1998)", start:1986, end:1986},
-  {name:"FXDB Sturgis", kb:"FXR / Dyna Evo (1985-1998)", start:1991, end:1992},
-  {name:"FXDB Daytona", kb:"FXR / Dyna Evo (1985-1998)", start:1992, end:1994},
-  {name:"FXDC Dyna Glide Custom", kb:"FXR / Dyna Evo (1985-1998)", start:1992, end:1998},
-  {name:"FXDWG Dyna Wide Glide", kb:"FXR / Dyna Evo (1985-1998)", start:1993, end:1998},
-  {name:"FXDL Dyna Low Rider", kb:"FXR / Dyna Evo (1985-1998)", start:1993, end:1998},
-  {name:"FXD Dyna Super Glide", kb:"FXR / Dyna Evo (1985-1998)", start:1995, end:1998},
-  {name:"FXDS-CONV Dyna Convertible", kb:"FXR / Dyna Evo (1985-1998)", start:1995, end:1998},
-
-  {name:"FXD Dyna Super Glide", kb:"Dyna Twin Cam (1999-2016)", start:1999, end:2005},
-  {name:"FXDX Super Glide Sport", kb:"Dyna Twin Cam (1999-2016)", start:1999, end:2005},
-  {name:"FXDL Dyna Low Rider", kb:"Dyna Twin Cam (1999-2016)", start:1999, end:2009},
-  {name:"FXDL Dyna Low Rider (2014 return)", kb:"Dyna Twin Cam (1999-2016)", start:2014, end:2017},
-  {name:"FXDWG Dyna Wide Glide", kb:"Dyna Twin Cam (1999-2016)", start:1999, end:2008},
-  {name:"FXDWG Dyna Wide Glide (2010 return)", kb:"Dyna Twin Cam (1999-2016)", start:2010, end:2016},
-  {name:"FXDC Super Glide Custom", kb:"Dyna Twin Cam (1999-2016)", start:1999, end:2013},
-  {name:"FXDB Street Bob", kb:"Dyna Twin Cam (1999-2016)", start:2006, end:2017},
-  {name:"FXDF Fat Bob", kb:"Dyna Twin Cam (1999-2016)", start:2008, end:2017},
-  {name:"FLD Switchback", kb:"Dyna Twin Cam (1999-2016)", start:2012, end:2016},
-  {name:"FXDLS Low Rider S", kb:"Dyna Twin Cam (1999-2016)", start:2016, end:2017},
-  {name:"FXDI35 35th Anniversary Super Glide", kb:"Dyna Twin Cam (1999-2016)", start:2006, end:2006},
-
-  {name:"FXST Softail Standard", kb:"Softail (Evolution era, 1984-1999)", start:1984, end:1999},
-  {name:"FXSTC Softail Custom", kb:"Softail (Evolution era, 1984-1999)", start:1986, end:1999},
-  {name:"FXSTS Springer Softail", kb:"Softail (Evolution era, 1984-1999)", start:1988, end:1999},
-  {name:"FXSTSB Bad Boy", kb:"Softail (Evolution era, 1984-1999)", start:1995, end:1996},
-  {name:"FLST Heritage Softail", kb:"Softail (Evolution era, 1984-1999)", start:1986, end:1990},
-  {name:"FLSTC Heritage Softail Classic", kb:"Softail (Evolution era, 1984-1999)", start:1988, end:1999},
-  {name:"FLSTF Fat Boy", kb:"Softail (Evolution era, 1984-1999)", start:1990, end:1999},
-  {name:"FLSTN Softail Nostalgia \"Moo Glide\"", kb:"Softail (Evolution era, 1984-1999)", start:1993, end:1996},
-  {name:"FLSTS Heritage Springer", kb:"Softail (Evolution era, 1984-1999)", start:1997, end:1999},
-
-  {name:"FXST Softail Standard", kb:"Softail (Twin Cam era)", start:2000, end:2013},
-  {name:"FXSTB Night Train", kb:"Softail (Twin Cam era)", start:2000, end:2009},
-  {name:"FXSTC Softail Custom", kb:"Softail (Twin Cam era)", start:2000, end:2010},
-  {name:"FXSTD Deuce", kb:"Softail (Twin Cam era)", start:2000, end:2007},
-  {name:"FXSTS Springer Softail", kb:"Softail (Twin Cam era)", start:2000, end:2006},
-  {name:"FLSTC Heritage Softail Classic", kb:"Softail (Twin Cam era)", start:2000, end:2017},
-  {name:"FLSTF Fat Boy", kb:"Softail (Twin Cam era)", start:2000, end:2017},
-  {name:"FLSTFB Fat Boy Lo", kb:"Softail (Twin Cam era)", start:2010, end:2017},
-  {name:"FLSTN Softail Deluxe", kb:"Softail (Twin Cam era)", start:2005, end:2017},
-  {name:"FLSTS Heritage Springer", kb:"Softail (Twin Cam era)", start:2000, end:2003},
-  {name:"FLSTSC Springer Classic", kb:"Softail (Twin Cam era)", start:2005, end:2007},
-  {name:"FLSTSB Cross Bones", kb:"Softail (Twin Cam era)", start:2008, end:2011},
-  {name:"FLS Softail Slim", kb:"Softail (Twin Cam era)", start:2012, end:2017},
-  {name:"FXS Blackline", kb:"Softail (Twin Cam era)", start:2011, end:2013},
-  {name:"FXSB Breakout", kb:"Softail (Twin Cam era)", start:2013, end:2017},
-  {name:"FXCW / FXCWC Rocker", kb:"Softail (Twin Cam era)", start:2008, end:2011},
-
-  {name:"FXST Softail Standard", kb:"Softail M8 (2018+)", start:2018, end:2100},
-  {name:"FXBB Street Bob", kb:"Softail M8 (2018+)", start:2018, end:2100},
-  {name:"FXLR Low Rider", kb:"Softail M8 (2018+)", start:2018, end:2100},
-  {name:"FXLRS Low Rider S", kb:"Softail M8 (2018+)", start:2020, end:2100},
-  {name:"FXLRST Low Rider ST", kb:"Softail M8 (2018+)", start:2022, end:2100},
-  {name:"FXFB Fat Bob", kb:"Softail M8 (2018+)", start:2018, end:2100},
-  {name:"FXFBS Fat Bob 114", kb:"Softail M8 (2018+)", start:2018, end:2100},
-  {name:"FLFB Fat Boy", kb:"Softail M8 (2018+)", start:2018, end:2100},
-  {name:"FLFBS Fat Boy 114", kb:"Softail M8 (2018+)", start:2018, end:2100},
-  {name:"FLDE Softail Deluxe", kb:"Softail M8 (2018+)", start:2018, end:2100},
-  {name:"FLHC Heritage Classic", kb:"Softail M8 (2018+)", start:2018, end:2100},
-  {name:"FLSL Softail Slim", kb:"Softail M8 (2018+)", start:2018, end:2100},
-  {name:"FLSB Sport Glide", kb:"Softail M8 (2018+)", start:2018, end:2100},
-  {name:"FXBR Breakout", kb:"Softail M8 (2018+)", start:2018, end:2100},
-  {name:"FXBRS Breakout 117", kb:"Softail M8 (2018+)", start:2018, end:2100},
-  {name:"FXDR FXDR 114", kb:"Softail M8 (2018+)", start:2019, end:2020},
-
-  {name:"FLHT Electra Glide Standard", kb:"Touring Evo (1985-1998)", start:1985, end:1998},
-  {name:"FLHTC Electra Glide Classic", kb:"Touring Evo (1985-1998)", start:1985, end:1998},
-  {name:"FLHTCU Ultra Classic Electra Glide", kb:"Touring Evo (1985-1998)", start:1989, end:1998},
-  {name:"FLHS Electra Glide Sport", kb:"Touring Evo (1985-1998)", start:1987, end:1993},
-  {name:"FLHR Road King", kb:"Touring Evo (1985-1998)", start:1994, end:1998},
-  {name:"FLTC Tour Glide Classic", kb:"Touring Evo (1985-1998)", start:1985, end:1995},
-  {name:"FLT Tour Glide", kb:"Touring Evo (1985-1998)", start:1985, end:1995},
-
-  {name:"FLHT Electra Glide Standard", kb:"Touring (Twin Cam era)", start:1999, end:2016},
-  {name:"FLHTC Electra Glide Classic", kb:"Touring (Twin Cam era)", start:1999, end:2008},
-  {name:"FLHTCU Ultra Classic Electra Glide", kb:"Touring (Twin Cam era)", start:1999, end:2013},
-  {name:"FLHTCUI Ultra Classic Electra Glide", kb:"Touring (Twin Cam era)", start:1999, end:2006},
-  {name:"FLHR Road King", kb:"Touring (Twin Cam era)", start:1999, end:2016},
-  {name:"FLHRC Road King Classic", kb:"Touring (Twin Cam era)", start:2003, end:2013},
-  {name:"FLHRS Road King Custom", kb:"Touring (Twin Cam era)", start:2004, end:2007},
-  {name:"FLTR Road Glide", kb:"Touring (Twin Cam era)", start:1998, end:2016},
-  {name:"FLTRU Road Glide Ultra", kb:"Touring (Twin Cam era)", start:2011, end:2016},
-  {name:"FLHX Street Glide", kb:"Touring (Twin Cam era)", start:2006, end:2016},
-  {name:"FLHXS Street Glide Special", kb:"Touring (Twin Cam era)", start:2014, end:2016},
-  {name:"FLHTK Ultra Limited", kb:"Touring (Twin Cam era)", start:2010, end:2016},
-  {name:"FLHTCUSE CVO Ultra Classic", kb:"Touring (Twin Cam era)", start:1999, end:2016},
-
-  {name:"FLHR Road King", kb:"Touring M8 (2017+)", start:2017, end:2100},
-  {name:"FLHRXS Road King Special", kb:"Touring M8 (2017+)", start:2017, end:2100},
-  {name:"FLHX Street Glide", kb:"Touring M8 (2017+)", start:2017, end:2100},
-  {name:"FLHXS Street Glide Special", kb:"Touring M8 (2017+)", start:2017, end:2100},
-  {name:"FLTRX Road Glide", kb:"Touring M8 (2017+)", start:2017, end:2100},
-  {name:"FLTRXS Road Glide Special", kb:"Touring M8 (2017+)", start:2017, end:2100},
-  {name:"FLTRK Road Glide Limited", kb:"Touring M8 (2017+)", start:2017, end:2100},
-  {name:"FLHTK Ultra Limited", kb:"Touring M8 (2017+)", start:2017, end:2100},
-  {name:"FLHTCU Electra Glide Standard", kb:"Touring M8 (2017+)", start:2017, end:2100},
-  {name:"FLHTCUTG Tri Glide Ultra", kb:"Touring M8 (2017+)", start:2017, end:2100},
-  {name:"FLRT Freewheeler", kb:"Touring M8 (2017+)", start:2017, end:2100},
-  {name:"FLHXSE CVO Street Glide", kb:"Touring M8 (2017+)", start:2017, end:2100},
-  {name:"FLTRXSE CVO Road Glide", kb:"Touring M8 (2017+)", start:2017, end:2100},
-  {name:"FLHTKSE CVO Limited", kb:"Touring M8 (2017+)", start:2017, end:2100}
-];
-
-let scrollLockY = 0;
-function openSampleModal(){
-  document.getElementById('sampleModalOverlay').classList.add('active');
-  // Plain overflow:hidden on body doesn't reliably stop background scroll on iOS Safari --
-  // fixing the body in place and restoring scroll position on close is the standard workaround.
-  scrollLockY = window.scrollY;
-  document.body.style.position = 'fixed';
-  document.body.style.top = `-${scrollLockY}px`;
-  document.body.style.left = '0';
-  document.body.style.right = '0';
-}
-function closeSampleModal(){
-  document.getElementById('sampleModalOverlay').classList.remove('active');
-  document.body.style.position = '';
-  document.body.style.top = '';
-  document.body.style.left = '';
-  document.body.style.right = '';
-  window.scrollTo(0, scrollLockY);
-}
-document.addEventListener('keydown', function(e){
-  if(e.key === 'Escape') closeSampleModal();
-});
-
-function switchSampleTab(tab){
-  document.getElementById('sampleTabFlag').style.display = tab === 'flag' ? 'block' : 'none';
-  document.getElementById('sampleTabClean').style.display = tab === 'clean' ? 'block' : 'none';
-  document.getElementById('tabBtnFlag').classList.toggle('active', tab === 'flag');
-  document.getElementById('tabBtnClean').classList.toggle('active', tab === 'clean');
-}
-
-function populateModelDropdown(){
-  const yearVal = document.getElementById('year').value;
-  const modelSelect = document.getElementById('modelName');
-  const year = parseInt(yearVal, 10);
-  if(!yearVal || isNaN(year)){
-    modelSelect.innerHTML = '<option value="" disabled selected>Enter a model year first…</option>';
-    return;
-  }
-  const matches = MODEL_DATA.filter(m => year >= m.start && year <= m.end);
-  if(matches.length === 0){
-    modelSelect.innerHTML = '<option value="" disabled selected>No models found for that year — check the year</option>';
-    return;
-  }
-  modelSelect.innerHTML = '<option value="" disabled selected>Select a model…</option>' +
-    matches.map(m => `<option value="${m.name}" data-kb="${m.kb}">${m.name}</option>`).join('');
-}
-
-
-function esc(s){
-  const d = document.createElement('div');
-  d.innerText = (s === undefined || s === null) ? '' : s;
-  return d.innerHTML;
-}
-
-let progressTimer = null;
-function startProgress(){
-  const fill = document.getElementById('progressFill');
-  const pct = document.getElementById('progressPct');
-  const text = document.getElementById('loadingText');
-  const stages = [
-    {at: 0,  label: "Checking known failure points…"},
-    {at: 20, label: "Matching year and model against the knowledge base…"},
-    {at: 38, label: "Checking for open safety recalls…"},
-    {at: 55, label: "Searching current market listings…"},
-    {at: 72, label: "Comparing prices against similar bikes…"},
-    {at: 87, label: "Putting the report together…"}
-  ];
-  fill.style.width = '0%';
-  pct.textContent = '0%';
-  text.textContent = stages[0].label;
-
-  // Phase 1: linear climb to 85% over the estimated duration -- predictable, even pace.
-  // Phase 2: if the real request runs longer than expected, keep creeping toward 99%
-  // in small but always-nonzero steps, so the number never fully stops moving and
-  // never reads as "frozen," even on an unusually slow report.
-  const startTime = Date.now();
-  const estimatedDurationMs = 24000; // ~24s typical now that recalls search was added, tune as needed
-  const linearCeiling = 85;
-  let current = 0;
-  progressTimer = setInterval(() => {
-    const elapsed = Date.now() - startTime;
-    if(current < linearCeiling){
-      current = Math.min(linearCeiling, (elapsed / estimatedDurationMs) * linearCeiling);
-    } else {
-      current = current + (99 - current) * 0.02 + 0.05; // always ticks forward, slows near 99 but never stops
-      if(current > 99) current = 99;
+  const vin = $("vin"), help = $("vin-help"), yv = $("year-v"), yvWrap = $("year-v-wrap");
+  const HELP = help.textContent;
+  vin.addEventListener("input", () => {
+    const raw = vin.value.toUpperCase(), bad = /[IOQ]/.test(raw);
+    const v = raw.replace(/[^A-HJ-NPR-Z0-9]/g,"").slice(0,17);
+    vin.value = v; state.vin = v; help.className = "help"; yvWrap.hidden = true; state.year = "";
+    if (bad){ help.textContent = "VINs never use I, O or Q. Those are usually 1 or 0."; help.classList.add("warn"); return; }
+    if (!v){ help.textContent = HELP; return; }
+    if (v.length < 17){ help.textContent = `${17 - v.length} characters to go`; return; }
+    const notes = [], ys = yearsFor(v[9]);
+    if (!/^(1HD|5HD)/.test(v)) notes.push("This doesn't start like a Harley VIN (1HD or 5HD). Double-check it.");
+    if (!checkOk(v)) notes.push("The check digit doesn't add up. One character may be misread.");
+    if (ys.length === 1){ state.year = String(ys[0]); notes.unshift(`Model year ${ys[0]}.`); }
+    else if (ys.length > 1){
+      yv.innerHTML = ""; yv.add(new Option("Choose year","")); ys.forEach(y => yv.add(new Option(y,y)));
+      yvWrap.hidden = false; notes.unshift(`The year code fits ${ys.join(" or ")}. Pick the right one.`);
     }
-    fill.style.width = current + '%';
-    pct.textContent = Math.round(current) + '%';
-    const stage = [...stages].reverse().find(s => current >= s.at);
-    if(stage) text.textContent = stage.label;
-  }, 150);
-}
-function finishProgress(success){
-  if(progressTimer) clearInterval(progressTimer);
-  const fill = document.getElementById('progressFill');
-  const pct = document.getElementById('progressPct');
-  const text = document.getElementById('loadingText');
-  fill.style.width = '100%';
-  pct.textContent = '100%';
-  text.textContent = success ? "Done." : "Something went wrong.";
-}
+    help.textContent = notes.join(" ");
+    help.classList.add(notes.length === 1 && ys.length === 1 ? "ok" : "warn");
+  });
+  yv.addEventListener("change", () => state.year = yv.value);
 
-
-// Saves the current form field values to sessionStorage before sending the person
-// to Stripe -- so when they come back after paying, we can restore what they typed.
-function saveFormToSession(){
-  const modelSelectEl = document.getElementById('modelName');
-  const formData = {
-    modelName: modelSelectEl.value,
-    modelKb: modelSelectEl.selectedOptions[0]?.dataset.kb || '',
-    year: document.getElementById('year').value,
-    mileage: document.getElementById('mileage').value,
-    vin: document.getElementById('vin').value,
-    price: document.getElementById('price').value,
-    listingText: document.getElementById('listingText').value
+  /* Platform */
+  function platform(y, f){
+    y = +y;
+    if (f === "FXR") return { name:"Evolution", warn:(y > 1994 && y < 1999) || y > 2000 ? "FXR models were built 1982–1994, plus 1999–2000 CVO versions. Double-check the year." : "" };
+    if (f === "Dyna") return (y < 1991 || y > 2017) ? { name:"", warn:"Dyna models were built 1991–2017. Double-check the year or model family." } : { name: y < 1999 ? "Evolution" : "Twin Cam", warn:"" };
+    if (f === "Touring") return { name: y < 1999 ? "Evolution" : y < 2017 ? "Twin Cam" : "Milwaukee-Eight", warn:"" };
+    if (f === "Softail") return { name: y < 2000 ? "Evolution" : y < 2018 ? "Twin Cam" : "Milwaukee-Eight", warn:"" };
+    return { name:"", warn:"We focus on Big Twins: Touring, Softail, Dyna and FXR. Email support@coldstartreport.com before ordering for other models." };
+  }
+  const WATCH = {
+    "Evolution":"top-end and base gasket seepage, charging system, starter clutch, carburetor and intake seals",
+    "Twin Cam":"cam chest and tensioners, primary drive and compensator, common oil leak points, charging system",
+    "Milwaukee-Eight":"oil control and breathers, compensator and primary, heat management, Touring electrical"
   };
-  sessionStorage.setItem('coldstart_pending_form', JSON.stringify(formData));
-}
 
-function loadFormFromSession(){
-  const raw = sessionStorage.getItem('coldstart_pending_form');
-  if(!raw) return null;
-  try { return JSON.parse(raw); } catch(e) { return null; }
-}
-
-// Step 1 of payment: send the person to Stripe's hosted checkout page.
-async function submitNotifySignup(){
-  const emailInput = document.getElementById('notifyEmail');
-  const statusEl = document.getElementById('notifyStatus');
-  const btn = document.getElementById('notifyBtn');
-  const email = emailInput.value.trim();
-  if(!email || !email.includes('@')){
-    statusEl.textContent = 'Please enter a valid email.';
-    statusEl.style.color = '#B23A2E';
-    return;
-  }
-  btn.disabled = true;
-  btn.textContent = '...';
-  try {
-    const response = await fetch(`${BACKEND_URL}/api/notify-signup`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, model_interest: 'Sportster' })
-    });
-    if(!response.ok) throw new Error('Signup failed');
-    statusEl.textContent = "You're on the list — we'll email you when Sportster coverage is live.";
-    statusEl.style.color = '#4C7A52';
-    emailInput.value = '';
-    emailInput.disabled = true;
-    btn.textContent = 'Added';
-  } catch(err){
-    statusEl.textContent = 'Something went wrong — please try again.';
-    statusEl.style.color = '#B23A2E';
-    btn.disabled = false;
-    btn.textContent = 'Notify me';
-  }
-}
-
-async function startCheckout(){
-  const btn = document.getElementById('submitBtn');
-  const year = document.getElementById('year').value;
-  const modelSelectEl = document.getElementById('modelName');
-  if(!year || !modelSelectEl.value){
-    alert('Please select a model year and model before continuing to payment.');
-    return;
-  }
-  btn.disabled = true;
-  btn.textContent = 'Redirecting to secure payment…';
-  saveFormToSession();
-  try {
-    const response = await fetch(`${BACKEND_URL}/api/create-checkout-session`, { method: 'POST' });
-    const data = await response.json();
-    if(!response.ok || !data.url){
-      throw new Error(data.error || 'Could not start checkout.');
+  /* Submit */
+  $("lookup").addEventListener("submit", e => {
+    e.preventDefault();
+    const err = $("form-err"); err.textContent = "";
+    if (!$("pane-vin").hidden){
+      if (state.vin.length !== 17){ err.textContent = "Enter all 17 characters of the VIN, or switch to Year / Model."; vin.focus(); return; }
+      if (!state.year){ err.textContent = "Choose the model year."; (yvWrap.hidden ? vin : yv).focus(); return; }
+      state.family = $("family-v").value; state.model = "";
+      if (!state.family){ err.textContent = "Choose the model family."; $("family-v").focus(); return; }
+    } else {
+      state.vin = ""; state.year = $("year").value; state.family = $("family").value; state.model = $("model").value.trim();
+      if (!state.year){ err.textContent = "Choose the model year."; $("year").focus(); return; }
+      if (!state.family){ err.textContent = "Choose the model family."; $("family").focus(); return; }
     }
-    window.location.href = data.url; // off to Stripe
-  } catch(err){
-    alert('Something went wrong starting payment: ' + err.message);
-    btn.disabled = false;
-    btn.textContent = 'Pay $29 & Generate Report';
-  }
-}
+    showOrder();
+  });
 
-// Runs on page load: if Stripe just redirected back with a session_id, verify it
-// was actually paid, restore the form, and generate the report automatically.
-async function checkForReturnFromCheckout(){
-  const params = new URLSearchParams(window.location.search);
-  const sessionId = params.get('session_id');
-  const canceled = params.get('canceled');
-
-  if(canceled){
-    window.history.replaceState({}, document.title, window.location.pathname);
-    return;
-  }
-  if(!sessionId) return;
-
-  const formData = loadFormFromSession();
-  const btn = document.getElementById('submitBtn');
-  btn.disabled = true;
-  btn.textContent = 'Verifying payment…';
-
-  try {
-    const response = await fetch(`${BACKEND_URL}/api/verify-session?session_id=${encodeURIComponent(sessionId)}`);
-    const data = await response.json();
-    window.history.replaceState({}, document.title, window.location.pathname); // clean up the URL
-
-    if(!response.ok || !data.paid){
-      alert(data.alreadyUsed
-        ? 'This payment was already used to generate a report.'
-        : 'We could not confirm payment. If you were charged, please contact support.');
-      btn.disabled = false;
-      btn.textContent = 'Pay $29 & Generate Report';
-      return;
-    }
-
-    // Payment confirmed -- restore the form and generate automatically.
-    if(formData){
-      document.getElementById('year').value = formData.year || '';
-      populateModelDropdown();
-      document.getElementById('modelName').value = formData.modelName || '';
-      document.getElementById('mileage').value = formData.mileage || '';
-      document.getElementById('vin').value = formData.vin || '';
-      document.getElementById('price').value = formData.price || '';
-      document.getElementById('listingText').value = formData.listingText || '';
-    }
-    sessionStorage.removeItem('coldstart_pending_form');
-    generateReport(sessionId);
-  } catch(err){
-    alert('Something went wrong verifying payment: ' + err.message);
-    btn.disabled = false;
-    btn.textContent = 'Pay $29 & Generate Report';
-  }
-}
-
-async function generateReport(sessionId){
-  const btn = document.getElementById('submitBtn');
-  const loading = document.getElementById('loading');
-  const sheet = document.getElementById('reportSheet');
-
-  const modelSelectEl = document.getElementById('modelName');
-  const modelName = modelSelectEl.value || '(model not specified)';
-  const modelKbFamily = modelSelectEl.selectedOptions[0]?.dataset.kb;
-  const year = document.getElementById('year').value || '(year not specified)';
-  const mileage = document.getElementById('mileage').value || '(mileage not specified)';
-  const vin = document.getElementById('vin').value;
-  const price = document.getElementById('price').value;
-  const listingText = document.getElementById('listingText').value;
-
-  btn.disabled = true;
-  loading.classList.add('active');
-  sheet.classList.remove('active');
-  startProgress();
-  loading.scrollIntoView({ behavior: 'smooth', block: 'center' });
-
-  const kbEntry = KB.find(k => k.model_family === modelKbFamily);
-  if(!kbEntry){
-    if(progressTimer) clearInterval(progressTimer);
-    sheet.innerHTML = `<div style="padding:30px;color:#B23A2E;background:#fff;">Please select a model year and model before generating a report.</div>`;
-    sheet.classList.add('active');
-    btn.disabled = false;
-    loading.classList.remove('active');
-    return;
+  const tick = '<svg aria-hidden="true"><use href="#check"/></svg>';
+  function showOrder(){
+    const p = platform(state.year, state.family);
+    $("o-ymm").textContent = `${state.year} Harley-Davidson ${state.model || (state.family === "Other" ? "" : state.family)}`.trim();
+    $("o-meta").textContent = [state.family !== "Other" ? `${state.family} family` : "", p.name ? `${p.name} engine era` : ""].filter(Boolean).join(", ");
+    $("o-vin").textContent = state.vin ? `VIN ${state.vin}` : "";
+    const items = ["Factory specs for this model and year","Recall campaigns and how to verify them",
+      p.name ? `Known ${p.name} weak points: ${WATCH[p.name]}` : "Known failure points for this model",
+      "Maintenance insights and overdue-service costs","Price check against similar bikes for sale","Cold start, inspection and test ride checklists"];
+    $("o-inc").innerHTML = items.map(t => `<li>${tick}<span></span></li>`).join("");
+    [...$("o-inc").querySelectorAll("span")].forEach((s,i) => s.textContent = items[i]);
+    const n = $("o-note"); n.textContent = p.warn; n.className = "note" + (p.warn ? " warn" : "");
+    [...$("progress").children].forEach((li,i) => li.className = i === 0 ? "done" : i === 1 ? "now" : "");
+    const o = $("order"); o.classList.add("active"); o.scrollIntoView({block:"start"}); o.focus({preventScroll:true});
   }
 
-  const prompt = `You are generating a pre-purchase inspection report for a used Harley-Davidson motorcycle, for Cold Start Report. Use ONLY the knowledge base entries provided below as your source of known failure points -- do not invent failure points that aren't in this knowledge base. You may use general reasoning to decide which entries are relevant given the year/mileage, and to interpret the seller's listing text for red flags.
+  $("edit-bike").addEventListener("click", () => { $("lookup").scrollIntoView({block:"center"}); });
 
-KNOWLEDGE BASE (model family: ${kbEntry.model_family}):
-${JSON.stringify(kbEntry.failure_points, null, 2)}
-
-GENERAL KNOWLEDGE BASE (applies to all model families):
-${JSON.stringify(GENERAL_KB.failure_points, null, 2)}
-
-VEHICLE DETAILS:
-- Model: ${modelName}
-- Year: ${year}
-- Mileage: ${mileage}
-- VIN: ${vin || 'not provided'}
-- Asking price: ${price ? '$' + price : 'not provided'}
-- Seller's listing text: ${listingText || 'not provided'}
-
-After you finish any web searches, your FINAL message must contain nothing but a single JSON object -- no leading sentence like "Based on my research..." or "Here's the report:", no markdown fences, no trailing commentary. Just the raw JSON object, matching exactly this schema:
-{
-  "grade": "single letter grade like B+ or C",
-  "grade_label": "short 2-3 word label like 'Solid buy' or 'Proceed with caution'",
-  "grade_note": "one sentence, under 20 words",
-  "summary": "2-3 sentence overall assessment referencing the specific failure points that apply given the year/mileage",
-  "stats": {"items_to_check": number, "red_flags": number},
-  "findings": [
-    {"flag": "check|watch|clear", "title": "short title", "detail": "1-2 sentences explaining what to check and why, referencing the knowledge base entry if relevant"}
-  ],
-  "questions": ["question to ask the seller", "..."],
-  "recalls": {
-    "found": true or false,
-    "items": [
-      {"title": "short recall title", "description": "1-2 sentences on what the recall covers and the safety risk", "recall_number": "NHTSA campaign number if found, otherwise omit"}
-    ],
-    "note": "1-2 sentences -- confirm whether search found official NHTSA/manufacturer recall data for this specific year/model, or say plainly that none were found / search was inconclusive and the buyer should check nhtsa.gov/recalls with their VIN directly"
-  },
-  "fair_market": {
-    "low": number (dollars, no symbol/commas),
-    "high": number,
-    "basis": "1-2 sentences on what this range is based on -- name the actual comparable listings/sources found, or say plainly if too few comps were found and this is a rough estimate",
-    "asking_price_assessment": "one sentence on where the asking price falls relative to the range, or 'not provided' if no asking price was given"
-  }
-}
-
-Only include findings for knowledge base entries that are actually relevant given this vehicle's year, mileage, AND specific model name -- some entries only apply to specific named models (check the "applies_to_models" field where present; if the vehicle's model doesn't match, leave that finding out). Include 3-6 findings and 3-5 questions. Be direct and practical, like an experienced dealership GM talking to a buyer.
-
-IMPORTANT: if a knowledge base entry's severity notes it as a safety issue (not just a cost/reliability issue), use flag "check" (not "watch") for that finding, and say plainly in the detail why it matters for safety, not just cost.
-
-For fair_market: use the web_search tool to find 3-5 real, current or recent listings/sold-price references for this specific year and model (or the closest realistic comparable) at roughly this mileage -- try sources like Cycle Trader, RumbleOn, J&P Cycles, or Harley-Davidson dealer listings. Base the range on what you actually find, not a generic guess. If search doesn't turn up enough real data, say so honestly in "basis" rather than inventing a confident-sounding number.
-
-For recalls: use the web_search tool to search nhtsa.gov/recalls and Harley-Davidson's own recall pages for official open recalls affecting this specific year and model. List only recalls that actually apply to this exact year and model -- never invent a recall number or description, and never mention recalls you found for other model years or different models even to rule them out; the buyer doesn't need to hear about campaigns that don't apply to their bike. If search finds none that apply, set found to false and keep "note" to a single short sentence: "No open recalls found for this year and model. Check nhtsa.gov/recalls with your VIN to confirm." Do not restate the VIN number, do not explain your search process, and do not justify why nhtsa.gov is authoritative -- just the plain confirmation and the one-line pointer.`;
-
-  try {
-    const response = await fetch(`${BACKEND_URL}/api/generate-report`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ prompt, session_id: sessionId })
-    });
-    if (!response.ok) {
-      const errBody = await response.json().catch(() => ({}));
-      throw new Error(errBody.error || `Server returned ${response.status}`);
-    }
-    const data = await response.json();
-    const textBlocks = data.content.filter(b => b.type === "text");
-    let raw = textBlocks.length ? textBlocks[textBlocks.length - 1].text : "{}";
-    raw = raw.replace(/```json|```/g, "").trim();
-    // Web search sometimes makes the model add a sentence before/after the JSON despite
-    // instructions -- pull out just the {...} object rather than assuming the whole string is clean JSON.
-    const firstBrace = raw.indexOf('{');
-    const lastBrace = raw.lastIndexOf('}');
-    if(firstBrace === -1 || lastBrace === -1 || lastBrace < firstBrace){
-      throw new Error("Could not find a JSON object in the model's response.");
-    }
-    raw = raw.slice(firstBrace, lastBrace + 1);
-    const report = JSON.parse(raw);
-
-    renderReport(report, { modelName, year, mileage, vin, price });
-    finishProgress(true);
-  } catch (err) {
-    finishProgress(false);
-    sheet.innerHTML = `<div style="padding:30px;color:#B23A2E;background:#fff;">Something went wrong generating the report: ${esc(err.message)}</div>`;
-    sheet.classList.add('active');
-  } finally {
-    await new Promise(r => setTimeout(r, 400)); // let the 100% state be visible briefly
-    btn.disabled = false;
-    loading.classList.remove('active');
-  }
-}
-
-function renderReport(r, vehicle){
-  const sheet = document.getElementById('reportSheet');
-  const formCard = document.getElementById('formCard');
-
-  const findingsHtml = (r.findings || []).map(f => `
-    <div class="finding">
-      <span class="flag ${esc(f.flag)}">${esc(f.flag)}</span>
-      <div class="finding-text"><b>${esc(f.title)}</b><span class="sub">${esc(f.detail)}</span></div>
-    </div>
-  `).join('');
-
-  const questionsHtml = (r.questions || []).map(q => `<li>${esc(q)}</li>`).join('');
-
-  sheet.innerHTML = `
-    <div class="header">
-      <div>
-        <p class="brand-eyebrow">Pre-purchase inspection report</p>
-        <div class="brand-row">
-          <svg class="logo-mark small" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="60" cy="60" r="58" fill="#2E333A" stroke="#3A4048" stroke-width="2"/>
-            <g fill="none" stroke="#8A8F98" stroke-width="2.5" stroke-linecap="round">
-              <line x1="60" y1="14" x2="60" y2="24"/><line x1="60" y1="96" x2="60" y2="106"/>
-              <line x1="14" y1="60" x2="24" y2="60"/><line x1="96" y1="60" x2="106" y2="60"/>
-              <line x1="27" y1="27" x2="34" y2="34"/><line x1="93" y1="27" x2="86" y2="34"/>
-              <line x1="27" y1="93" x2="34" y2="86"/><line x1="93" y1="93" x2="86" y2="86"/>
-            </g>
-            <path d="M67 28 L42 66 L57 66 L52 94 L80 54 L64 54 Z" fill="#C8752B"/>
-          </svg>
-          <p class="brand-name">Cold Start Report</p>
-        </div>
-        <p class="brand-sub">Pre-purchase inspection reports for used Harley-Davidson motorcycles</p>
-      </div>
-      <div class="report-meta">
-        Report #<strong>HC-${Date.now().toString().slice(-8)}</strong><br>
-        Generated <strong>${new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})}</strong>
-      </div>
-    </div>
-    <div class="vehicle-strip">
-      <div class="vehicle-title">${esc(vehicle.year)} Harley-Davidson <span>${esc(vehicle.modelName)}</span></div>
-      <div class="vehicle-facts">
-        <div>MILEAGE <b>${esc(vehicle.mileage)}</b></div>
-        ${vehicle.vin ? `<div>VIN <b>${esc(vehicle.vin)}</b></div>` : ''}
-        ${vehicle.price ? `<div>ASKING <b>$${esc(vehicle.price)}</b></div>` : ''}
-      </div>
-    </div>
-    <div class="body">
-      <div class="grade-block">
-        <div class="hang-tag">
-          <div class="hang-tag-eyebrow">Buy confidence</div>
-          <div class="hang-tag-grade">${esc(r.grade)}</div>
-          <div class="hang-tag-label">${esc(r.grade_label)}</div>
-          <div class="hang-tag-note">${esc(r.grade_note)}</div>
-        </div>
-        <div class="grade-summary">
-          <h2>Overall assessment</h2>
-          <p>${esc(r.summary)}</p>
-          <div class="stat-row">
-            <div class="stat"><p class="stat-label">Items to check</p><p class="stat-value">${esc(r.stats?.items_to_check)}</p></div>
-            <div class="stat"><p class="stat-label">Red flags</p><p class="stat-value">${esc(r.stats?.red_flags)}</p></div>
-          </div>
-        </div>
-      </div>
-      ${r.fair_market ? `
-      <div class="section">
-        <div class="section-head"><span class="section-num">01</span><h3 class="section-title">Fair market range</h3></div>
-        <div class="stat-row" style="margin-bottom:12px;">
-          <div class="stat"><p class="stat-label">Low</p><p class="stat-value">$${Number(r.fair_market.low || 0).toLocaleString()}</p></div>
-          <div class="stat"><p class="stat-label">High</p><p class="stat-value">$${Number(r.fair_market.high || 0).toLocaleString()}</p></div>
-        </div>
-        <p style="font-size:13px;color:var(--ink-soft);line-height:1.6;margin:0 0 6px;">${esc(r.fair_market.basis)}</p>
-        ${r.fair_market.asking_price_assessment ? `<p style="font-size:13px;color:var(--ink);line-height:1.6;margin:0;"><b>Asking price:</b> ${esc(r.fair_market.asking_price_assessment)}</p>` : ''}
-      </div>` : ''}
-      <div class="section">
-        <div class="section-head"><span class="section-num">02</span><h3 class="section-title">Inspection findings</h3></div>
-        ${findingsHtml}
-      </div>
-      <div class="section">
-        <div class="section-head"><span class="section-num">03</span><h3 class="section-title">Questions to ask the seller</h3></div>
-        <ul class="qlist">${questionsHtml}</ul>
-      </div>
-      ${r.recalls ? `
-      <div class="section">
-        <div class="section-head"><span class="section-num">04</span><h3 class="section-title">Safety recalls</h3></div>
-        ${r.recalls.found && (r.recalls.items || []).length ? `
-          ${r.recalls.items.map(item => `
-            <div class="finding">
-              <span class="flag check">Recall</span>
-              <div class="finding-text">
-                <b>${esc(item.title)}</b>${item.recall_number ? ` <span style="color:var(--ink-soft);font-weight:400;">(${esc(item.recall_number)})</span>` : ''}
-                <span class="sub">${esc(item.description)}</span>
-              </div>
-            </div>
-          `).join('')}
-        ` : `
-          <div class="finding">
-            <span class="flag clear">Clear</span>
-            <div class="finding-text"><b>No open recalls found</b><span class="sub">${esc(r.recalls.note)}</span></div>
-          </div>
-        `}
-        ${r.recalls.found && (r.recalls.items || []).length ? `<p style="font-size:12px;color:var(--ink-soft);line-height:1.5;margin:10px 0 0;">${esc(r.recalls.note)}</p>` : ''}
-      </div>` : ''}
-    </div>
-    <div class="footer">
-      <span>Generated by <strong>Cold Start Report</strong></span>
-      <span>Not a substitute for an in-person mechanical inspection — market range is an estimate from web-search comps, not a guarantee</span>
-    </div>
-    <div class="report-actions">
-      <button class="download-btn" onclick="window.print()">Download as PDF</button>
-      <button class="new-report-btn" onclick="location.reload()">Generate another report</button>
-    </div>
-  `;
-  sheet.classList.add('active');
-  formCard.style.display = 'none';
-  sheet.scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
-
-checkForReturnFromCheckout();
+  /* Hand off to the report app (checkout + generation live there) */
+  $("pay").addEventListener("submit", e => {
+    e.preventDefault();
+    const q = new URLSearchParams();
+    if (state.year) q.set("year", state.year);
+    if (state.vin) q.set("vin", state.vin);
+    if (state.model) q.set("model", state.model);
+    window.location.href = "/report.html?" + q.toString();
+  });
+})();
 </script>
 </body>
 </html>
