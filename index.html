@@ -129,7 +129,8 @@ input[type=text]:focus,select:focus{outline:none;border-color:var(--blue);box-sh
 #vin{font:600 1.1rem var(--head);letter-spacing:.1em;text-transform:uppercase}
 .help{font-size:.83rem;color:var(--dim);margin:-.4rem 0 1.1rem;min-height:1.3em}
 .help.warn{color:var(--warn)}.help.ok{color:var(--ok)}
-.row{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+.row,.row2{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+select:disabled{opacity:.6}
 .row .field:last-child{grid-column:1/-1}
 @media (min-width:30rem){.row{grid-template-columns:.8fr 1.2fr 1.1fr}.row .field:last-child{grid-column:auto}}
 .lookup .btn{width:100%;margin-top:.3rem}
@@ -291,19 +292,19 @@ footer{border-top:1px solid var(--line);padding:3.5rem 0 2.5rem;font-size:.92rem
             <label class="field" for="year-v" id="year-v-wrap" hidden><span>Model year</span>
               <select id="year-v"></select>
             </label>
-            <label class="field" for="family-v"><span>Model family</span>
-              <select id="family-v"></select>
+            <label class="field" for="model-v"><span>Model</span>
+              <select id="model-v"><option value="">Enter the VIN or pick a year first…</option></select>
             </label>
           </div>
           <div id="pane-ymm" role="tabpanel" aria-labelledby="tab-ymm" hidden>
-            <div class="row">
-              <label class="field" for="year"><span>Year</span><select id="year"></select></label>
-              <label class="field" for="make"><span>Make</span><select id="make"><option>Harley-Davidson</option></select></label>
-              <label class="field" for="family"><span>Model family</span><select id="family"></select></label>
+            <div class="row2">
+              <label class="field" for="year"><span>Model year</span><select id="year"></select></label>
+              <label class="field" for="make"><span>Make</span><select id="make" disabled><option>Harley-Davidson</option></select></label>
             </div>
-            <label class="field" for="model"><span>Model name (optional)</span>
-              <input id="model" type="text" autocomplete="off" placeholder="Street Glide, Fat Boy, Low Rider…">
+            <label class="field" for="model"><span>Model</span>
+              <select id="model"><option value="">Choose the year first…</option></select>
             </label>
+            <p class="help" id="model-help">Covers Softail, Touring, Dyna and FXR models, 1985 to current.</p>
           </div>
           <button class="btn" type="submit"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>Check This Harley</button>
           <p class="err" id="form-err" role="alert"></p>
@@ -488,14 +489,139 @@ footer{border-top:1px solid var(--line);padding:3.5rem 0 2.5rem;font-size:.92rem
 (() => {
   const $ = id => document.getElementById(id);
   const MIN = 1985, MAX = 2027;
-  const state = { vin:"", year:"", family:"", model:"" };
+  const state = { vin:"", year:"", model:"", era:"" };
   $("yr").textContent = new Date().getFullYear();
 
-  /* Selects */
-  const FAMILIES = [["","Select family"],["Touring","Touring"],["Softail","Softail"],["Dyna","Dyna"],["FXR","FXR"],["Other","Other / not sure"]];
-  ["family","family-v"].forEach(id => FAMILIES.forEach(([v,t]) => $(id).add(new Option(t,v))));
+  /* Model list — same list the report app uses, so the choice carries straight through */
+  const MODEL_DATA = [
+  {name:"FXR Super Glide", kb:"FXR / Dyna Evo (1985-1998)", start:1985, end:1994},
+  {name:"FXRS Low Rider", kb:"FXR / Dyna Evo (1985-1998)", start:1985, end:1994},
+  {name:"FXRS-Conv Low Rider Convertible", kb:"FXR / Dyna Evo (1985-1998)", start:1989, end:1993},
+  {name:"FXRT Sport Glide", kb:"FXR / Dyna Evo (1985-1998)", start:1985, end:1992},
+  {name:"FXLR Low Rider Custom", kb:"FXR / Dyna Evo (1985-1998)", start:1988, end:1994},
+  {name:"FXRD Sport Glide", kb:"FXR / Dyna Evo (1985-1998)", start:1986, end:1986},
+  {name:"FXDB Sturgis", kb:"FXR / Dyna Evo (1985-1998)", start:1991, end:1992},
+  {name:"FXDB Daytona", kb:"FXR / Dyna Evo (1985-1998)", start:1992, end:1994},
+  {name:"FXDC Dyna Glide Custom", kb:"FXR / Dyna Evo (1985-1998)", start:1992, end:1998},
+  {name:"FXDWG Dyna Wide Glide", kb:"FXR / Dyna Evo (1985-1998)", start:1993, end:1998},
+  {name:"FXDL Dyna Low Rider", kb:"FXR / Dyna Evo (1985-1998)", start:1993, end:1998},
+  {name:"FXD Dyna Super Glide", kb:"FXR / Dyna Evo (1985-1998)", start:1995, end:1998},
+  {name:"FXDS-CONV Dyna Convertible", kb:"FXR / Dyna Evo (1985-1998)", start:1995, end:1998},
+
+  {name:"FXD Dyna Super Glide", kb:"Dyna Twin Cam (1999-2016)", start:1999, end:2005},
+  {name:"FXDX Super Glide Sport", kb:"Dyna Twin Cam (1999-2016)", start:1999, end:2005},
+  {name:"FXDL Dyna Low Rider", kb:"Dyna Twin Cam (1999-2016)", start:1999, end:2009},
+  {name:"FXDL Dyna Low Rider (2014 return)", kb:"Dyna Twin Cam (1999-2016)", start:2014, end:2017},
+  {name:"FXDWG Dyna Wide Glide", kb:"Dyna Twin Cam (1999-2016)", start:1999, end:2008},
+  {name:"FXDWG Dyna Wide Glide (2010 return)", kb:"Dyna Twin Cam (1999-2016)", start:2010, end:2016},
+  {name:"FXDC Super Glide Custom", kb:"Dyna Twin Cam (1999-2016)", start:1999, end:2013},
+  {name:"FXDB Street Bob", kb:"Dyna Twin Cam (1999-2016)", start:2006, end:2017},
+  {name:"FXDF Fat Bob", kb:"Dyna Twin Cam (1999-2016)", start:2008, end:2017},
+  {name:"FLD Switchback", kb:"Dyna Twin Cam (1999-2016)", start:2012, end:2016},
+  {name:"FXDLS Low Rider S", kb:"Dyna Twin Cam (1999-2016)", start:2016, end:2017},
+  {name:"FXDI35 35th Anniversary Super Glide", kb:"Dyna Twin Cam (1999-2016)", start:2006, end:2006},
+
+  {name:"FXST Softail Standard", kb:"Softail (Evolution era, 1984-1999)", start:1984, end:1999},
+  {name:"FXSTC Softail Custom", kb:"Softail (Evolution era, 1984-1999)", start:1986, end:1999},
+  {name:"FXSTS Springer Softail", kb:"Softail (Evolution era, 1984-1999)", start:1988, end:1999},
+  {name:"FXSTSB Bad Boy", kb:"Softail (Evolution era, 1984-1999)", start:1995, end:1996},
+  {name:"FLST Heritage Softail", kb:"Softail (Evolution era, 1984-1999)", start:1986, end:1990},
+  {name:"FLSTC Heritage Softail Classic", kb:"Softail (Evolution era, 1984-1999)", start:1988, end:1999},
+  {name:"FLSTF Fat Boy", kb:"Softail (Evolution era, 1984-1999)", start:1990, end:1999},
+  {name:"FLSTN Softail Nostalgia \"Moo Glide\"", kb:"Softail (Evolution era, 1984-1999)", start:1993, end:1996},
+  {name:"FLSTS Heritage Springer", kb:"Softail (Evolution era, 1984-1999)", start:1997, end:1999},
+
+  {name:"FXST Softail Standard", kb:"Softail (Twin Cam era)", start:2000, end:2013},
+  {name:"FXSTB Night Train", kb:"Softail (Twin Cam era)", start:2000, end:2009},
+  {name:"FXSTC Softail Custom", kb:"Softail (Twin Cam era)", start:2000, end:2010},
+  {name:"FXSTD Deuce", kb:"Softail (Twin Cam era)", start:2000, end:2007},
+  {name:"FXSTS Springer Softail", kb:"Softail (Twin Cam era)", start:2000, end:2006},
+  {name:"FLSTC Heritage Softail Classic", kb:"Softail (Twin Cam era)", start:2000, end:2017},
+  {name:"FLSTF Fat Boy", kb:"Softail (Twin Cam era)", start:2000, end:2017},
+  {name:"FLSTFB Fat Boy Lo", kb:"Softail (Twin Cam era)", start:2010, end:2017},
+  {name:"FLSTN Softail Deluxe", kb:"Softail (Twin Cam era)", start:2005, end:2017},
+  {name:"FLSTS Heritage Springer", kb:"Softail (Twin Cam era)", start:2000, end:2003},
+  {name:"FLSTSC Springer Classic", kb:"Softail (Twin Cam era)", start:2005, end:2007},
+  {name:"FLSTSB Cross Bones", kb:"Softail (Twin Cam era)", start:2008, end:2011},
+  {name:"FLS Softail Slim", kb:"Softail (Twin Cam era)", start:2012, end:2017},
+  {name:"FXS Blackline", kb:"Softail (Twin Cam era)", start:2011, end:2013},
+  {name:"FXSB Breakout", kb:"Softail (Twin Cam era)", start:2013, end:2017},
+  {name:"FXCW / FXCWC Rocker", kb:"Softail (Twin Cam era)", start:2008, end:2011},
+
+  {name:"FXST Softail Standard", kb:"Softail M8 (2018+)", start:2018, end:2100},
+  {name:"FXBB Street Bob", kb:"Softail M8 (2018+)", start:2018, end:2100},
+  {name:"FXLR Low Rider", kb:"Softail M8 (2018+)", start:2018, end:2100},
+  {name:"FXLRS Low Rider S", kb:"Softail M8 (2018+)", start:2020, end:2100},
+  {name:"FXLRST Low Rider ST", kb:"Softail M8 (2018+)", start:2022, end:2100},
+  {name:"FXFB Fat Bob", kb:"Softail M8 (2018+)", start:2018, end:2100},
+  {name:"FXFBS Fat Bob 114", kb:"Softail M8 (2018+)", start:2018, end:2100},
+  {name:"FLFB Fat Boy", kb:"Softail M8 (2018+)", start:2018, end:2100},
+  {name:"FLFBS Fat Boy 114", kb:"Softail M8 (2018+)", start:2018, end:2100},
+  {name:"FLDE Softail Deluxe", kb:"Softail M8 (2018+)", start:2018, end:2100},
+  {name:"FLHC Heritage Classic", kb:"Softail M8 (2018+)", start:2018, end:2100},
+  {name:"FLSL Softail Slim", kb:"Softail M8 (2018+)", start:2018, end:2100},
+  {name:"FLSB Sport Glide", kb:"Softail M8 (2018+)", start:2018, end:2100},
+  {name:"FXBR Breakout", kb:"Softail M8 (2018+)", start:2018, end:2100},
+  {name:"FXBRS Breakout 117", kb:"Softail M8 (2018+)", start:2018, end:2100},
+  {name:"FXDR FXDR 114", kb:"Softail M8 (2018+)", start:2019, end:2020},
+
+  {name:"FLHT Electra Glide Standard", kb:"Touring Evo (1985-1998)", start:1985, end:1998},
+  {name:"FLHTC Electra Glide Classic", kb:"Touring Evo (1985-1998)", start:1985, end:1998},
+  {name:"FLHTCU Ultra Classic Electra Glide", kb:"Touring Evo (1985-1998)", start:1989, end:1998},
+  {name:"FLHS Electra Glide Sport", kb:"Touring Evo (1985-1998)", start:1987, end:1993},
+  {name:"FLHR Road King", kb:"Touring Evo (1985-1998)", start:1994, end:1998},
+  {name:"FLTC Tour Glide Classic", kb:"Touring Evo (1985-1998)", start:1985, end:1995},
+  {name:"FLT Tour Glide", kb:"Touring Evo (1985-1998)", start:1985, end:1995},
+
+  {name:"FLHT Electra Glide Standard", kb:"Touring (Twin Cam era)", start:1999, end:2016},
+  {name:"FLHTC Electra Glide Classic", kb:"Touring (Twin Cam era)", start:1999, end:2008},
+  {name:"FLHTCU Ultra Classic Electra Glide", kb:"Touring (Twin Cam era)", start:1999, end:2013},
+  {name:"FLHTCUI Ultra Classic Electra Glide", kb:"Touring (Twin Cam era)", start:1999, end:2006},
+  {name:"FLHR Road King", kb:"Touring (Twin Cam era)", start:1999, end:2016},
+  {name:"FLHRC Road King Classic", kb:"Touring (Twin Cam era)", start:2003, end:2013},
+  {name:"FLHRS Road King Custom", kb:"Touring (Twin Cam era)", start:2004, end:2007},
+  {name:"FLTR Road Glide", kb:"Touring (Twin Cam era)", start:1998, end:2016},
+  {name:"FLTRU Road Glide Ultra", kb:"Touring (Twin Cam era)", start:2011, end:2016},
+  {name:"FLHX Street Glide", kb:"Touring (Twin Cam era)", start:2006, end:2016},
+  {name:"FLHXS Street Glide Special", kb:"Touring (Twin Cam era)", start:2014, end:2016},
+  {name:"FLHTK Ultra Limited", kb:"Touring (Twin Cam era)", start:2010, end:2016},
+  {name:"FLHTCUSE CVO Ultra Classic", kb:"Touring (Twin Cam era)", start:1999, end:2016},
+
+  {name:"FLHR Road King", kb:"Touring M8 (2017+)", start:2017, end:2100},
+  {name:"FLHRXS Road King Special", kb:"Touring M8 (2017+)", start:2017, end:2100},
+  {name:"FLHX Street Glide", kb:"Touring M8 (2017+)", start:2017, end:2100},
+  {name:"FLHXS Street Glide Special", kb:"Touring M8 (2017+)", start:2017, end:2100},
+  {name:"FLTRX Road Glide", kb:"Touring M8 (2017+)", start:2017, end:2100},
+  {name:"FLTRXS Road Glide Special", kb:"Touring M8 (2017+)", start:2017, end:2100},
+  {name:"FLTRK Road Glide Limited", kb:"Touring M8 (2017+)", start:2017, end:2100},
+  {name:"FLHTK Ultra Limited", kb:"Touring M8 (2017+)", start:2017, end:2100},
+  {name:"FLHTCU Electra Glide Standard", kb:"Touring M8 (2017+)", start:2017, end:2100},
+  {name:"FLHTCUTG Tri Glide Ultra", kb:"Touring M8 (2017+)", start:2017, end:2100},
+  {name:"FLRT Freewheeler", kb:"Touring M8 (2017+)", start:2017, end:2100},
+  {name:"FLHXSE CVO Street Glide", kb:"Touring M8 (2017+)", start:2017, end:2100},
+  {name:"FLTRXSE CVO Road Glide", kb:"Touring M8 (2017+)", start:2017, end:2100},
+  {name:"FLHTKSE CVO Limited", kb:"Touring M8 (2017+)", start:2017, end:2100}
+];
+
+  function fillModels(sel, year){
+    sel.innerHTML = "";
+    if (!year){ sel.add(new Option("Choose the year first…","")); return; }
+    const hits = MODEL_DATA.filter(m => year >= m.start && year <= m.end);
+    if (!hits.length){ sel.add(new Option("No models listed for that year","")); return; }
+    sel.add(new Option("Select a model…",""));
+    hits.forEach(m => { const o = new Option(m.name, m.name); o.dataset.kb = m.kb; sel.add(o); });
+  }
+  function eraOf(sel){
+    const kb = sel.selectedOptions[0]?.dataset.kb || "";
+    if (/M8/.test(kb)) return "Milwaukee-Eight";
+    if (/Twin Cam/.test(kb)) return "Twin Cam";
+    if (/Evo/.test(kb)) return "Evolution";
+    return "";
+  }
+
   $("year").add(new Option("Year",""));
   for (let y = MAX; y >= MIN; y--) $("year").add(new Option(y,y));
+  $("year").addEventListener("change", () => fillModels($("model"), +$("year").value));
 
   /* Tabs */
   const tabs = [$("tab-vin"),$("tab-ymm")];
@@ -517,36 +643,29 @@ footer{border-top:1px solid var(--line);padding:3.5rem 0 2.5rem;font-size:.92rem
   const yearsFor = c => { const o = []; if (/[1-9]/.test(c)) o.push(2000 + +c); const i = L.indexOf(c); if (i >= 0) o.push(1980 + i, 2010 + i); return o.filter(y => y >= MIN && y <= MAX); };
 
   const vin = $("vin"), help = $("vin-help"), yv = $("year-v"), yvWrap = $("year-v-wrap");
+  yv.addEventListener("change", () => { state.year = yv.value; fillModels($("model-v"), +yv.value); });
   const HELP = help.textContent;
   vin.addEventListener("input", () => {
     const raw = vin.value.toUpperCase(), bad = /[IOQ]/.test(raw);
     const v = raw.replace(/[^A-HJ-NPR-Z0-9]/g,"").slice(0,17);
     vin.value = v; state.vin = v; help.className = "help"; yvWrap.hidden = true; state.year = "";
+    fillModels($("model-v"), null);
     if (bad){ help.textContent = "VINs never use I, O or Q. Those are usually 1 or 0."; help.classList.add("warn"); return; }
     if (!v){ help.textContent = HELP; return; }
     if (v.length < 17){ help.textContent = `${17 - v.length} characters to go`; return; }
     const notes = [], ys = yearsFor(v[9]);
     if (!/^(1HD|5HD)/.test(v)) notes.push("This doesn't start like a Harley VIN (1HD or 5HD). Double-check it.");
     if (!checkOk(v)) notes.push("The check digit doesn't add up. One character may be misread.");
-    if (ys.length === 1){ state.year = String(ys[0]); notes.unshift(`Model year ${ys[0]}.`); }
+    if (ys.length === 1){ state.year = String(ys[0]); fillModels($("model-v"), ys[0]); notes.unshift(`Model year ${ys[0]}. Now pick the model below.`); }
     else if (ys.length > 1){
       yv.innerHTML = ""; yv.add(new Option("Choose year","")); ys.forEach(y => yv.add(new Option(y,y)));
+      fillModels($("model-v"), null);
       yvWrap.hidden = false; notes.unshift(`The year code fits ${ys.join(" or ")}. Pick the right one.`);
     }
     help.textContent = notes.join(" ");
     help.classList.add(notes.length === 1 && ys.length === 1 ? "ok" : "warn");
   });
-  yv.addEventListener("change", () => state.year = yv.value);
 
-  /* Platform */
-  function platform(y, f){
-    y = +y;
-    if (f === "FXR") return { name:"Evolution", warn:(y > 1994 && y < 1999) || y > 2000 ? "FXR models were built 1982–1994, plus 1999–2000 CVO versions. Double-check the year." : "" };
-    if (f === "Dyna") return (y < 1991 || y > 2017) ? { name:"", warn:"Dyna models were built 1991–2017. Double-check the year or model family." } : { name: y < 1999 ? "Evolution" : "Twin Cam", warn:"" };
-    if (f === "Touring") return { name: y < 1999 ? "Evolution" : y < 2017 ? "Twin Cam" : "Milwaukee-Eight", warn:"" };
-    if (f === "Softail") return { name: y < 2000 ? "Evolution" : y < 2018 ? "Twin Cam" : "Milwaukee-Eight", warn:"" };
-    return { name:"", warn:"We focus on Big Twins: Touring, Softail, Dyna and FXR. Email support@coldstartreport.com before ordering for other models." };
-  }
   const WATCH = {
     "Evolution":"top-end and base gasket seepage, charging system, starter clutch, carburetor and intake seals",
     "Twin Cam":"cam chest and tensioners, primary drive and compensator, common oil leak points, charging system",
@@ -557,31 +676,34 @@ footer{border-top:1px solid var(--line);padding:3.5rem 0 2.5rem;font-size:.92rem
   $("lookup").addEventListener("submit", e => {
     e.preventDefault();
     const err = $("form-err"); err.textContent = "";
+    let sel;
     if (!$("pane-vin").hidden){
       if (state.vin.length !== 17){ err.textContent = "Enter all 17 characters of the VIN, or switch to Year / Model."; vin.focus(); return; }
       if (!state.year){ err.textContent = "Choose the model year."; (yvWrap.hidden ? vin : yv).focus(); return; }
-      state.family = $("family-v").value; state.model = "";
-      if (!state.family){ err.textContent = "Choose the model family."; $("family-v").focus(); return; }
+      sel = $("model-v");
     } else {
-      state.vin = ""; state.year = $("year").value; state.family = $("family").value; state.model = $("model").value.trim();
+      state.vin = ""; state.year = $("year").value;
       if (!state.year){ err.textContent = "Choose the model year."; $("year").focus(); return; }
-      if (!state.family){ err.textContent = "Choose the model family."; $("family").focus(); return; }
+      sel = $("model");
     }
+    state.model = sel.value;
+    if (!state.model){ err.textContent = "Choose the model."; sel.focus(); return; }
+    state.era = eraOf(sel);
     showOrder();
   });
 
   const tick = '<svg aria-hidden="true"><use href="#check"/></svg>';
   function showOrder(){
-    const p = platform(state.year, state.family);
-    $("o-ymm").textContent = `${state.year} Harley-Davidson ${state.model || (state.family === "Other" ? "" : state.family)}`.trim();
-    $("o-meta").textContent = [state.family !== "Other" ? `${state.family} family` : "", p.name ? `${p.name} engine era` : ""].filter(Boolean).join(", ");
+    const era = state.era;
+    $("o-ymm").textContent = `${state.year} Harley-Davidson ${state.model}`;
+    $("o-meta").textContent = era ? `${era} engine era` : "";
     $("o-vin").textContent = state.vin ? `VIN ${state.vin}` : "";
     const items = ["Factory specs for this model and year","Recall campaigns and how to verify them",
-      p.name ? `Known ${p.name} weak points: ${WATCH[p.name]}` : "Known failure points for this model",
+      era ? `Known ${era} weak points: ${WATCH[era]}` : "Known failure points for this model",
       "Maintenance insights and overdue-service costs","Price check against similar bikes for sale","Cold start, inspection and test ride checklists"];
     $("o-inc").innerHTML = items.map(t => `<li>${tick}<span></span></li>`).join("");
     [...$("o-inc").querySelectorAll("span")].forEach((s,i) => s.textContent = items[i]);
-    const n = $("o-note"); n.textContent = p.warn; n.className = "note" + (p.warn ? " warn" : "");
+    const n = $("o-note"); n.textContent = ""; n.className = "note";
     [...$("progress").children].forEach((li,i) => li.className = i === 0 ? "done" : i === 1 ? "now" : "");
     const o = $("order"); o.classList.add("active"); o.scrollIntoView({block:"start"}); o.focus({preventScroll:true});
   }
