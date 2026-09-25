@@ -75,6 +75,8 @@ p{margin:0 0 1rem}
 .blue{color:var(--blue)}
 .eyebrow{display:block;font:600 .8rem/1 var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--blue);margin-bottom:.9rem}
 .sec{padding:5rem 0;border-top:1px solid var(--line)}
+#inside{padding-bottom:3rem}
+#inside + .sec{padding-top:3.5rem;border-top:0}
 .sec-head{text-align:center;max-width:44rem;margin:0 auto 3rem}
 .sec-head h2{font-size:clamp(2rem,5vw,2.9rem)}
 .sec-head p{color:var(--muted);font-size:1.08rem;margin:1rem auto 0}
@@ -84,7 +86,7 @@ p{margin:0 0 1rem}
 .btn:hover{background:var(--blue-hi)}
 .btn-ghost{background:transparent;border:1px solid rgba(61,139,253,.5);color:var(--text)}
 .btn-ghost:hover{background:var(--blue);border-color:var(--blue);color:#fff}
-.center{text-align:center;margin-top:2.5rem}
+.center{text-align:center;margin-top:2.2rem}
 .btn-sm{min-height:42px;padding:.7rem 1.1rem;font-size:.95rem}
 .btn svg{width:18px;height:18px}
 
@@ -187,9 +189,10 @@ select:disabled{opacity:.6}
 .why{display:grid;gap:3rem;align-items:center}
 @media (min-width:62rem){.why{grid-template-columns:1fr 1fr;gap:4.5rem}}
 .photo{position:relative;border-radius:14px;min-height:320px;background:var(--card-2) url("shop-photo.jpg") center/cover no-repeat;border:1px solid var(--line)}
-.photo-card{position:absolute;right:1rem;bottom:-1.5rem;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:1.1rem 1.3rem;max-width:15rem;box-shadow:0 20px 40px -20px #000}
-.photo-card b{display:block;font:700 1.9rem var(--head);color:var(--gold)}
-.photo-card span{font-size:.86rem;color:var(--muted)}
+.photo-card{position:absolute;left:1rem;bottom:-1.4rem;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:.85rem 1rem;max-width:12.5rem;box-shadow:0 20px 40px -20px #000}
+@media(min-width:62rem){.photo-card{left:-1.25rem}}
+.photo-card b{display:block;font:700 1.55rem var(--head);color:var(--gold)}
+.photo-card span{font-size:.8rem;line-height:1.45;color:var(--muted)}
 .why h2{font-size:clamp(2rem,5vw,2.7rem)}
 .why .lead{color:var(--muted);font-size:1.08rem;margin:1.3rem 0 2rem}
 .stats{display:grid;gap:1.3rem}
